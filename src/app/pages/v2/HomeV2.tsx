@@ -192,7 +192,7 @@ export function HomeV2() {
       <nav className="fixed top-0 w-full z-40 px-4 sm:px-6 md:px-8 py-3 md:py-4 flex justify-between items-center bg-neutral-950/95 backdrop-blur-md border-b border-white/5">
         <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-lg sm:text-xl md:text-2xl font-black tracking-tighter uppercase flex items-center gap-1.5 md:gap-2 cursor-pointer">
           <img src="/images/logo-biomercadeo.png" alt="Biomercadeo" className="h-7 w-7 md:h-8 md:w-8 object-contain" />
-          Biomercadeo<span className="text-orange-500">.</span>
+          Biomercadeo
         </a>
         <div className="hidden md:flex gap-6 lg:gap-8 text-sm font-bold uppercase tracking-widest">
           <a href="#clients" className="hover:text-orange-500 transition-colors">Clientes</a>
@@ -225,7 +225,7 @@ export function HomeV2() {
           >
             <div className="flex items-center gap-4 mb-6">
               <img src="/images/logo-biomercadeo.png" alt="Biomercadeo" className="h-16 w-16 md:h-20 md:w-20 object-contain" />
-              <span className="text-white font-black text-3xl md:text-5xl tracking-tighter uppercase">Biomercadeo<span className="text-orange-500">.</span></span>
+              <span className="text-white font-black text-3xl md:text-5xl tracking-tighter uppercase">Biomercadeo</span>
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1] mb-6 uppercase">
               Somos parte de su <br/>
