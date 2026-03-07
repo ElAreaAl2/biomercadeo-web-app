@@ -223,9 +223,10 @@ export function HomeV2() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center text-center"
           >
-            <h2 className="text-orange-500 font-bold tracking-[0.3em] uppercase mb-6 text-sm md:text-base border border-orange-500/30 bg-orange-500/10 px-6 py-2 rounded-full backdrop-blur-md">
-              Corporación Biomercadeo
-            </h2>
+            <div className="flex items-center gap-4 mb-6">
+              <img src="/images/logo-biomercadeo.png" alt="Biomercadeo" className="h-16 w-16 md:h-20 md:w-20 object-contain" />
+              <span className="text-white font-black text-3xl md:text-5xl tracking-tighter uppercase">Biomercadeo<span className="text-orange-500">.</span></span>
+            </div>
             <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1] mb-6 uppercase">
               Somos parte de su <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300">
@@ -252,7 +253,7 @@ export function HomeV2() {
       {/* CLIENTS INFINITE SCROLL */}
       <section id="clients" className="py-24 bg-black overflow-hidden relative border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-16 text-center">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl text-white font-black uppercase tracking-tighter">Grandes marcas confían en nosotros</h3>
+          <h3 className="text-2xl sm:text-3xl md:text-4xl text-white font-black uppercase tracking-tighter">Importantes compañías confían en nosotros</h3>
         </div>
         
         {/* Marquee Banner */}
@@ -294,7 +295,7 @@ export function HomeV2() {
             transition={{ duration: 0.6 }}
             className="grid grid-cols-2 gap-6"
           >
-            <StatsCard number="15+" label="Años de Experiencia" delay={0.1} />
+            <StatsCard number="17+" label="Años de Experiencia" delay={0.1} />
             <StatsCard number="12+" label="Países Trabajados" delay={0.2} />
             <StatsCard number="360°" label="Estrategias Integrales" delay={0.3} />
             <StatsCard number="Top" label="Partners en Salud & Farma" delay={0.4} />
