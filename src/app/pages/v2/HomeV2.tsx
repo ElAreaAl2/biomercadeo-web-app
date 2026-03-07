@@ -189,24 +189,24 @@ export function HomeV2() {
       />
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-40 px-8 py-4 flex justify-between items-center bg-neutral-950/95 backdrop-blur-md border-b border-white/5">
-        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-2xl font-black tracking-tighter uppercase flex items-center gap-2 cursor-pointer">
-          <img src="/images/logo-biomercadeo.png" alt="Biomercadeo" className="h-8 w-8 object-contain" />
+      <nav className="fixed top-0 w-full z-40 px-4 sm:px-6 md:px-8 py-3 md:py-4 flex justify-between items-center bg-neutral-950/95 backdrop-blur-md border-b border-white/5">
+        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-lg sm:text-xl md:text-2xl font-black tracking-tighter uppercase flex items-center gap-1.5 md:gap-2 cursor-pointer">
+          <img src="/images/logo-biomercadeo.png" alt="Biomercadeo" className="h-7 w-7 md:h-8 md:w-8 object-contain" />
           Biomercadeo<span className="text-orange-500">.</span>
         </a>
-        <div className="hidden md:flex gap-8 text-sm font-bold uppercase tracking-widest">
+        <div className="hidden md:flex gap-6 lg:gap-8 text-sm font-bold uppercase tracking-widest">
           <a href="#clients" className="hover:text-orange-500 transition-colors">Clientes</a>
           <a href="#about" className="hover:text-orange-500 transition-colors">Nosotros</a>
           <a href="#services" className="hover:text-orange-500 transition-colors">Portafolio</a>
           <a href="#bicall" className="hover:text-purple-400 transition-colors">Bicall</a>
         </div>
-        <a href="#contact" className="px-6 py-2 border border-white/20 rounded-full hover:bg-orange-600 hover:border-orange-600 transition-all font-medium text-sm w-max uppercase block text-center">
+        <a href="#contact" className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-2 border border-white/20 rounded-full hover:bg-orange-600 hover:border-orange-600 transition-all font-medium text-xs sm:text-sm w-max uppercase block text-center">
           Contáctenos
         </a>
       </nav>
 
       {/* HERO SECTION */}
-      <section className="relative h-screen flex flex-col items-center justify-center p-8">
+      <section className="relative h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black z-10" />
           <img 
@@ -226,18 +226,18 @@ export function HomeV2() {
             <h2 className="text-orange-500 font-bold tracking-[0.3em] uppercase mb-6 text-sm md:text-base border border-orange-500/30 bg-orange-500/10 px-6 py-2 rounded-full backdrop-blur-md">
               Corporación Biomercadeo
             </h2>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1] mb-6 uppercase">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1] mb-6 uppercase">
               Somos parte de su <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300">
                 Equipo de Trabajo
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-neutral-300 max-w-3xl mx-auto font-light leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl text-neutral-300 max-w-3xl mx-auto font-light leading-relaxed">
               Comunicación efectiva para el éxito. Somos una agencia especializada en diseño, tecnología y estrategias de alto nivel.
             </p>
             
             <div className="mt-12">
-              <a href="#services" className="inline-block group relative overflow-hidden bg-orange-600 hover:bg-orange-500 text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest transition-all shadow-[0_0_40px_rgba(234,88,12,0.3)]">
+              <a href="#services" className="inline-block group relative overflow-hidden bg-orange-600 hover:bg-orange-500 text-white px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 rounded-full font-bold uppercase tracking-wider sm:tracking-widest text-sm sm:text-base transition-all shadow-[0_0_40px_rgba(234,88,12,0.3)]">
                 <span className="relative z-10 flex items-center gap-4">
                   Explorar Portafolio
                   <ArrowsRight />
@@ -251,20 +251,20 @@ export function HomeV2() {
 
       {/* CLIENTS INFINITE SCROLL */}
       <section id="clients" className="py-24 bg-black overflow-hidden relative border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-8 mb-16 text-center">
-          <h3 className="text-4xl text-white font-black uppercase tracking-tighter">Grandes marcas confían en nosotros</h3>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-16 text-center">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl text-white font-black uppercase tracking-tighter">Grandes marcas confían en nosotros</h3>
         </div>
         
         {/* Marquee Banner */}
         <div className="relative flex overflow-x-hidden group bg-white/5 py-8 border-y border-white/10">
           <div className="animate-[scroll_40s_linear_infinite] whitespace-nowrap flex items-center space-x-16 px-8">
             {["Fresenius Kabi", "AstraZeneca", "Pfizer", "Abbott", "Janssen", "Takeda", "Bayer", "Merck", "Novartis", "Sanofi", "Medtronic"].map((client, i) => (
-              <span key={i} className="text-4xl md:text-6xl font-black uppercase tracking-widest text-neutral-600 hover:text-white transition-colors cursor-default">{client}</span>
+              <span key={i} className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black uppercase tracking-widest text-neutral-600 hover:text-white transition-colors cursor-default">{client}</span>
             ))}
           </div>
           <div className="animate-[scroll_40s_linear_infinite] whitespace-nowrap flex items-center space-x-16 px-8">
             {["Fresenius Kabi", "AstraZeneca", "Pfizer", "Abbott", "Janssen", "Takeda", "Bayer", "Merck", "Novartis", "Sanofi", "Medtronic"].map((client, i) => (
-              <span key={`dup-${i}`} className="text-4xl md:text-6xl font-black uppercase tracking-widest text-neutral-600 hover:text-white transition-colors cursor-default">{client}</span>
+              <span key={`dup-${i}`} className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black uppercase tracking-widest text-neutral-600 hover:text-white transition-colors cursor-default">{client}</span>
             ))}
           </div>
         </div>
@@ -272,14 +272,14 @@ export function HomeV2() {
 
       {/* STATS & ABOUT */}
       <section id="about" className="py-24 bg-neutral-950 relative border-t border-white/10 z-20">
-        <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight">
               Diseño y comunicación hecha a su <span className="text-orange-500 underline decoration-wavy decoration-orange-500/50 underline-offset-8">medida.</span>
             </h3>
             <p className="text-neutral-400 text-xl leading-relaxed">
@@ -304,10 +304,10 @@ export function HomeV2() {
 
       {/* INTERACTIVE SERVICES ACCORDION/GRID */}
       <section id="services" className="py-32 relative bg-black">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="mb-20 text-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="mb-12 md:mb-20 text-center">
             <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-orange-500 mb-4">6 Ejes de Innovación</h2>
-            <h3 className="text-5xl md:text-7xl font-black uppercase tracking-tighter">Nuestro <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 to-neutral-600">Portafolio</span></h3>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-tighter">Nuestro <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 to-neutral-600">Portafolio</span></h3>
             <p className="text-neutral-500 mt-4 text-lg">Haz cli en cualquier servicio para conocer el detalle</p>
           </div>
 
@@ -329,7 +329,7 @@ export function HomeV2() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-purple-500/5 rounded-full" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           {/* Bicall Hero Header */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -342,7 +342,7 @@ export function HomeV2() {
               <PhoneCall className="w-5 h-5 text-purple-400" />
               <span className="text-purple-300 font-bold text-sm uppercase tracking-widest">Contact Center</span>
             </div>
-            <h2 className="text-6xl md:text-8xl font-black tracking-tighter mb-6">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black tracking-tighter mb-6">
               <span className="text-white">Bi</span><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-violet-300">call</span>
             </h2>
             <p className="text-xl md:text-2xl text-purple-200/60 max-w-2xl mx-auto leading-relaxed">
@@ -422,7 +422,7 @@ export function HomeV2() {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="mt-16 text-center"
           >
-            <button onClick={() => setShowContactForm(true)} className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest transition-all shadow-[0_0_40px_rgba(147,51,234,0.3)] hover:shadow-[0_0_60px_rgba(147,51,234,0.5)] cursor-pointer">
+            <button onClick={() => setShowContactForm(true)} className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 text-white px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 rounded-full font-bold uppercase text-sm sm:text-base tracking-wider sm:tracking-widest transition-all shadow-[0_0_40px_rgba(147,51,234,0.3)] hover:shadow-[0_0_60px_rgba(147,51,234,0.5)] cursor-pointer">
               <PhoneCall className="w-5 h-5" />
               Conocer más sobre Bicall
             </button>
@@ -431,18 +431,18 @@ export function HomeV2() {
       </section>
 
       {/* Footer / Contact */}
-      <footer id="contact" className="py-32 px-8 md:px-24 bg-orange-600 text-black relative overflow-hidden">
-        <div className="relative z-10 grid md:grid-cols-2 gap-16 max-w-7xl mx-auto">
+      <footer id="contact" className="py-16 sm:py-24 md:py-32 px-4 sm:px-8 md:px-16 lg:px-24 bg-orange-600 text-black relative overflow-hidden">
+        <div className="relative z-10 grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 max-w-7xl mx-auto">
           <div className="text-center md:text-left">
-            <h2 className="text-6xl md:text-8xl font-black mb-8 leading-none">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black mb-6 md:mb-8 leading-none">
               LET'S <br/> WORK.
             </h2>
-            <p className="text-2xl font-bold max-w-sm mx-auto md:mx-0">
+            <p className="text-lg sm:text-xl md:text-2xl font-bold max-w-sm mx-auto md:mx-0">
               ¿Tiene un proyecto en mente? Creamos el futuro juntos.
             </p>
           </div>
           <div className="flex flex-col items-center md:items-end">
-            <div className="space-y-4 text-xl font-bold w-fit mx-auto md:w-full md:max-w-md md:mx-0">
+            <div className="space-y-3 md:space-y-4 text-base sm:text-lg md:text-xl font-bold w-fit mx-auto md:w-full md:max-w-md md:mx-0">
               <div className="flex items-center gap-4 hover:text-white transition-colors cursor-default">
                 <MapPin className="w-6 h-6 shrink-0 text-black/50" />
                 <span>Carrera 55A #166-21, Bogotá</span>
