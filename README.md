@@ -31,14 +31,6 @@ Landing page interactiva y moderna para **Biomercadeo**, una agencia especializa
 
 ---
 
-## Diseno original
-
-El prototipo fue creado en Figma y se puede consultar aqui:
-
-https://www.figma.com/design/hd6jWumdzpPJe5niOogS5B/Prototipos-para-Biomercadeo
-
----
-
 ## Inicio rapido
 
 ```bash
