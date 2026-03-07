@@ -309,7 +309,7 @@ export function HomeV2() {
           <div className="mb-12 md:mb-20 text-center">
             <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-orange-500 mb-4">6 Ejes de Innovación</h2>
             <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-tighter">Nuestro <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 to-neutral-600">Portafolio</span></h3>
-            <p className="text-neutral-500 mt-4 text-lg">Haz cli en cualquier servicio para conocer el detalle</p>
+            <p className="text-neutral-500 mt-4 text-lg">Haz click en cualquier servicio para conocer el detalle</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
