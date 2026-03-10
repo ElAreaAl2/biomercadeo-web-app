@@ -1,6 +1,6 @@
 ﻿import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
-import { ArrowUpRight, MonitorPlay, Layers, Layout, BookOpen, Globe, Presentation, MessageSquare, MapPin, Phone, Smartphone, X, CheckCircle2, ChevronRight, Sparkles, ArrowDown, Send, Loader2, PhoneCall, Bot, HeartPulse, BarChart3, Database, ClipboardCheck, Megaphone, Users, Gift, Truck, ShieldCheck, BrainCircuit, Mail as MailIcon, Target, Eye } from 'lucide-react';
+import { ArrowUpRight, MonitorPlay, Layers, Layout, BookOpen, Globe, Presentation, MessageSquare, MapPin, Phone, Smartphone, X, CheckCircle2, ChevronRight, Sparkles, ArrowDown, Send, Loader2, PhoneCall, Bot, HeartPulse, BarChart3, Database, ClipboardCheck, Megaphone, Users, Gift, Truck, ShieldCheck, BrainCircuit, Mail as MailIcon, Target, Eye, Search } from 'lucide-react';
 import { Link } from 'react-router';
 
 // Array de servicios expandido con detalles profundos
@@ -164,6 +164,46 @@ export function HomeV2() {
   const [activeTab, setActiveTab] = useState<'mision' | 'vision'>('mision');
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+
+    const term = searchQuery.toLowerCase();
+    
+    // Un-highlight previous
+    document.querySelectorAll('.search-highlight').forEach(el => {
+      el.classList.remove('search-highlight', 'bg-orange-500/40', 'transition-colors', 'duration-500', 'rounded', 'px-1');
+    });
+
+    // Encontrar todos los elementos que podrian contener texto
+    const elements = Array.from(document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, li, a, strong, b, button'));
+    
+    for (const el of elements) {
+      // Necesitamos asegurar que es el elemento más interno o tiene texto directo sustancial
+      const textNodes = Array.from(el.childNodes).filter(node => node.nodeType === Node.TEXT_NODE && (node.nodeValue?.trim()?.length || 0) > 0);
+      
+      const elementContainsText = textNodes.some(node => node.nodeValue?.toLowerCase().includes(term));
+      
+      if (elementContainsText) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Agregar clases para resaltar visualmente
+        el.classList.add('search-highlight', 'bg-orange-500/40', 'transition-colors', 'duration-500', 'rounded', 'px-1');
+        
+        // Cierra el panel de busqueda si está abierto
+        setIsSearchOpen(false);
+
+        // Quitar el resaltado despues de un tiempo
+        setTimeout(() => {
+          el.classList.remove('search-highlight', 'bg-orange-500/40', 'transition-colors', 'duration-500', 'rounded', 'px-1');
+        }, 3000);
+        break;
+      }
+    }
+  };
 
   // Bloquear el scroll de la pagina cuando el modal está abierto
   useEffect(() => {
@@ -233,19 +273,59 @@ export function HomeV2() {
           <a href="#services" className="hover:text-orange-500 transition-colors">¿Qué hacemos?</a>
           <a href="#contact" className="hover:text-orange-500 transition-colors">Contacto</a>
         </div>
-        <div className="flex gap-3 sm:gap-4 items-center z-10 scale-90 sm:scale-100 origin-right">
-          <a href="https://www.instagram.com/biomercadeosas?igsh=dXFkaTYyZzBxaTFm" target="_blank" rel="noopener noreferrer" className="text-white hover:text-orange-500 transition-colors" title="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-          </a>
-          <a href="https://www.facebook.com/share/1CL5jvcE1h/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-orange-500 transition-colors" title="Facebook">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/search/results/content/?keywords=biomercadeo%20sas&origin=SWITCH_SEARCH_VERTICAL" target="_blank" rel="noopener noreferrer" className="text-white hover:text-orange-500 transition-colors" title="LinkedIn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-          <a href="https://wa.me/573103255698" target="_blank" rel="noopener noreferrer" className="text-white hover:text-orange-500 transition-colors" title="WhatsApp">
-            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.405-.883-.733-1.48-1.638-1.653-1.935-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.122 1.536 5.86L.045 23.953l6.242-1.63A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.986c-1.84 0-3.642-.478-5.234-1.385l-.375-.213-3.896 1.018 1.043-3.796-.233-.372A9.972 9.972 0 0 1 2.014 12C2.014 6.49 6.49 2.014 12 2.014s9.986 4.476 9.986 9.986-4.476 9.986-9.986 9.986z"/></svg>
-          </a>
+        
+        <div className="flex gap-2 sm:gap-3 lg:gap-4 items-center z-10 scale-90 sm:scale-100 origin-right transition-all">
+          
+          {/* Barra de búsqueda integrada y dinámica */}
+          <div className="flex items-center">
+            {isSearchOpen ? (
+              <form onSubmit={handleSearch} className="flex items-center ml-2">
+                <input
+                  type="text"
+                  placeholder="Buscar..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  autoFocus
+                  className="bg-black/60 text-white text-sm px-3 py-1.5 rounded-l-md outline-none border border-white/20 w-[130px] sm:w-[150px] lg:w-[200px] placeholder:text-gray-400 focus:border-orange-500/50 transition-all"
+                />
+                <button type="submit" className="bg-orange-600 hover:bg-orange-500 text-white px-2.5 py-1.5 border border-orange-600 transition-colors flex items-center justify-center">
+                  <Search size={16} />
+                </button>
+                <button 
+                  type="button" 
+                  onClick={() => setIsSearchOpen(false)}
+                  className="bg-white/10 hover:bg-white/20 text-white px-2 py-1.5 rounded-r-md border border-l-0 border-white/20 transition-colors flex items-center justify-center"
+                  title="Cerrar"
+                >
+                  <X size={16} />
+                </button>
+              </form>
+            ) : (
+              <button 
+                onClick={() => setIsSearchOpen(true)}
+                className="text-white hover:text-orange-500 transition-colors p-1"
+                title="Buscar"
+              >
+                <Search size={22} />
+              </button>
+            )}
+          </div>
+
+          {/* Redes sociales (Ocultar dinámicamente en tablet/móvil si la búsqueda está activa) */}
+          <div className={`items-center gap-2 sm:gap-3 ${isSearchOpen ? 'hidden lg:flex' : 'flex'}`}>
+            <a href="https://www.instagram.com/biomercadeosas?igsh=dXFkaTYyZzBxaTFm" target="_blank" rel="noopener noreferrer" className="text-white hover:text-orange-500 transition-colors" title="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+            <a href="https://www.facebook.com/share/1CL5jvcE1h/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-orange-500 transition-colors" title="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/search/results/content/?keywords=biomercadeo%20sas&origin=SWITCH_SEARCH_VERTICAL" target="_blank" rel="noopener noreferrer" className="text-white hover:text-orange-500 transition-colors" title="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://wa.me/573103255698" target="_blank" rel="noopener noreferrer" className="text-white hover:text-orange-500 transition-colors" title="WhatsApp">
+              <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.405-.883-.733-1.48-1.638-1.653-1.935-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.122 1.536 5.86L.045 23.953l6.242-1.63A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.986c-1.84 0-3.642-.478-5.234-1.385l-.375-.213-3.896 1.018 1.043-3.796-.233-.372A9.972 9.972 0 0 1 2.014 12C2.014 6.49 6.49 2.014 12 2.014s9.986 4.476 9.986 9.986-4.476 9.986-9.986 9.986z"/></svg>
+            </a>
+          </div>
         </div>
       </nav>
 
