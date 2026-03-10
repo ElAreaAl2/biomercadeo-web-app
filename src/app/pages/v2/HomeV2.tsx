@@ -1,6 +1,6 @@
 ﻿import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
-import { ArrowUpRight, MonitorPlay, Layers, Layout, BookOpen, Globe, Presentation, MessageSquare, MapPin, Phone, Smartphone, X, CheckCircle2, ChevronRight, Sparkles, ArrowDown, Send, Loader2, PhoneCall, Bot, HeartPulse, BarChart3, Database, ClipboardCheck, Megaphone, Users, Gift, Truck, ShieldCheck, BrainCircuit, Mail as MailIcon } from 'lucide-react';
+import { ArrowUpRight, MonitorPlay, Layers, Layout, BookOpen, Globe, Presentation, MessageSquare, MapPin, Phone, Smartphone, X, CheckCircle2, ChevronRight, Sparkles, ArrowDown, Send, Loader2, PhoneCall, Bot, HeartPulse, BarChart3, Database, ClipboardCheck, Megaphone, Users, Gift, Truck, ShieldCheck, BrainCircuit, Mail as MailIcon, Target, Eye } from 'lucide-react';
 import { Link } from 'react-router';
 
 // Array de servicios expandido con detalles profundos
@@ -120,25 +120,60 @@ const SERVICES = [
         { title: "Monitoreo y Evaluación", desc: "Del rendimiento de la campaña con métricas y KPIs, analizando la efectividad de cada canal." }
       ]
     }
+  },
+  {
+    id: "07",
+    title: "BiCall",
+    description: "Contact Center especializado en salud y relacionamiento corporativo efectivo de última generación.",
+    icon: <PhoneCall className="w-6 h-6" />,
+    image: "/images/arte-digital-equipo-trabajo.jpg",
+    list: ["Atención al paciente", "Fidelización", "Servicio integral"],
+    detailed: {
+      subtitle: "Solución de Call Center para las necesidades de comunicación y relacionamiento.",
+      type: "pills",
+      items: [
+        "Inbound (Recepción de llamadas)", "Outbound (Emisión de llamadas)", 
+        "Agendamiento de citas", "Campañas de prevención/adherencia",
+        "Seguimiento a pacientes/médicos", "Actualización de bases de datos",
+        "Encuestas de satisfacción", "Atención omnicanal (WhatsApp/Web)"
+      ]
+    }
+  },
+  {
+    id: "08",
+    title: "BIOGEO INSIGHTS",
+    description: "Sistema inteligente de georreferenciación para optimizar la ubicación de puntos de atención y el análisis territorial de pacientes en el sector salud.",
+    icon: <MapPin className="w-6 h-6" />,
+    image: "/images/technology-hologram-indoors.jpg",
+    list: ["Ubicación estratégica", "Perfiles de clientes", "Análisis territorial"],
+    detailed: {
+      subtitle: "Descubra dónde ubicar sus sedes, dónde surtir y cómo llegar a su cliente ideal con precisión geográfica e inteligencia de datos.",
+      type: "pills",
+      items: [
+        "Sugerencia de puntos de atención", "Análisis de perfiles cercanos", 
+        "Identificación de zonas de surtido", "Potencial del cliente objetivo",
+        "Geomarketing en salud", "Optimización de cobertura territorial"
+      ]
+    }
   }
 ];
 
 export function HomeV2() {
   const containerRef = useRef(null);
   const [selectedService, setSelectedService] = useState<any | null>(null);
-  const [showContactForm, setShowContactForm] = useState(false);
+  const [activeTab, setActiveTab] = useState<'mision' | 'vision'>('mision');
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   // Bloquear el scroll de la pagina cuando el modal está abierto
   useEffect(() => {
-    if (selectedService || showContactForm) {
+    if (selectedService) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
     return () => { document.body.style.overflow = 'unset'; }
-  }, [selectedService, showContactForm]);
+  }, [selectedService]);
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -160,7 +195,6 @@ export function HomeV2() {
       });
       setFormStatus('sent');
       setTimeout(() => {
-        setShowContactForm(false);
         setFormData({ name: '', email: '', subject: '', message: '' });
         setFormStatus('idle');
       }, 3000);
@@ -181,7 +215,7 @@ export function HomeV2() {
   });
 
   return (
-    <div ref={containerRef} className="bg-black text-white selection:bg-orange-500 selection:text-black font-sans overflow-hidden">
+    <div ref={containerRef} className="bg-[#050505] text-white selection:bg-orange-500 selection:text-black font-sans overflow-hidden">
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-orange-600 origin-left z-50 pointer-events-none"
@@ -189,74 +223,291 @@ export function HomeV2() {
       />
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-40 px-4 sm:px-6 md:px-8 py-3 md:py-4 flex justify-between items-center bg-neutral-950/95 backdrop-blur-md border-b border-white/5">
-        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-lg sm:text-xl md:text-2xl font-black tracking-tighter uppercase flex items-center gap-1.5 md:gap-2 cursor-pointer">
-          <img src="/images/logo-biomercadeo.png" alt="Biomercadeo" className="h-7 w-7 md:h-8 md:w-8 object-contain" />
-          Biomercadeo
+      <nav className="fixed top-0 w-full z-40 px-4 sm:px-6 md:px-8 py-3 md:py-4 flex justify-between items-center bg-[#050505]/95 backdrop-blur-md border-b border-white/5">
+        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-base sm:text-lg lg:text-2xl font-black tracking-tighter uppercase flex items-center gap-1.5 md:gap-2 cursor-pointer z-10 w-max truncate">
+          <img src="/images/logo-biomercadeo.png" alt="Biomercadeo" className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8 object-contain shrink-0" />
+          <span className="truncate">Biomercadeo</span>
         </a>
-        <div className="hidden md:flex gap-6 lg:gap-8 text-sm font-bold uppercase tracking-widest">
-          <a href="#clients" className="hover:text-orange-500 transition-colors">Clientes</a>
-          <a href="#about" className="hover:text-orange-500 transition-colors">Nosotros</a>
-          <a href="#services" className="hover:text-orange-500 transition-colors">Portafolio</a>
-          <a href="#bicall" className="hover:text-purple-400 transition-colors">Bicall</a>
+        <div className="hidden lg:flex gap-6 lg:gap-8 text-sm xl:text-base font-bold uppercase tracking-widest items-center absolute left-1/2 -translate-x-1/2 min-w-max">
+          <a href="#about" className="hover:text-orange-500 transition-colors">¿Quiénes somos?</a>
+          <a href="#services" className="hover:text-orange-500 transition-colors">¿Qué hacemos?</a>
+          <a href="#contact" className="hover:text-orange-500 transition-colors">Contacto</a>
         </div>
-        <a href="#contact" className="px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-2 border border-white/20 rounded-full hover:bg-orange-600 hover:border-orange-600 transition-all font-medium text-xs sm:text-sm w-max uppercase block text-center">
-          Contáctenos
-        </a>
+        <div className="flex gap-3 sm:gap-4 items-center z-10 scale-90 sm:scale-100 origin-right">
+          <a href="https://www.instagram.com/biomercadeosas?igsh=dXFkaTYyZzBxaTFm" target="_blank" rel="noopener noreferrer" className="text-white hover:text-orange-500 transition-colors" title="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/1CL5jvcE1h/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-orange-500 transition-colors" title="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/search/results/content/?keywords=biomercadeo%20sas&origin=SWITCH_SEARCH_VERTICAL" target="_blank" rel="noopener noreferrer" className="text-white hover:text-orange-500 transition-colors" title="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="https://wa.me/573103255698" target="_blank" rel="noopener noreferrer" className="text-white hover:text-orange-500 transition-colors" title="WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.405-.883-.733-1.48-1.638-1.653-1.935-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.122 1.536 5.86L.045 23.953l6.242-1.63A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.986c-1.84 0-3.642-.478-5.234-1.385l-.375-.213-3.896 1.018 1.043-3.796-.233-.372A9.972 9.972 0 0 1 2.014 12C2.014 6.49 6.49 2.014 12 2.014s9.986 4.476 9.986 9.986-4.476 9.986-9.986 9.986z"/></svg>
+          </a>
+        </div>
       </nav>
 
-      {/* HERO SECTION */}
-      <section className="relative h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
+      {/* QUIÉNES SOMOS */}
+      <section id="about" className="pt-20 pb-16 bg-[#1a1a1a] relative border-t border-white/20 z-20 overflow-hidden">
+        {/* TEXTURA GRID MODERNA MUCHO MÁS CLARA */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-60" />
+        
+        {/* LUCES DE NEON "AURORA" INTENSAS PARA ACLARAR EL FONDO */}
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }} 
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] pointer-events-none mix-blend-screen" 
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }} 
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] pointer-events-none mix-blend-screen" 
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }} 
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+          className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] pointer-events-none mix-blend-screen" 
+        />
+        
+        {/* Gradiente radial blanco masivo desde el centro para iluminar toda el área */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_100%)] pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-12 text-center relative z-10">
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-row items-center justify-center gap-4 sm:gap-6 mb-12"
+          >
+            <img src="/images/logo-biomercadeo.png" alt="Biomercadeo" className="h-20 w-20 sm:h-28 sm:w-28 lg:h-36 lg:w-36 object-contain" />
+            <span className="text-white font-black text-4xl sm:text-5xl lg:text-7xl tracking-tighter uppercase drop-shadow-lg">Biomercadeo</span>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-20 max-w-5xl mx-auto relative px-4"
+          >
+            {/* Elemento decorativo visual */}
+            <div className="flex justify-center mb-8">
+              <div className="h-px w-24 bg-gradient-to-r from-transparent via-orange-500 to-transparent"></div>
+            </div>
+
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-neutral-200 leading-[1.4] sm:leading-[1.5] text-center font-light mb-8">
+              Expertos en <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300">comunicaciones en salud</span> y soluciones corporativas.
+            </h3>
+            
+            <p className="text-lg md:text-xl text-neutral-400 leading-relaxed text-center font-light mb-10 max-w-3xl mx-auto">
+              Somos una empresa de mercadeo enfocada en transformar la visión de su marca ofreciendo soluciones integrales de:
+            </p>
+
+            {/* Grilla creativa de servicios core */}
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-14">
+              <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                <Layers className="w-5 h-5 text-orange-500" /> 
+                <span className="font-medium">Diseño y Publicidad</span>
+              </div>
+              <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                <MonitorPlay className="w-5 h-5 text-sky-500" /> 
+                <span className="font-medium">Tecnología</span>
+              </div>
+              <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                <Presentation className="w-5 h-5 text-emerald-500" /> 
+                <span className="font-medium">Estrategias de alto nivel</span>
+              </div>
+              <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                <PhoneCall className="w-5 h-5 text-purple-500" /> 
+                <span className="font-medium">Contact Center</span>
+              </div>
+            </div>
+
+            {/* Parrafo de experiencia con styling tipo cita/Quote de impacto */}
+            <div className="text-center relative max-w-4xl mx-auto">
+              <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-64 h-32 bg-orange-500/10 rounded-full blur-[60px] pointer-events-none"></div>
+              <div className="relative z-10 border-l-2 border-orange-500/50 pl-6 py-2 md:pl-8 text-left inline-block">
+                <p className="text-neutral-300 text-base md:text-xl leading-relaxed font-light">
+                  Contamos con un <strong className="text-white font-medium">amplio portafolio de servicios</strong>, respaldado por una <strong className="text-white font-medium">sólida experiencia</strong> en el acompañamiento de importantes compañías a nivel <strong className="text-white font-medium">nacional e internacional</strong>.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* STATS & ABOUT */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center mb-20 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight">
+              Diseño y comunicación <br />
+              <span className="text-orange-500 underline decoration-wavy decoration-orange-500/50 underline-offset-8">hecha a su medida.</span>
+            </h3>
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-2 gap-6"
+          >
+            <StatsCard number="17+" label="Años de Experiencia" delay={0.1} />
+            <StatsCard number="+12" label="Países de experiencia" delay={0.2} />
+            <StatsCard number="360°" label="Estrategias Integrales" delay={0.3} />
+            <StatsCard number="Top" label="Partners en Salud & Farma" delay={0.4} />
+          </motion.div>
+        </div>
+
+        {/* MISION & VISION */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 mt-12 relative z-10">
+          <div className="flex flex-col items-center">
+            {/* Controles interactivos (Tabs) */}
+            <div className="bg-[#111] border border-white/10 rounded-full p-1.5 flex shadow-2xl mb-8 relative">
+              <button 
+                onClick={() => setActiveTab('mision')}
+                className={`relative z-10 flex items-center gap-2 px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'mision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
+              >
+                <Target className="w-5 h-5" />
+                Misión
+              </button>
+              <button 
+                onClick={() => setActiveTab('vision')}
+                className={`relative z-10 flex items-center gap-2 px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'vision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
+              >
+                <Eye className="w-5 h-5" />
+                Visión
+              </button>
+              {/* Pill indicador de fondo con animacion */}
+              <div 
+                className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-gradient-to-r from-orange-500 to-amber-500 rounded-full transition-all duration-500 ease-out shadow-[0_0_20px_rgba(249,115,22,0.3)] ${activeTab === 'mision' ? 'left-1.5' : 'left-[calc(50%+4.5px)]'}`} 
+              />
+            </div>
+
+            {/* Contenedor del texto (Glassmorphism) */}
+            <div className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 rounded-3xl p-8 md:p-12 lg:p-16 min-h-[300px] w-full flex items-center justify-center relative overflow-hidden shadow-2xl">
+              {/* Blur decorativo de fondo en la tarjeta */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-[80px]" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/5 rounded-full blur-[80px]" />
+              
+              <AnimatePresence mode="wait">
+                {activeTab === 'mision' && (
+                  <motion.div
+                    key="mision"
+                    initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                    animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                    transition={{ duration: 0.4 }}
+                    className="text-center w-full"
+                  >
+                    <p className="text-neutral-300 text-xl md:text-2xl leading-relaxed font-light">
+                      Biomercadeo es una empresa Colombiana que apoya principalmente a <strong className="font-bold text-white">empresas del área de la salud</strong> a <strong className="font-bold text-white">desarrollar y aplicar estrategias de comunicación novedosas</strong> con sus colaboradores internos, médicos, farmacias, pacientes y socios estratégicos para <strong className="font-bold text-white">alcanzar sus objetivos comerciales y de ventas</strong>.
+                    </p>
+                  </motion.div>
+                )}
+                {activeTab === 'vision' && (
+                  <motion.div
+                    key="vision"
+                    initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                    animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                    transition={{ duration: 0.4 }}
+                    className="text-center w-full"
+                  >
+                    <p className="text-neutral-300 text-xl md:text-2xl leading-relaxed font-light">
+                      Biomercadeo quiere ser reconocido como el <strong className="font-bold text-white">más importante aliado estratégico en Colombia</strong> para la <strong className="font-bold text-white">Industria de la salud en comunicación</strong> con su unidad de diseño y Contact Center. Deseamos <strong className="font-bold text-white">expandir nuestros servicios a otras empresas</strong> en los próximos años.
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* EQUIPO DE TRABAJO */}
+      <section className="relative py-16 md:py-24 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 border-t border-white/5 bg-[#050505]">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/90 via-[#050505] to-[#0a0a0a]/90 z-10" />
           <img 
             src="https://images.unsplash.com/photo-1758468274726-1197049bbfa9?q=80&w=2000&auto=format&fit=crop" 
             alt="Futuristic Background" 
-            className="w-full h-full object-cover opacity-40 scale-110"
+            className="w-full h-full object-cover opacity-[0.15]"
           />
         </div>
 
         <div className="relative z-20 text-center max-w-6xl mx-auto flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center text-center"
           >
-            <div className="flex items-center gap-4 mb-6">
-              <img src="/images/logo-biomercadeo.png" alt="Biomercadeo" className="h-16 w-16 md:h-20 md:w-20 object-contain" />
-              <span className="text-white font-black text-3xl md:text-5xl tracking-tighter uppercase">Biomercadeo</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1] mb-6 uppercase">
-              Somos parte de su <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[1.2] mb-2 uppercase">
+              Queremos ser parte de su <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300 text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-1 block">
                 Equipo de Trabajo
               </span>
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-neutral-300 max-w-3xl mx-auto font-light leading-relaxed">
-              Comunicación efectiva para el éxito. Somos una agencia especializada en diseño, tecnología y estrategias de alto nivel.
-            </p>
-            
-            <div className="mt-12">
-              <a href="#services" className="inline-block group relative overflow-hidden bg-orange-600 hover:bg-orange-500 text-white px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 rounded-full font-bold uppercase tracking-wider sm:tracking-widest text-sm sm:text-base transition-all shadow-[0_0_40px_rgba(234,88,12,0.3)]">
-                <span className="relative z-10 flex items-center gap-4">
-                  Explorar Portafolio
-                  <ArrowsRight />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </a>
-            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* CLIENTS INFINITE SCROLL */}
-      <section id="clients" className="py-24 bg-black overflow-hidden relative border-t border-white/10">
+      {/* INTERACTIVE SERVICES ACCORDION/GRID */}
+      <section id="services" className="pt-20 pb-20 relative bg-[#1a1a1a] border-t border-white/20 z-20 overflow-hidden">
+        {/* TEXTURA GRID MODERNA MUCHO MÁS CLARA */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-60" />
+        
+        {/* LUCES DE NEON "AURORA" INTENSAS PARA ACLARAR EL FONDO */}
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }} 
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] pointer-events-none mix-blend-screen" 
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }} 
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] pointer-events-none mix-blend-screen" 
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }} 
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+          className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] pointer-events-none mix-blend-screen" 
+        />
+        
+        {/* Gradiente radial blanco masivo desde el centro para iluminar toda el área */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_100%)] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+          <div className="mb-12 md:mb-20 text-center">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-tighter"><span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300">8 Ejes</span> de Innovación</h3>
+            <p className="text-neutral-500 mt-4 text-lg">Haz click en cualquier servicio para conocer el detalle</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {SERVICES.map((srv, index) => (
+              <ServiceCard key={srv.id} srv={srv} index={index} onClick={() => setSelectedService(srv)} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CLIENTS MARQUEE */}
+      <section className="border-t border-white/5 py-16 bg-[#0a0a0a] z-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-16 text-center">
           <h3 className="text-2xl sm:text-3xl md:text-4xl text-white font-black uppercase tracking-tighter">Importantes compañías confían en nosotros</h3>
         </div>
         
-        {/* Marquee Banner */}
         <div className="relative flex overflow-x-hidden group bg-white/5 py-8 border-y border-white/10">
           <div className="animate-[scroll_40s_linear_infinite] whitespace-nowrap flex items-center space-x-16 px-8">
             {["Fresenius Kabi", "AstraZeneca", "Pfizer", "Abbott", "Janssen", "Takeda", "Bayer", "Merck", "Novartis", "Sanofi", "Medtronic"].map((client, i) => (
@@ -271,203 +522,158 @@ export function HomeV2() {
         </div>
       </section>
 
-      {/* STATS & ABOUT */}
-      <section id="about" className="py-24 bg-neutral-950 relative border-t border-white/10 z-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight">
-              Diseño y comunicación hecha a su <span className="text-orange-500 underline decoration-wavy decoration-orange-500/50 underline-offset-8">medida.</span>
-            </h3>
-            <p className="text-neutral-400 text-xl leading-relaxed">
-              Contamos con un amplio portafolio de servicios, aportando experiencia significativa apoyando importantes compañías a nivel nacional e internacional.
-            </p>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-2 gap-6"
-          >
-            <StatsCard number="17+" label="Años de Experiencia" delay={0.1} />
-            <StatsCard number="12+" label="Países Trabajados" delay={0.2} />
-            <StatsCard number="360°" label="Estrategias Integrales" delay={0.3} />
-            <StatsCard number="Top" label="Partners en Salud & Farma" delay={0.4} />
-          </motion.div>
-        </div>
-      </section>
+      {/* NEW CONTACT SECTION WITH FORM */}
+      <section id="contact" className="py-24 bg-[#1a1a1a] relative border-t border-white/20 z-20 overflow-hidden">
+        {/* TEXTURA GRID MODERNA MUCHO MÁS CLARA */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-60" />
+        
+        {/* LUCES DE NEON "AURORA" INTENSAS PARA ACLARAR EL FONDO */}
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }} 
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] pointer-events-none mix-blend-screen" 
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }} 
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] pointer-events-none mix-blend-screen" 
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }} 
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+          className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] pointer-events-none mix-blend-screen" 
+        />
+        
+        {/* Gradiente radial blanco masivo desde el centro para iluminar toda el área */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_100%)] pointer-events-none" />
 
-      {/* INTERACTIVE SERVICES ACCORDION/GRID */}
-      <section id="services" className="py-32 relative bg-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <div className="mb-12 md:mb-20 text-center">
-            <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-orange-500 mb-4">6 Ejes de Innovación</h2>
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-tighter">Nuestro <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 to-neutral-600">Portafolio</span></h3>
-            <p className="text-neutral-500 mt-4 text-lg">Haz click en cualquier servicio para conocer el detalle</p>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter mb-4">Iniciar <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300">Proyecto</span></h2>
+            <p className="text-neutral-400 text-lg">Cuéntenos sobre su iniciativa y le responderemos a la brevedad.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SERVICES.map((srv, index) => (
-              <ServiceCard key={srv.id} srv={srv} index={index} onClick={() => setSelectedService(srv)} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* BICALL - CONTACT CENTER */}
-      <section id="bicall" className="relative py-32 bg-gradient-to-b from-black via-[#0d0520] to-[#120828] overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[180px]" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[150px]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-purple-500/5 rounded-full" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-purple-500/5 rounded-full" />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          {/* Bicall Hero Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="text-center mb-20"
-          >
-            <div className="inline-flex items-center gap-3 bg-purple-500/10 border border-purple-500/20 rounded-full px-6 py-2 mb-8">
-              <PhoneCall className="w-5 h-5 text-purple-400" />
-              <span className="text-purple-300 font-bold text-sm uppercase tracking-widest">Contact Center</span>
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black tracking-tighter mb-6">
-              <span className="text-white">Bi</span><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-violet-300">call</span>
-            </h2>
-            <p className="text-xl md:text-2xl text-purple-200/60 max-w-2xl mx-auto leading-relaxed">
-              La solución integral en un <span className="text-purple-400 font-bold">Contact Center</span>
-            </p>
-          </motion.div>
-
-          {/* Programas Especializados Title */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mb-12"
-          >
-            <h3 className="text-3xl md:text-4xl font-black text-white">Programas Especializados</h3>
-            <p className="text-purple-400 text-lg font-medium mt-1">en diferentes áreas</p>
-          </motion.div>
-
-          {/* Bento Grid of Services */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { title: "Programas de apoyo", desc: "De recordación y educación para clientes y aliados", icon: <HeartPulse className="w-6 h-6" />, span: "lg:col-span-2", img: "/images/rendering-anime-doctors-work.jpg" },
-              { title: "Confirmación", desc: "Para eventos", icon: <ClipboardCheck className="w-6 h-6" />, span: "", img: "/images/scene-with-business-person-working-futuristic-office-job (1).jpg" },
-              { title: "Encuestas", desc: "De seguimiento y satisfacción", icon: <BarChart3 className="w-6 h-6" />, span: "", img: "/images/technology-hologram-indoors.jpg" },
-              { title: "Fuerza de ventas telefónica", desc: "Para la comercialización de sus productos", icon: <PhoneCall className="w-6 h-6" />, span: "", img: "/images/venta-telefono.png" },
-              { title: "Visita domiciliaria", desc: "Con educadores en salud", icon: <Users className="w-6 h-6" />, span: "", img: "/images/doctor-viosita.png" },
-              { title: "Recordación", desc: "Para la toma de medicamentos, vacunas y citas médicas", icon: <HeartPulse className="w-6 h-6" />, span: "", img: "/images/yellow-pill-spills-reflection-addiction-water-generative-ai.jpg" },
-              { title: "Servicios de IA", desc: "Listas de difusión • Chatbot • Voice call • Asistente virtual", icon: <BrainCircuit className="w-6 h-6" />, span: "", img: "/images/cyberpunk-illustration-with-futuristic-technology-bright-neon-lights.jpg" },
-              { title: "Plataforma interactiva", desc: "Personalizada con informes en Dashboard y manejo de KPIs", icon: <BarChart3 className="w-6 h-6" />, span: "lg:col-span-2", img: "/images/online-cloud-data-storage-concept-cloudscape-digital-online-server-global-network-business-web-database-backup-computer-private-infrastructure-technology.jpg" },
-              { title: "Actualización", desc: "De bases de datos (Habeas Data) de clientes, proveedores y aliados estratégicos", icon: <Database className="w-6 h-6" />, span: "lg:col-span-2", img: "/images/freepik__the-style-is-3d-model-with-octane-render-volumetri__62513.png" },
-              { title: "Test de adherencia", desc: "De los clientes al producto", icon: <ClipboardCheck className="w-6 h-6" />, span: "", img: "/images/freepik__the-style-is-3d-model-with-octane-render-volumetri__17321.png" },
-              { title: "Asesoría y apoyo", desc: "Gestión y apoyo para la entrega de productos", icon: <Truck className="w-6 h-6" />, span: "lg:col-span-2", img: "/images/delivery-robot-futuristic-environment.jpg" },
-              { title: "Farmacovigilancia", desc: "Experiencia y manejo de los lineamientos de farmacovigilancia", icon: <ShieldCheck className="w-6 h-6" />, span: "", img: "/images/arte-digital-equipo-trabajo.jpg" },
-              { title: "SMS y Mailing", desc: "Envío de mensajes personalizados para generar fidelidad", icon: <MailIcon className="w-6 h-6" />, span: "", img: "/images/work-team-digital-art.jpg" },
-              { title: "Kits de fidelización", desc: "Creación y elaboración de kits personalizados", icon: <Gift className="w-6 h-6" />, span: "lg:col-span-2", img: "/images/work-team-digital-art (1).jpg" },
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05, duration: 0.4 }}
-                className={`group relative bg-white/[0.03] backdrop-blur-sm border border-purple-500/10 rounded-2xl p-6 hover:bg-purple-500/10 hover:border-purple-500/30 transition-all duration-300 cursor-default overflow-hidden min-h-[200px] ${item.span}`}
-              >
-                {/* Background image */}
-                <img
-                  src={item.img}
-                  alt=""
-                  className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700 rounded-2xl"
-                />
-                {/* Dark overlay for readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-purple-900/30 rounded-2xl" />
-
-                {/* Glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 to-violet-600/0 group-hover:from-purple-600/10 group-hover:to-violet-600/15 transition-all duration-500 rounded-2xl" />
-                
-                <div className="relative z-10 flex flex-col justify-end h-full">
-                  <div className="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-300 mb-4 group-hover:bg-purple-500/30 group-hover:scale-110 transition-all duration-300 backdrop-blur-sm">
-                    {item.icon}
-                  </div>
-                  <h4 className="text-lg font-black text-white mb-1 group-hover:text-purple-200 transition-colors drop-shadow-lg">{item.title}</h4>
-                  <p className="text-neutral-300 text-sm leading-relaxed group-hover:text-neutral-200 transition-colors drop-shadow-md">{item.desc}</p>
+          <div className="bg-[#0a0a0a] border border-white/5 rounded-[2rem] p-8 md:p-12 shadow-2xl">
+            {formStatus === 'sent' ? (
+              <div className="flex flex-col items-center justify-center py-12 text-center h-full">
+                <div className="w-20 h-20 rounded-full bg-orange-500/20 flex items-center justify-center mb-6">
+                  <CheckCircle2 className="w-10 h-10 text-orange-500" />
                 </div>
-
-                {/* Corner accent */}
-                <div className="absolute -top-4 -right-4 w-16 h-16 bg-purple-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </motion.div>
-            ))}
+                <h3 className="text-3xl font-black text-white mb-2">¡Mensaje Enviado!</h3>
+                <p className="text-neutral-400 text-lg">Nos pondremos en contacto pronto.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleContactSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="text-sm font-bold text-neutral-300 uppercase tracking-wider mb-2 block">Nombre</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-neutral-600 focus:outline-none focus:border-orange-500 transition-colors"
+                      placeholder="Su nombre completo"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-bold text-neutral-300 uppercase tracking-wider mb-2 block">Correo</label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-neutral-600 focus:outline-none focus:border-orange-500 transition-colors"
+                      placeholder="correo@ejemplo.com"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="text-sm font-bold text-neutral-300 uppercase tracking-wider mb-2 block">Asunto</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.subject}
+                    onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-neutral-600 focus:outline-none focus:border-orange-500 transition-colors"
+                    placeholder="Asunto del mensaje"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-bold text-neutral-300 uppercase tracking-wider mb-2 block">Mensaje</label>
+                  <textarea
+                    required
+                    rows={5}
+                    value={formData.message}
+                    onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-neutral-600 focus:outline-none focus:border-orange-500 transition-colors resize-none"
+                    placeholder="Cuéntenos al detalle su idea..."
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={formStatus === 'sending'}
+                  className="w-full bg-orange-600 hover:bg-orange-500 disabled:opacity-60 text-black font-black text-lg py-5 rounded-xl transition-colors flex items-center justify-center gap-2 uppercase tracking-wider mt-4"
+                >
+                  {formStatus === 'sending' ? (
+                    <><Loader2 className="w-6 h-6 animate-spin" /> Enviando...</>
+                  ) : (
+                    <><Send className="w-6 h-6" /> Enviar Mensaje</>
+                  )}
+                </button>
+                {formStatus === 'error' && (
+                  <p className="text-red-400 text-center font-medium mt-4">Hubo un error al enviar el mensaje. Su email no se pudo conectar con nuestro servidor, por favor intente más tarde.</p>
+                )}
+              </form>
+            )}
           </div>
-
-          {/* Bottom CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="mt-16 text-center"
-          >
-            <button onClick={() => setShowContactForm(true)} className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 text-white px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 rounded-full font-bold uppercase text-sm sm:text-base tracking-wider sm:tracking-widest transition-all shadow-[0_0_40px_rgba(147,51,234,0.3)] hover:shadow-[0_0_60px_rgba(147,51,234,0.5)] cursor-pointer">
-              <PhoneCall className="w-5 h-5" />
-              Conocer más sobre Bicall
-            </button>
-          </motion.div>
         </div>
       </section>
 
       {/* Footer / Contact */}
-      <footer id="contact" className="py-16 sm:py-24 md:py-32 px-4 sm:px-8 md:px-16 lg:px-24 bg-orange-600 text-black relative overflow-hidden">
-        <div className="relative z-10 grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 max-w-7xl mx-auto">
-          <div className="text-center md:text-left">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black mb-6 md:mb-8 leading-none">
-              LET'S <br/> WORK.
+      <footer className="py-12 md:py-16 px-4 sm:px-8 bg-[#0d0d0d] text-white relative overflow-hidden border-t border-white/5">
+        {/* Glow sutil en el fondo del footer */}
+        <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-orange-600/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none" />
+        
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-10 md:gap-0">
+          <div className="text-center md:text-left space-y-2">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black leading-none mb-2 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300">
+              LET'S WORK.
             </h2>
-            <p className="text-lg sm:text-xl md:text-2xl font-bold max-w-sm mx-auto md:mx-0">
-              ¿Tiene un proyecto en mente? Creamos el futuro juntos.
+            <p className="text-xl md:text-2xl font-bold text-neutral-300">
+              ¿Tiene un proyecto en mente?
+            </p>
+            <p className="text-xl md:text-2xl font-bold text-neutral-300">
+              Creemos un futuro juntos.
             </p>
           </div>
-          <div className="flex flex-col items-center md:items-end">
-            <div className="space-y-3 md:space-y-4 text-base sm:text-lg md:text-xl font-bold w-fit mx-auto md:w-full md:max-w-md md:mx-0">
-              <div className="flex items-center gap-4 hover:text-white transition-colors cursor-default">
-                <MapPin className="w-6 h-6 shrink-0 text-black/50" />
-                <span>Carrera 55A #166-21, Bogotá</span>
-              </div>
-              <a href="tel:6018055894" className="flex items-center gap-4 hover:text-white transition-colors">
-                <Phone className="w-6 h-6 shrink-0 text-black/50" />
-                <span>601 8055894</span>
-              </a>
-              <div className="flex items-center gap-4 hover:text-white transition-colors cursor-default">
-                <Smartphone className="w-6 h-6 shrink-0 text-black/50" />
-                <span>310 325 5698 - 311 450 9968</span>
-              </div>
+          
+            <div className="flex flex-col items-center md:items-start text-lg md:text-xl lg:text-2xl font-bold gap-4 mt-4 md:mt-0 text-neutral-300">
+            <div className="flex items-center gap-3 hover:text-orange-400 transition-colors cursor-default">
+              <MapPin className="w-6 h-6 md:w-8 md:h-8 text-orange-500 shrink-0" />
+              <span>Carrera 55A #166-21, Bogotá Colombia</span>
             </div>
-            <div className="mt-10 w-full flex justify-center">
-              <button 
-                onClick={() => setShowContactForm(true)}
-                className="bg-black text-white px-8 py-4 font-bold text-lg hover:bg-white hover:text-black transition-colors flex items-center gap-2"
-              >
-                Iniciar Proyecto <MessageSquare className="w-5 h-5" />
-              </button>
+            <a href="tel:6018055894" className="flex items-center gap-3 hover:text-orange-400 transition-colors">
+              <Phone className="w-6 h-6 md:w-8 md:h-8 text-orange-500 shrink-0" />
+              <span>601 8055894</span>
+            </a>
+            <div className="flex items-center gap-3 hover:text-orange-400 transition-colors cursor-default">
+              <Smartphone className="w-6 h-6 md:w-8 md:h-8 text-orange-500 shrink-0" />
+              <span>310 325 5698 - 311 450 9968</span>
+            </div>
+            <div className="flex items-center gap-3 mt-1">
+              <MailIcon className="w-6 h-6 md:w-8 md:h-8 text-orange-500 shrink-0" />
+              <div className="flex flex-col gap-1 items-center md:items-start">
+                <a href="mailto:angelamgiraldo@biomercadeo.com" className="hover:text-orange-400 transition-colors break-all text-center md:text-left text-base md:text-lg">
+                  angelamgiraldo@biomercadeo.com
+                </a>
+                <a href="mailto:hellen.garzon@biomercadeo.com" className="hover:text-orange-400 transition-colors break-all text-center md:text-left text-base md:text-lg">
+                  hellen.garzon@biomercadeo.com
+                </a>
+              </div>
             </div>
           </div>
         </div>
-        <div className="absolute top-1/2 -right-24 w-[500px] h-[500px] bg-black rounded-full blur-[150px] opacity-20 pointer-events-none" />
       </footer>
 
       {/* MODAL DE SERVICIOS */}
@@ -651,115 +857,6 @@ export function HomeV2() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* MODAL DE CONTACTO */}
-      <AnimatePresence>
-        {showContactForm && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
-          >
-            <motion.div
-              className="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer"
-              onClick={() => { setShowContactForm(false); setFormStatus('idle'); }}
-            />
-            <motion.div
-              initial={{ y: 60, opacity: 0, scale: 0.95 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: 40, opacity: 0, scale: 0.95 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="relative w-full max-w-lg bg-neutral-900 border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl"
-            >
-              <button
-                onClick={() => { setShowContactForm(false); setFormStatus('idle'); }}
-                className="absolute top-5 right-5 p-2 bg-white/5 hover:bg-orange-600 rounded-full transition-colors text-neutral-400 hover:text-white"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              {formStatus === 'sent' ? (
-                <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <div className="w-16 h-16 rounded-full bg-orange-500/20 flex items-center justify-center mb-6">
-                    <CheckCircle2 className="w-8 h-8 text-orange-500" />
-                  </div>
-                  <h3 className="text-2xl font-black text-white mb-2">¡Mensaje Enviado!</h3>
-                  <p className="text-neutral-400">Nos pondremos en contacto pronto.</p>
-                </div>
-              ) : (
-                <>
-                  <h3 className="text-3xl font-black text-white mb-2">
-                    Iniciar <span className="text-orange-500">Proyecto</span>
-                  </h3>
-                  <p className="text-neutral-400 mb-8">Cuéntenos sobre su proyecto y le responderemos a la brevedad.</p>
-
-                  <form onSubmit={handleContactSubmit} className="space-y-5">
-                    <div>
-                      <label className="text-sm font-bold text-neutral-300 uppercase tracking-wider mb-2 block">Nombre</label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-neutral-600 focus:outline-none focus:border-orange-500 transition-colors"
-                        placeholder="Su nombre completo"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-bold text-neutral-300 uppercase tracking-wider mb-2 block">Correo electrónico</label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-neutral-600 focus:outline-none focus:border-orange-500 transition-colors"
-                        placeholder="correo@ejemplo.com"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-bold text-neutral-300 uppercase tracking-wider mb-2 block">Asunto</label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.subject}
-                        onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-neutral-600 focus:outline-none focus:border-orange-500 transition-colors"
-                        placeholder="Asunto del mensaje"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-bold text-neutral-300 uppercase tracking-wider mb-2 block">Mensaje</label>
-                      <textarea
-                        required
-                        rows={4}
-                        value={formData.message}
-                        onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-neutral-600 focus:outline-none focus:border-orange-500 transition-colors resize-none"
-                        placeholder="Describa brevemente su proyecto..."
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      disabled={formStatus === 'sending'}
-                      className="w-full bg-orange-600 hover:bg-orange-500 disabled:opacity-60 text-black font-black text-lg py-4 rounded-xl transition-colors flex items-center justify-center gap-2 uppercase tracking-wider"
-                    >
-                      {formStatus === 'sending' ? (
-                        <><Loader2 className="w-5 h-5 animate-spin" /> Enviando...</>
-                      ) : (
-                        <><Send className="w-5 h-5" /> Enviar Mensaje</>
-                      )}
-                    </button>
-                    {formStatus === 'error' && (
-                      <p className="text-red-400 text-sm text-center">Hubo un error. Intente de nuevo.</p>
-                    )}
-                  </form>
-                </>
-              )}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
@@ -775,7 +872,7 @@ function StatsCard({ number, label, delay }: { number: string, label: string, de
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay: delay, duration: 0.4 }}
-      className="p-8 bg-white/5 border border-white/10 rounded-3xl flex flex-col items-start justify-center backdrop-blur-sm hover:bg-white/10 hover:border-orange-500/50 transition-all cursor-pointer"
+      className="p-6 sm:p-8 bg-white/5 border border-white/10 rounded-3xl flex flex-col items-center justify-center text-center backdrop-blur-sm hover:bg-white/10 hover:border-orange-500/50 transition-all cursor-pointer"
     >
       <span className="text-5xl lg:text-6xl font-black text-orange-500 mb-3">{number}</span>
       <span className="text-sm font-bold uppercase tracking-widest text-neutral-300">{label}</span>
@@ -791,7 +888,7 @@ function ServiceCard({ srv, index, onClick }: { srv: any, index: number, onClick
       viewport={{ once: true, margin: "-50px" }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       onClick={onClick}
-      className="group relative h-[450px] rounded-3xl overflow-hidden cursor-pointer"
+      className="group relative h-[450px] rounded-3xl overflow-hidden cursor-pointer border border-white/5 hover:border-orange-500/50 transition-colors"
     >
       {/* Background Image & Overlay */}
       <div className="absolute inset-0">
@@ -804,36 +901,39 @@ function ServiceCard({ srv, index, onClick }: { srv: any, index: number, onClick
       </div>
       
       {/* Content */}
-      <div className="absolute inset-0 p-8 flex flex-col justify-end">
-        {/* En el header del servicio le agrego un pequeño "+" para indicar accionable */}
-        <div className="absolute top-8 right-8 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-md border border-white/20">
-          <ChevronRight className="text-white group-hover:text-orange-500" />
+      <div className="absolute inset-0 p-8 flex flex-col justify-between">
+        {/* Superior: Título de la Tarjeta */}
+        <div className="flex justify-between items-start">
+          <h3 className="text-2xl font-bold leading-tight drop-shadow-md pr-4 text-white">
+            {srv.title}
+          </h3>
+          <div className="w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-md border border-white/20 shrink-0 bg-white/10">
+            <ChevronRight className="text-white" />
+          </div>
         </div>
 
-        {/* Static part */}
-        <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
-          <div className="mb-4 text-orange-500 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/10 shadow-[0_0_15px_rgba(234,88,12,0.2)]">
-            {srv.icon}
-          </div>
-          <div className="flex items-start justify-between mb-4 gap-4">
-            <h3 className="text-2xl font-bold leading-tight drop-shadow-md">{srv.title}</h3>
-            <span className="text-3xl font-black text-white/20 mt-1">{srv.id}</span>
-          </div>
-          
-          {/* Hover part */}
+        {/* Inferior (Ícono y Hover Part) */}
+        <div className="flex flex-col">
+          {/* Hover part (Aparece encima del icono) */}
           <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
             <div className="overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-              <p className="text-neutral-400 text-sm leading-relaxed mb-4">
-                {srv.description}
-              </p>
-              <ul className="flex flex-wrap gap-2">
-                {srv.list.map((item: string, i: number) => (
-                  <li key={i} className="text-xs bg-black/50 text-neutral-300 px-3 py-1.5 rounded-full border border-white/10">
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <div className="pb-6">
+                <p className="text-neutral-400 text-sm leading-relaxed mb-4">
+                  {srv.description}
+                </p>
+                <ul className="flex flex-wrap gap-2">
+                  {srv.list.map((item: string, i: number) => (
+                    <li key={i} className="text-xs px-3 py-1.5 rounded-full border bg-black/50 text-neutral-300 border-white/10">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
+          </div>
+          
+          <div className="text-orange-500 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/10 shadow-[0_0_15px_rgba(234,88,12,0.2)] shrink-0 self-start">
+            {srv.icon}
           </div>
         </div>
       </div>
