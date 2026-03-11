@@ -2,10 +2,14 @@
   "rewrites": [
     { "source": "/archivos/(.*)", "destination": "https://old.biomercadeo.com/archivos/$1" },
     { "source": "/abbott/(.*)", "destination": "https://old.biomercadeo.com/abbott/$1" },
-    { "source": "/ayudas2026/(.*)", "destination": "https://old.biomercadeo.com/ayudas2026/$1" },
     { "source": "/desarrollos/(.*)", "destination": "https://old.biomercadeo.com/desarrollos/$1" },
+    { "source": "/formula-abbott/(.*)", "destination": "https://old.biomercadeo.com/formula-abbott/$1" },
+    { "source": "/mascerca/(.*)", "destination": "https://old.biomercadeo.com/mascerca/$1" },
     { "source": "/proyectos/(.*)", "destination": "https://old.biomercadeo.com/proyectos/$1" },
+    { "source": "/siden/(.*)", "destination": "https://old.biomercadeo.com/siden/$1" },
+    { "source": "/wp-admin/(.*)", "destination": "https://old.biomercadeo.com/wp-admin/$1" },
     { "source": "/wp-content/(.*)", "destination": "https://old.biomercadeo.com/wp-content/$1" },
+    { "source": "/wp-includes/(.*)", "destination": "https://old.biomercadeo.com/wp-includes/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
