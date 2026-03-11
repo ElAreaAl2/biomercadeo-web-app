@@ -1,0 +1,737 @@
+@keyframes rotate1 {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(360deg);
+  }
+}
+@keyframes appear2 {
+  0% {
+    top: -55%;
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    top: 5%;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes appear3 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes appear4 {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  100% {
+    left: 35%;
+    opacity: 1;
+  }
+}
+@keyframes next {
+  0% {
+    left: 92%;
+  }
+  50% {
+    left: 92.5%;
+  }
+  100% {
+    left: 92%;
+  }
+}
+@keyframes back {
+  0% {
+    left: 92%;
+  }
+  50% {
+    left: 92.5%;
+  }
+  100% {
+    left: 92%;
+  }
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #a18484;
+}
+html .invisible,
+body .invisible {
+  opacity: 0;
+  pointer-events: none;
+}
+html .elemento,
+body .elemento {
+  position: absolute;
+}
+html .popup,
+body .popup {
+  background: rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 9999 !important;
+  position: absolute;
+}
+html .popup .cerrar-pop,
+body .popup .cerrar-pop {
+  cursor: pointer;
+  right: 3%;
+  top: 3%;
+  z-index: 99;
+  width: 6%;
+}
+html .popup.popup-oculto,
+body .popup.popup-oculto {
+  display: none !important;
+}
+html .popup .img1,
+body .popup .img1 {
+  position: absolute;
+  width: 60%;
+  left: 20%;
+  top: -4%;
+}
+html .popup .img2,
+body .popup .img2 {
+  position: absolute;
+  width: 90%;
+  left: 5%;
+  top: 4%;
+}
+html .popup .img3,
+body .popup .img3 {
+  position: absolute;
+  width: 90%;
+  left: 5%;
+  top: 0%;
+}
+html .ocultar,
+body .ocultar {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+html .oculto,
+body .oculto {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+html .z-0,
+body .z-0 {
+  z-index: 0 !important;
+}
+html .z-1,
+body .z-1 {
+  z-index: 1 !important;
+}
+html .z-2,
+body .z-2 {
+  z-index: 2 !important;
+}
+html .z-3,
+body .z-3 {
+  z-index: 3 !important;
+}
+html .z-4,
+body .z-4 {
+  z-index: 4 !important;
+}
+html .z-5,
+body .z-5 {
+  z-index: 5 !important;
+}
+html .z-6,
+body .z-6 {
+  z-index: 6 !important;
+}
+html .z-7,
+body .z-7 {
+  z-index: 7 !important;
+}
+html .z-8,
+body .z-8 {
+  z-index: 8 !important;
+}
+html .z-9,
+body .z-9 {
+  z-index: 9 !important;
+}
+html .z-99,
+body .z-99 {
+  z-index: 99 !important;
+}
+html .img-blanca,
+body .img-blanca {
+  filter: brightness(0) invert(1);
+}
+html .animate__delay-0-3s,
+body .animate__delay-0-3s {
+  animation-delay: 0.3s !important;
+}
+html .animate__delay-0-6s,
+body .animate__delay-0-6s {
+  animation-delay: 0.6s !important;
+}
+html .animate__delay-0-9s,
+body .animate__delay-0-9s {
+  animation-delay: 0.9s !important;
+}
+html .animate__delay-1-2s,
+body .animate__delay-1-2s {
+  animation-delay: 1.2s !important;
+}
+html .animate__delay-1-5s,
+body .animate__delay-1-5s {
+  animation-delay: 1.5s !important;
+}
+html .animate__delay-1-8s,
+body .animate__delay-1-8s {
+  animation-delay: 1.8s !important;
+}
+html .animate__delay-2-1s,
+body .animate__delay-2-1s {
+  animation-delay: 2.1s !important;
+}
+html .animate__delay-2-4s,
+body .animate__delay-2-4s {
+  animation-delay: 2.4s !important;
+}
+html .animate__delay-2-7s,
+body .animate__delay-2-7s {
+  animation-delay: 2.7s !important;
+}
+html .animate__delay,
+body .animate__delay {
+  animation-delay: 1.2s !important;
+}
+html .animate__delay-,
+body .animate__delay- {
+  animation-delay: 1.2s !important;
+}
+html .animate__delay-7s,
+body .animate__delay-7s {
+  animation-delay: 7s !important;
+}
+html .animate__delay-8s,
+body .animate__delay-8s {
+  animation-delay: 8s !important;
+}
+html #kad_container,
+body #kad_container {
+  position: absolute;
+  width: 1280px;
+  height: 720px;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  overflow: hidden;
+  background-color: #fff;
+  display: block;
+  /* Estado inicial para evitar el salto */
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+html #kad_container.visible,
+body #kad_container.visible {
+  opacity: 1;
+}
+html #kad_container .contenedor,
+body #kad_container .contenedor {
+  width: 1280px;
+  height: 720px;
+  margin: 0 auto;
+  background: #ffffff;
+  overflow: hidden;
+  position: relative;
+}
+html #kad_container .contenedor .fondo-general,
+body #kad_container .contenedor .fondo-general {
+  margin: 0 auto;
+  left: 0%;
+  top: 0%;
+  z-index: 0;
+}
+html #kad_container .contenedor .full-asset,
+body #kad_container .contenedor .full-asset {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1280px;
+  height: 720px;
+  pointer-events: none;
+  /* Evita que las capas transparentes bloqueen clics */
+}
+html #kad_container .contenedor .con-click,
+body #kad_container .contenedor .con-click {
+  pointer-events: auto;
+  cursor: pointer;
+}
+html #kad_container .contenedor .nav-home,
+body #kad_container .contenedor .nav-home {
+  position: absolute;
+  animation-delay: 0.3s;
+  top: 5%;
+  cursor: pointer;
+  right: 15%;
+  width: 5%;
+  z-index: 999 !important;
+}
+html #kad_container .contenedor .nav-home:hover,
+body #kad_container .contenedor .nav-home:hover {
+  transform: scale(0.95) !important;
+}
+html #kad_container .contenedor .nav-home-fin,
+body #kad_container .contenedor .nav-home-fin {
+  position: absolute;
+  animation-delay: 0.3s;
+  top: 5%;
+  cursor: pointer;
+  right: 5%;
+  width: 5%;
+  z-index: 999 !important;
+}
+html #kad_container .contenedor .nav-home-fin:hover,
+body #kad_container .contenedor .nav-home-fin:hover {
+  transform: scale(0.95) !important;
+}
+html #kad_container .contenedor .nav-prev,
+body #kad_container .contenedor .nav-prev {
+  position: absolute;
+  animation-delay: 0.6s;
+  top: 5%;
+  cursor: pointer;
+  right: 9%;
+  width: 5%;
+  z-index: 999 !important;
+}
+html #kad_container .contenedor .nav-prev:hover,
+body #kad_container .contenedor .nav-prev:hover {
+  transform: scale(0.95) !important;
+}
+html #kad_container .contenedor .nav-next,
+body #kad_container .contenedor .nav-next {
+  position: absolute;
+  animation-delay: 0.9s;
+  top: 5%;
+  cursor: pointer;
+  right: 3%;
+  width: 5%;
+  z-index: 999 !important;
+}
+html #kad_container .contenedor .nav-next:hover,
+body #kad_container .contenedor .nav-next:hover {
+  transform: scale(0.95) !important;
+}
+html #kad_container .contenedor .nav-next-inicio,
+body #kad_container .contenedor .nav-next-inicio {
+  position: absolute;
+  top: 62%;
+  cursor: pointer;
+  right: 4%;
+  z-index: 9999 !important;
+  width: 10%;
+}
+html #kad_container .contenedor .nav-next-inicio:hover,
+body #kad_container .contenedor .nav-next-inicio:hover {
+  transform: scale(0.95) !important;
+}
+html #kad_container .contenedor .cerrar,
+body #kad_container .contenedor .cerrar {
+  animation-delay: 1s;
+  background: #3e7fb1;
+  border-radius: 2rem 0 0 2rem;
+  top: 3%;
+  cursor: pointer;
+  padding: 0.5rem 1rem 0.5rem 1.2rem;
+  right: 0;
+  transition: all ease 0.3s;
+  width: 1.5rem;
+  z-index: 9999;
+}
+html #kad_container .contenedor .menu,
+body #kad_container .contenedor .menu {
+  list-style: none;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+  top: 23%;
+  z-index: 110;
+  width: 21%;
+}
+html #kad_container .contenedor .menu li,
+body #kad_container .contenedor .menu li {
+  display: inline-block;
+  cursor: pointer;
+  transition: all ease 0.3s;
+}
+html #kad_container .contenedor .menu li img,
+body #kad_container .contenedor .menu li img {
+  display: block;
+  transform-origin: bottom;
+  width: 40%;
+  margin: 6% 0 6% 18%;
+  transition: all ease 0.3s;
+}
+html #kad_container .contenedor .menu li:hover img,
+body #kad_container .contenedor .menu li:hover img {
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.7));
+  margin: 6% 0 6% 15%;
+}
+html #kad_container .contenedor .menu li:nth-child(1),
+body #kad_container .contenedor .menu li:nth-child(1) {
+  animation-delay: 0.3s;
+}
+html #kad_container .contenedor .menu li:nth-child(2),
+body #kad_container .contenedor .menu li:nth-child(2) {
+  animation-delay: 0.6s;
+}
+html #kad_container .contenedor .menu li:nth-child(3),
+body #kad_container .contenedor .menu li:nth-child(3) {
+  animation-delay: 0.9s;
+}
+html #kad_container .contenedor .menu li:nth-child(4),
+body #kad_container .contenedor .menu li:nth-child(4) {
+  animation-delay: 1.2s;
+}
+html #kad_container .contenedor .menu li:nth-child(5),
+body #kad_container .contenedor .menu li:nth-child(5) {
+  animation-delay: 1.5s;
+}
+html #kad_container .contenedor .menu li:nth-child(6),
+body #kad_container .contenedor .menu li:nth-child(6) {
+  animation-delay: 1.8s;
+}
+html #kad_container .contenedor .menu li:nth-child(7),
+body #kad_container .contenedor .menu li:nth-child(7) {
+  animation-delay: 2.1s;
+}
+html #kad_container .contenedor .menu li:nth-child(8),
+body #kad_container .contenedor .menu li:nth-child(8) {
+  animation-delay: 2.4s;
+}
+html #kad_container .contenedor .menu li:nth-child(9),
+body #kad_container .contenedor .menu li:nth-child(9) {
+  animation-delay: 2.7s;
+}
+html #kad_container .contenedor .menu li:nth-child(10),
+body #kad_container .contenedor .menu li:nth-child(10) {
+  animation-delay: 3s;
+}
+html #kad_container .contenedor .menu li:nth-child(11),
+body #kad_container .contenedor .menu li:nth-child(11) {
+  animation-delay: 3.3s;
+}
+html #kad_container .contenedor .menu li:nth-child(12),
+body #kad_container .contenedor .menu li:nth-child(12) {
+  animation-delay: 3.6s;
+}
+html #kad_container .contenedor .menu li:nth-child(13),
+body #kad_container .contenedor .menu li:nth-child(13) {
+  animation-delay: 3.9s;
+}
+html #kad_container .contenedor .menu li.activo img,
+body #kad_container .contenedor .menu li.activo img {
+  margin: 0 0 0 -33%;
+  width: 100%;
+}
+html #kad_container .contenedor .menu li.activo img:hover,
+body #kad_container .contenedor .menu li.activo img:hover {
+  margin: 0 0 0 -30%;
+}
+html #kad_container .contenedor .abrir1,
+body #kad_container .contenedor .abrir1 {
+  position: absolute;
+  width: 6%;
+  height: auto;
+  left: 69%;
+  top: 25%;
+}
+html #kad_container .contenedor .gif,
+body #kad_container .contenedor .gif {
+  pointer-events: none;
+}
+html #kad_container .contenedor .gif1,
+body #kad_container .contenedor .gif1 {
+  position: absolute;
+  width: 19%;
+  height: auto;
+  left: 43%;
+  top: 21%;
+}
+html #kad_container .contenedor .gif2,
+body #kad_container .contenedor .gif2 {
+  position: absolute;
+  width: 19%;
+  height: auto;
+  left: 48%;
+  top: 39%;
+}
+html #kad_container .contenedor .gif3,
+body #kad_container .contenedor .gif3 {
+  position: absolute;
+  width: 19%;
+  height: auto;
+  left: 43%;
+  top: 57%;
+}
+html #kad_container .contenedor .gif4,
+body #kad_container .contenedor .gif4 {
+  position: absolute;
+  width: 45%;
+  height: auto;
+  left: 12%;
+  top: 22%;
+}
+html #kad_container .contenedor .gif5,
+body #kad_container .contenedor .gif5 {
+  position: absolute;
+  width: 50%;
+  height: auto;
+  left: 15%;
+  top: 25%;
+}
+html #kad_container .contenedor .gif6,
+body #kad_container .contenedor .gif6 {
+  position: absolute;
+  width: 44%;
+  height: auto;
+  right: 0;
+  top: 25%;
+}
+html #kad_container .contenedor .gif7,
+body #kad_container .contenedor .gif7 {
+  position: absolute;
+  width: 80%;
+  height: auto;
+  right: 4%;
+  top: 18%;
+}
+html #kad_container .contenedor .gif8,
+body #kad_container .contenedor .gif8 {
+  position: absolute;
+  width: 30%;
+  height: auto;
+  right: 4%;
+  top: 0.5%;
+}
+html #kad_container .contenedor .gif9,
+body #kad_container .contenedor .gif9 {
+  position: absolute;
+  width: 21%;
+  height: auto;
+  left: 15%;
+  top: 27%;
+}
+html #kad_container .contenedor .gif10,
+body #kad_container .contenedor .gif10 {
+  position: absolute;
+  width: 81%;
+  height: auto;
+  left: 18%;
+  top: 11%;
+}
+html #kad_container .contenedor .gif11,
+body #kad_container .contenedor .gif11 {
+  position: absolute;
+  width: 31%;
+  height: auto;
+  left: 17%;
+  bottom: 0;
+}
+html #kad_container .contenedor .gif12,
+body #kad_container .contenedor .gif12 {
+  position: absolute;
+  width: 35%;
+  height: auto;
+  right: 0;
+  top: 6%;
+}
+html #kad_container .contenedor .gif13,
+body #kad_container .contenedor .gif13 {
+  position: absolute;
+  width: 40%;
+  height: auto;
+  left: 16.4%;
+  top: 25%;
+}
+html #kad_container .contenedor .gif14,
+body #kad_container .contenedor .gif14 {
+  position: absolute;
+  width: 40%;
+  height: auto;
+  left: 56.4%;
+  top: 23%;
+}
+html #kad_container .contenedor .gif15,
+body #kad_container .contenedor .gif15 {
+  position: absolute;
+  width: 8%;
+  height: auto;
+  left: 19%;
+  top: 67%;
+  filter: brightness(9);
+  opacity: 0.8;
+}
+html #kad_container .contenedor .gif16,
+body #kad_container .contenedor .gif16 {
+  position: absolute;
+  width: 8%;
+  height: auto;
+  left: 19%;
+  top: 30%;
+  filter: brightness(9);
+  opacity: 0.8;
+}
+html #kad_container .contenedor .gif17,
+body #kad_container .contenedor .gif17 {
+  position: absolute;
+  width: 8%;
+  height: auto;
+  left: 19%;
+  top: 46%;
+  filter: brightness(9);
+  opacity: 0.8;
+}
+html #kad_container .contenedor .gif18,
+body #kad_container .contenedor .gif18 {
+  position: absolute;
+  width: 56%;
+  height: auto;
+  left: 19%;
+  top: 25%;
+}
+html #kad_container .contenedor .gif19,
+body #kad_container .contenedor .gif19 {
+  position: absolute;
+  width: 46%;
+  height: auto;
+  left: 15%;
+  top: 31%;
+}
+html #kad_container .contenedor .gif20,
+body #kad_container .contenedor .gif20 {
+  position: absolute;
+  width: 46%;
+  height: auto;
+  left: 15%;
+  top: 31%;
+}
+html #kad_container .contenedor .gif21,
+body #kad_container .contenedor .gif21 {
+  position: absolute;
+  width: 78%;
+  height: auto;
+  left: 12%;
+  top: 15%;
+}
+html #kad_container .contenedor .gif22,
+body #kad_container .contenedor .gif22 {
+  position: absolute;
+  width: 67%;
+  height: auto;
+  left: 22%;
+  top: 29%;
+}
+html #kad_container .contenedor .gif23,
+body #kad_container .contenedor .gif23 {
+  position: absolute;
+  width: 11%;
+  height: auto;
+  left: 14.5%;
+  top: 25%;
+}
+html #kad_container .contenedor .gif24,
+body #kad_container .contenedor .gif24 {
+  position: absolute;
+  width: 11%;
+  height: auto;
+  left: 27%;
+  top: 43%;
+}
+html #kad_container .contenedor .gif25,
+body #kad_container .contenedor .gif25 {
+  position: absolute;
+  width: 11%;
+  height: auto;
+  left: 20%;
+  top: 34%;
+}
+html #kad_container .contenedor .gif26,
+body #kad_container .contenedor .gif26 {
+  position: absolute;
+  width: 44%;
+  height: auto;
+  left: 13%;
+  top: 50%;
+}
+html #kad_container .contenedor .gif27,
+body #kad_container .contenedor .gif27 {
+  position: absolute;
+  width: 76%;
+  height: auto;
+  right: 0%;
+  bottom: 0%;
+}
+html #kad_container .contenedor .gif28,
+body #kad_container .contenedor .gif28 {
+  position: absolute;
+  width: 12%;
+  height: auto;
+  right: 15%;
+  top: 50%;
+}
+html #kad_container .contenedor .gif29,
+body #kad_container .contenedor .gif29 {
+  position: absolute;
+  width: 12%;
+  height: auto;
+  right: 15%;
+  top: 24%;
+}
+html #kad_container .contenedor .gif30,
+body #kad_container .contenedor .gif30 {
+  position: absolute;
+  width: 76%;
+  height: auto;
+  left: 1%;
+  bottom: 1%;
+}
+html #kad_container .contenedor .gif31,
+body #kad_container .contenedor .gif31 {
+  position: absolute;
+  width: 76%;
+  height: auto;
+  left: 19%;
+  bottom: 0%;
+}
+html #kad_container .contenedor .gif32,
+body #kad_container .contenedor .gif32 {
+  position: absolute;
+  width: 29%;
+  height: auto;
+  left: 68%;
+  bottom: 7%;
+}/*# sourceMappingURL=main.min.css.map */

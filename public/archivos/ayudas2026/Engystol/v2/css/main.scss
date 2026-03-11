@@ -1,0 +1,724 @@
+$negro: #000000;
+$bgContenedor: #ffffff;
+
+// Animations **************************************
+
+@keyframes rotate1 {
+    0% {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes appear2 {
+    0% {
+        top: -55%;
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        top: 5%;
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes appear3 {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes appear4 {
+    0% {
+        left: 0;
+        opacity: 0;
+    }
+
+    100% {
+        left: 35%;
+        opacity: 1;
+    }
+}
+
+@keyframes next {
+    0% {
+        left: 92%;
+    }
+
+    50% {
+        left: 92.5%;
+    }
+
+    100% {
+        left: 92%;
+    }
+}
+
+@keyframes back {
+    0% {
+        left: 92%;
+    }
+
+    50% {
+        left: 92.5%;
+    }
+
+    100% {
+        left: 92%;
+    }
+}
+
+// Animations **************************************
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #a18484;
+
+    .invisible {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .elemento {
+        position: absolute;
+    }
+
+    .popup {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        height: 100%;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 9999 !important;
+        position: absolute;
+
+        .cerrar-pop {
+            cursor: pointer;
+            right: 3%;
+            top: 3%;
+            z-index: 99;
+            width: 6%;
+        }
+
+
+        &.popup-oculto {
+            display: none !important;
+        }
+
+        .img1 {
+            position: absolute;
+            width: 60%;
+            left: 20%;
+            top: -4%;
+        }
+
+        .img2 {
+            position: absolute;
+            width: 90%;
+            left: 5%;
+            top: 4%;
+        }
+
+        .img3 {
+            position: absolute;
+            width: 90%;
+            left: 5%;
+            top: 0%;
+        }
+
+    }
+
+    .ocultar {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        visibility: hidden !important;
+    }
+
+    .oculto {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        visibility: hidden !important;
+    }
+
+    .z-0 {
+        z-index: 0 !important;
+    }
+
+    .z-1 {
+        z-index: 1 !important;
+    }
+
+    .z-2 {
+        z-index: 2 !important;
+    }
+
+    .z-3 {
+        z-index: 3 !important;
+    }
+
+    .z-4 {
+        z-index: 4 !important;
+    }
+
+    .z-5 {
+        z-index: 5 !important;
+    }
+
+    .z-6 {
+        z-index: 6 !important;
+    }
+
+    .z-7 {
+        z-index: 7 !important;
+    }
+
+    .z-8 {
+        z-index: 8 !important;
+    }
+
+    .z-9 {
+        z-index: 9 !important;
+    }
+
+    .z-99 {
+        z-index: 99 !important;
+    }
+
+    .img-blanca {
+        filter: brightness(0) invert(1);
+    }
+
+    .animate__delay-0-3s {
+        animation-delay: 0.3s !important;
+    }
+
+    .animate__delay-0-6s {
+        animation-delay: 0.6s !important;
+    }
+
+    .animate__delay-0-9s {
+        animation-delay: 0.9s !important;
+    }
+
+    .animate__delay-1-2s {
+        animation-delay: 1.2s !important;
+    }
+
+    .animate__delay-1-5s {
+        animation-delay: 1.5s !important;
+    }
+
+    .animate__delay-1-8s {
+        animation-delay: 1.8s !important;
+    }
+
+    .animate__delay-2-1s {
+        animation-delay: 2.1s !important;
+    }
+
+    .animate__delay-2-4s {
+        animation-delay: 2.4s !important;
+    }
+
+    .animate__delay-2-7s {
+        animation-delay: 2.7s !important;
+    }
+
+    .animate__delay {
+        animation-delay: 1.2s !important;
+    }
+
+    .animate__delay- {
+        animation-delay: 1.2s !important;
+    }
+
+    .animate__delay-7s {
+        animation-delay: 7s !important;
+    }
+
+    .animate__delay-8s {
+        animation-delay: 8s !important;
+    }
+
+    @mixin contraste() {
+        filter: contrast(150%) brightness(110%);
+    }
+
+    #kad_container {
+        position: absolute;
+        width: 1280px;
+        height: 720px;
+        top: 0;
+        left: 0;
+        transform-origin: 0 0;
+        overflow: hidden;
+        background-color: #fff;
+        display: block;
+
+        /* Estado inicial para evitar el salto */
+    opacity: 0; 
+    transition: opacity 0.3s ease-in-out;
+
+    &.visible {
+    opacity: 1;
+}
+
+        .contenedor {
+            width: 1280px;
+            height: 720px;
+            margin: 0 auto;
+            background: $bgContenedor;
+            overflow: hidden;
+            position: relative;
+
+            .fondo-general {
+                margin: 0 auto;
+                left: 0%;
+                top: 0%;
+                z-index: 0;
+            }
+
+            .full-asset {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 1280px;
+                height: 720px;
+                pointer-events: none;
+                /* Evita que las capas transparentes bloqueen clics */
+            }
+
+            .con-click {
+                pointer-events: auto;
+                cursor: pointer;
+            }
+
+            .nav-home {
+                position: absolute;
+                animation-delay: 0.3s;
+                top: 5%;
+                cursor: pointer;
+                right: 15%;
+                width: 5%;
+                z-index: 999 !important;
+
+                &:hover {
+                    transform: scale(0.95) !important;
+                }
+            }
+
+            .nav-home-fin {
+                position: absolute;
+                animation-delay: 0.3s;
+                top: 5%;
+                cursor: pointer;
+                right: 5%;
+                width: 5%;
+                z-index: 999 !important;
+
+                &:hover {
+                    transform: scale(0.95) !important;
+                }
+            }
+
+            .nav-prev {
+                position: absolute;
+                animation-delay: 0.6s;
+                top: 5%;
+                cursor: pointer;
+                right: 9%;
+                width: 5%;
+                z-index: 999 !important;
+
+                &:hover {
+                    transform: scale(0.95) !important;
+                }
+            }
+
+            .nav-next {
+                position: absolute;
+                animation-delay: 0.9s;
+                top: 5%;
+                cursor: pointer;
+                right: 3%;
+                width: 5%;
+                z-index: 999 !important;
+
+                &:hover {
+                    transform: scale(0.95) !important;
+                }
+            }
+
+            .nav-next-inicio {
+                position: absolute;
+                top: 62%;
+                cursor: pointer;
+                right: 4%;
+                z-index: 9999 !important;
+                width: 10%;
+
+                &:hover {
+                    transform: scale(0.95) !important;
+                }
+            }
+
+            .cerrar {
+                animation-delay: 1s;
+                background: #3e7fb1;
+                border-radius: 2rem 0 0 2rem;
+                top: 3%;
+                cursor: pointer;
+                padding: 0.5rem 1rem 0.5rem 1.2rem;
+                right: 0;
+                transition: all ease 0.3s;
+                width: 1.5rem;
+                z-index: 9999;
+            }
+
+            .menu {
+                list-style: none;
+                left: 0;
+                margin: 0;
+                padding: 0;
+                position: absolute;
+                overflow: hidden;
+                top: 23%;
+                z-index: 110;
+                width: 21%;
+
+                li {
+                    display: inline-block;
+                    cursor: pointer;
+                    transition: all ease 0.3s;
+
+                    img {
+                        display: block;
+                        transform-origin: bottom;
+                        width: 40%;
+                        margin: 6% 0 6% 18%;
+                        transition: all ease 0.3s
+                    }
+
+                    &:hover {
+                        img {
+                            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.7));
+                            margin: 6% 0 6% 15%;
+                        }
+                    }
+
+                    @for $i from 1 through 13 {
+                        &:nth-child(#{$i}) {
+                            animation-delay: 0.3s * $i;
+                        }
+                    }
+
+                    &.activo {
+                        img {
+                            margin: 0 0 0 -33%;
+                            width: 100%;
+
+                            &:hover {
+                                margin: 0 0 0 -30%;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .abrir1 {
+                position: absolute;
+                width: 6%;
+                height: auto;
+                left: 69%;
+                top: 25%;
+            }
+
+            .gif {
+                pointer-events: none;
+            }
+
+            .gif1 {
+                position: absolute;
+                width: 19%;
+                height: auto;
+                left: 43%;
+                top: 21%;
+            }
+
+            .gif2 {
+                position: absolute;
+                width: 19%;
+                height: auto;
+                left: 48%;
+                top: 39%;
+            }
+
+            .gif3 {
+                position: absolute;
+                width: 19%;
+                height: auto;
+                left: 43%;
+                top: 57%;
+            }
+
+            .gif4 {
+                position: absolute;
+                width: 45%;
+                height: auto;
+                left: 12%;
+                top: 22%;
+            }
+
+            .gif5 {
+                position: absolute;
+                width: 50%;
+                height: auto;
+                left: 15%;
+                top: 25%;
+            }
+
+            .gif6 {
+                position: absolute;
+                width: 44%;
+                height: auto;
+                right: 0;
+                top: 25%;
+            }
+
+            .gif7 {
+                position: absolute;
+                width: 80%;
+                height: auto;
+                right: 4%;
+                top: 18%;
+            }
+
+            .gif8 {
+                position: absolute;
+                width: 30%;
+                height: auto;
+                right: 4%;
+                top: 0.5%;
+            }
+
+            .gif9 {
+                position: absolute;
+                width: 21%;
+                height: auto;
+                left: 15%;
+                top: 27%;
+            }
+
+            .gif10 {
+                position: absolute;
+                width: 81%;
+                height: auto;
+                left: 18%;
+                top: 11%;
+            }
+
+            .gif11 {
+                position: absolute;
+                width: 31%;
+                height: auto;
+                left: 17%;
+                bottom: 0;
+            }
+
+            .gif12 {
+                position: absolute;
+                width: 35%;
+                height: auto;
+                right: 0;
+                top: 6%;
+            }
+
+            .gif13 {
+                position: absolute;
+                width: 40%;
+                height: auto;
+                left: 16.4%;
+                top: 25%;
+            }
+
+            .gif14 {
+                position: absolute;
+                width: 40%;
+                height: auto;
+                left: 56.4%;
+                top: 23%;
+            }
+
+            .gif15 {
+                position: absolute;
+                width: 8%;
+                height: auto;
+                left: 19%;
+                top: 67%;
+                filter: brightness(9);
+                opacity: 0.8;
+            }
+
+            .gif16 {
+                position: absolute;
+                width: 8%;
+                height: auto;
+                left: 19%;
+                top: 30%;
+                filter: brightness(9);
+                opacity: 0.8;
+            }
+
+            .gif17 {
+                position: absolute;
+                width: 8%;
+                height: auto;
+                left: 19%;
+                top: 46%;
+                filter: brightness(9);
+                opacity: 0.8;
+            }
+
+            .gif18 {
+                position: absolute;
+                width: 56%;
+                height: auto;
+                left: 19%;
+                top: 25%;
+            }
+
+            .gif19 {
+                position: absolute;
+                width: 46%;
+                height: auto;
+                left: 15%;
+                top: 31%;
+            }
+
+            .gif20 {
+                position: absolute;
+                width: 46%;
+                height: auto;
+                left: 15%;
+                top: 31%;
+            }
+
+            .gif21 {
+                position: absolute;
+                width: 78%;
+                height: auto;
+                left: 12%;
+                top: 15%;
+            }
+
+            .gif22 {
+                position: absolute;
+                width: 67%;
+height: auto;
+left: 22%;
+top: 29%;
+            }
+
+            .gif23 {
+                position: absolute;
+                width: 11%;
+                height: auto;
+                left: 14.5%;
+                top: 25%;
+            }
+
+            .gif24 {
+                position: absolute;
+                width: 11%;
+                height: auto;
+                left: 27%;
+                top: 43%;
+            }
+
+            .gif25 {
+                position: absolute;
+                width: 11%;
+                height: auto;
+                left: 20%;
+                top: 34%;
+            }
+
+            .gif26 {
+                position: absolute;
+                width: 44%;
+                height: auto;
+                left: 13%;
+                top: 50%;
+            }
+
+            .gif27 {
+                position: absolute;
+                width: 76%;
+                height: auto;
+                right: 0%;
+                bottom: 0%;
+            }
+
+            .gif28 {
+                position: absolute;
+                width: 12%;
+                height: auto;
+                right: 15%;
+                top: 50%;
+            }
+
+            .gif29 {
+                position: absolute;
+                width: 12%;
+                height: auto;
+                right: 15%;
+                top: 24%;
+            }
+
+            .gif30 {
+                position: absolute;
+                width: 76%;
+                height: auto;
+                left: 1%;
+                bottom: 1%;
+            }
+
+            .gif31 {
+                position: absolute;
+                width: 76%;
+                height: auto;
+                left: 19%;
+                bottom: 0%;
+            }
+
+            .gif32 {
+                position: absolute;
+                width: 29%;
+                height: auto;
+                left: 68%;
+                bottom: 7%;
+            }
+
+
+        }
+    }
+}

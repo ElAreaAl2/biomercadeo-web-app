@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Dr. Reddys</title>
+
+        <link rel="icon" href="favicon.ico">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="../css/jquery-confirm.css" />
+		    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/jquery-confirm.js"></script>
+
+
+    </head>
+    <body onLoad="abrir()">
+
+                        <script type="text/javascript">
+                            function abrir () {
+                                $.confirm({
+                                    theme: 'supervan',
+									backgroundDismiss: false,
+									confirmButton: 'Acepto',
+    								cancelButton: 'No Acepto',
+									title: 'Aceptación de Uso',
+									content: 'url:../disclaimer.txt',
+									animation: 'top',
+									confirm: function(){
+        								window.location= "../pdf/IPP-DAPTOMRED-350MG.pdf";
+  									},
+    								cancel: function(){
+       									window.location= "https://www.drreddys.com";
+    								}
+                                });
+                            };
+                        </script>
+
+
+
+    </body>
+
+</html>

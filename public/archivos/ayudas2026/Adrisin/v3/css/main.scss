@@ -1,0 +1,751 @@
+$negro: #000000;
+$bgContenedor: #ffffff;
+
+// Animations **************************************
+
+@keyframes rotate1 {
+    0% {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes appear2 {
+    0% {
+        top: -55%;
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        top: 5%;
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes appear3 {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes appear4 {
+    0% {
+        left: 0;
+        opacity: 0;
+    }
+
+    100% {
+        left: 35%;
+        opacity: 1;
+    }
+}
+
+@keyframes next {
+    0% {
+        left: 92%;
+    }
+
+    50% {
+        left: 92.5%;
+    }
+
+    100% {
+        left: 92%;
+    }
+}
+
+@keyframes back {
+    0% {
+        left: 92%;
+    }
+
+    50% {
+        left: 92.5%;
+    }
+
+    100% {
+        left: 92%;
+    }
+}
+
+// Animations **************************************
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #a18484;
+
+    .invisible {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .elemento {
+        position: absolute;
+    }
+
+    .popup {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        height: 100%;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 9999 !important;
+        position: absolute;
+
+        .cerrar-pop {
+            cursor: pointer;
+            right: 3%;
+            top: 3%;
+            z-index: 99;
+            width: 6%;
+        }
+
+
+        &.popup-oculto {
+            display: none !important;
+
+        }
+
+        .img1 {
+            position: absolute;
+            width: 80%;
+            left: 10%;
+            top: -21%;
+        }
+
+        .img2 {
+            position: absolute;
+            width: 90%;
+            left: 5%;
+            top: 4%;
+        }
+
+        .img3 {
+            position: absolute;
+            width: 122%;
+            left: -5%;
+            top: -28%;
+        }
+
+    }
+
+    .ocultar {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        visibility: hidden !important;
+    }
+
+    .oculto {
+        margin-top: -1000px;
+        display: none;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .z-0 {
+        z-index: 0 !important;
+    }
+
+    .z-1 {
+        z-index: 1 !important;
+    }
+
+    .z-2 {
+        z-index: 2 !important;
+    }
+
+    .z-3 {
+        z-index: 3 !important;
+    }
+
+    .z-4 {
+        z-index: 4 !important;
+    }
+
+    .z-5 {
+        z-index: 5 !important;
+    }
+
+    .z-6 {
+        z-index: 6 !important;
+    }
+
+    .z-7 {
+        z-index: 7 !important;
+    }
+
+    .z-8 {
+        z-index: 8 !important;
+    }
+
+    .z-9 {
+        z-index: 9 !important;
+    }
+
+    .z-99 {
+        z-index: 99 !important;
+    }
+
+    .img-blanca {
+        filter: brightness(0) invert(1);
+    }
+
+    .animate__delay-0-3s {
+        animation-delay: 0.3s !important;
+    }
+
+    .animate__delay-0-6s {
+        animation-delay: 0.6s !important;
+    }
+
+    .animate__delay-0-9s {
+        animation-delay: 0.9s !important;
+    }
+
+    .animate__delay-1-2s {
+        animation-delay: 1.2s !important;
+    }
+
+    .animate__delay-1-5s {
+        animation-delay: 1.5s !important;
+    }
+
+    .animate__delay-1-8s {
+        animation-delay: 1.8s !important;
+    }
+
+    .animate__delay-2-1s {
+        animation-delay: 2.1s !important;
+    }
+
+    .animate__delay-2-4s {
+        animation-delay: 2.4s !important;
+    }
+
+    .animate__delay-2-7s {
+        animation-delay: 2.7s !important;
+    }
+
+    .animate__delay {
+        animation-delay: 1.2s !important;
+    }
+
+    .animate__delay- {
+        animation-delay: 1.2s !important;
+    }
+
+    .animate__delay-7s {
+        animation-delay: 7s !important;
+    }
+
+    .animate__delay-8s {
+        animation-delay: 8s !important;
+    }
+
+    @mixin contraste() {
+        filter: contrast(150%) brightness(110%);
+    }
+
+    #kad_container {
+        position: absolute;
+        width: 1280px;
+        height: 720px;
+        top: 0;
+        left: 0;
+        transform-origin: 0 0;
+        overflow: hidden;
+        background-color: #fff;
+        display: block;
+
+        /* Estado inicial para evitar el salto */
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+
+        &.visible {
+            opacity: 1;
+        }
+
+        .img-open1 {
+            position: absolute;
+            width: 5%;
+            height: auto;
+            left: 91%;
+            top: 27%;
+            z-index: 99 !important;
+        }
+
+        .img-open2 {
+            position: absolute;
+            width: 5%;
+            height: auto;
+            left: 48%;
+            top: 33%;
+            z-index: 99 !important;
+        }
+
+        .contenedor {
+            width: 1280px;
+            height: 720px;
+            margin: 0 auto;
+            background: $bgContenedor;
+            overflow: hidden;
+            position: relative;
+
+            .fondo-general {
+                margin: 0 auto;
+                left: 0%;
+                top: 0%;
+                z-index: 0;
+            }
+
+            .full-asset {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 1280px;
+                height: 720px;
+                pointer-events: none;
+                /* Evita que las capas transparentes bloqueen clics */
+            }
+
+            .con-click {
+                pointer-events: auto;
+                cursor: pointer;
+            }
+
+            .nav-home {
+                position: absolute;
+                animation-delay: 0.3s;
+                top: 5%;
+                cursor: pointer;
+                right: 15%;
+                width: 5%;
+                z-index: 999 !important;
+
+                &:hover {
+                    transform: scale(0.95) !important;
+                }
+            }
+
+            .nav-home-fin {
+                position: absolute;
+                animation-delay: 0.3s;
+                top: 5%;
+                cursor: pointer;
+                right: 5%;
+                width: 5%;
+                z-index: 999 !important;
+
+                &:hover {
+                    transform: scale(0.95) !important;
+                }
+            }
+
+            .nav-prev {
+                position: absolute;
+                animation-delay: 0.6s;
+                top: 5%;
+                cursor: pointer;
+                right: 9%;
+                width: 5%;
+                z-index: 999 !important;
+
+                &:hover {
+                    transform: scale(0.95) !important;
+                }
+            }
+
+            .nav-next {
+                position: absolute;
+                animation-delay: 0.9s;
+                top: 5%;
+                cursor: pointer;
+                right: 3%;
+                width: 5%;
+                z-index: 999 !important;
+
+                &:hover {
+                    transform: scale(0.95) !important;
+                }
+            }
+
+            .nav-next-inicio {
+                position: absolute;
+                top: 49%;
+                cursor: pointer;
+                right: 5%;
+                z-index: 9999 !important;
+                width: 6%;
+
+                &:hover {
+                    transform: scale(0.95) !important;
+                }
+            }
+
+            .cerrar {
+                animation-delay: 1s;
+                background: #3e7fb1;
+                border-radius: 2rem 0 0 2rem;
+                top: 3%;
+                cursor: pointer;
+                padding: 0.5rem 1rem 0.5rem 1.2rem;
+                right: 0;
+                transition: all ease 0.3s;
+                width: 1.5rem;
+                z-index: 9999;
+            }
+
+            .menu {
+                display: flex;
+                list-style: none;
+                right: 2%;
+                margin: 0;
+                padding: 0;
+                position: absolute;
+                top: 5%;
+                z-index: 110;
+                width: 80%;
+                text-align: right;
+                justify-content: end;
+
+                li {
+                    display: inline-block;
+                    cursor: pointer;
+                    transition: all ease 0.3s;
+
+                    img {
+                        display: block;
+                        transform-origin: bottom;
+                        transition: all ease 0.3s;
+                        height: 2.5rem;
+                        margin: 0 0.5rem;
+
+                        &:hover {
+                            transform: scale(0.9) !important;
+                        }
+                    }
+
+                    @for $i from 1 through 13 {
+                        &:nth-child(#{$i}) {
+                            animation-delay: 0.3s * $i;
+                        }
+                    }
+
+                }
+            }
+
+            .abrir1 {
+                position: absolute;
+                width: 6%;
+                height: auto;
+                left: 69%;
+                top: 25%;
+            }
+
+            .gif {
+                pointer-events: none;
+            }
+
+            .gif1 {
+                position: absolute;
+                width: 42%;
+                height: auto;
+                left: 54%;
+                top: 51%;
+            }
+
+            .gif2 {
+                position: absolute;
+                width: 10%;
+                height: auto;
+                left: 25%;
+                top: 44%;
+            }
+
+            .gif3 {
+                position: absolute;
+                width: 11%;
+                height: auto;
+                left: 6%;
+                top: 58%;
+
+            }
+
+            .gif4 {
+                position: absolute;
+                width: 29%;
+                height: auto;
+                left: 57.3%;
+                top: 45.5%;
+            }
+
+            .gif5 {
+                position: absolute;
+                width: 59%;
+                height: auto;
+                left: 45%;
+                top: 34%;
+            }
+
+            .gif6 {
+                position: absolute;
+                width: 5%;
+                height: auto;
+                left: 50%;
+                top: 71%;
+            }
+
+            .gif7 {
+                position: absolute;
+                width: 5%;
+                height: auto;
+                right: 1%;
+                top: 41%;
+            }
+
+            .gif8 {
+                position: absolute;
+                width: 36%;
+                height: auto;
+                left: 5%;
+                top: 32.5%;
+            }
+
+            .gif9 {
+                position: absolute;
+                width: 56%;
+                height: auto;
+                left: 41%;
+                top: 9%;
+            }
+
+            .gif10 {
+                position: absolute;
+                width: 28%;
+                height: auto;
+                left: -5.5%;
+                top: 42%;
+            }
+
+            .gif11 {
+                position: absolute;
+                width: 24%;
+                height: auto;
+                left: 67%;
+                bottom: 25%;
+            }
+
+            .gif12 {
+                position: absolute;
+                width: 24%;
+                height: auto;
+                left: 7%;
+                bottom: 25%;
+            }
+
+            .gif13 {
+                position: absolute;
+                width: 24%;
+                height: auto;
+                left: 38%;
+                bottom: 25%;
+            }
+
+            .gif14 {
+                position: absolute;
+                width: 6%;
+                height: auto;
+                left: 17.3%;
+                top: 26.8%;
+            }
+
+            .gif15 {
+                position: absolute;
+                width: 6%;
+                height: auto;
+                left: 37.3%;
+                top: 27%;
+            }
+
+            .gif16 {
+                position: absolute;
+                width: 4%;
+                height: auto;
+                left: 58%;
+                top: 28.5%;
+            }
+
+            .gif17 {
+                position: absolute;
+                width: 6%;
+                height: auto;
+                left: 77%;
+                top: 26.8%;
+            }
+
+            .gif18 {
+                position: absolute;
+                width: 47%;
+                height: auto;
+                left: 26%;
+                bottom: 0%;
+            }
+
+            .gif19 {
+                position: absolute;
+                width: 36%;
+                height: auto;
+                left: 4%;
+                top: 17%;
+            }
+
+            .gif20 {
+                position: absolute;
+                width: 70%;
+                height: auto;
+                left: 38%;
+                top: -11%;
+            }
+
+            .gif21 {
+                position: absolute;
+                width: 84%;
+                height: auto;
+                left: 8%;
+                top: 17%;
+            }
+
+            .gif22 {
+                position: absolute;
+                width: 84%;
+                height: auto;
+                left: 8%;
+                top: 2%;
+            }
+
+            .gif23 {
+                position: absolute;
+                width: 104%;
+                height: auto;
+                left: -3%;
+                bottom: 0;
+            }
+
+            .gif24 {
+                position: absolute;
+                width: 64%;
+                height: auto;
+                left: 18%;
+                top: 29%;
+            }
+
+            .gif25 {
+                position: absolute;
+                width: 84%;
+                height: auto;
+                left: 36%;
+                top: 14%;
+            }
+
+            .gif26 {
+                position: absolute;
+                width: 13%;
+                height: auto;
+                left: 5%;
+                top: 65.8%;
+            }
+
+            .gif27 {
+                position: absolute;
+                width: 13%;
+                height: auto;
+                left: 5%;
+                top: 50.6%;
+            }
+
+            .gif28 {
+                position: absolute;
+                width: 13%;
+                height: auto;
+                left: 5%;
+                top: 34.8%;
+            }
+
+            .gif29 {
+                position: absolute;
+                width: 51%;
+                height: auto;
+                left: 4%;
+                top: 16.6%;
+            }
+
+            .gif30 {
+                position: absolute;
+                width: 32%;
+                height: auto;
+                left: 59%;
+                bottom: 16%;
+            }
+
+            .gif31 {
+                position: absolute;
+                width: 40%;
+                height: auto;
+                left: 30%;
+                top: 27%;
+            }
+
+            .gif32 {
+                position: absolute;
+                width: 28%;
+                height: auto;
+                left: 7%;
+                bottom: 19%;
+            }
+
+            .gif33 {
+                position: absolute;
+                width: 100%;
+                height: auto;
+                left: 1%;
+                top: 19%;
+            }
+
+            .gif35 {
+                position: absolute;
+                width: 15%;
+                height: auto;
+                left: -3%;
+                top: 40%;
+            }
+
+            .gif34 {
+                position: absolute;
+                width: 15%;
+                height: auto;
+                left: 88%;
+                top: 41%;
+            }
+
+
+        }
+    }
+}
