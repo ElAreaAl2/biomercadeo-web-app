@@ -1,0 +1,51 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Amgen</title>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<style type="text/css">
+body{background: #333333; margin: 0px; padding: 0px}	
+.centrado{position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);}
+video{box-shadow: rgba(0,0,0,0.5) 0px 0px 10px; border-radius: 5px}
+.ocultar{display: none}	
+.mostrar{display: block}
+a{background: #FFFFFF; color: #333333; padding: 10px 30px; border-radius: 4px; font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 22px; box-shadow: rgba(0,0,0,0.5) 0px 0px 5px;}
+a:hover{font-size: 21px; box-shadow: rgba(0,0,0,0.5) 0px 0px 5px;}
+a strong{color: #FF6600}
+</style>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function(){
+	$("#video").on('ended', function(){
+		$(".video").addClass("ocultar");
+		$(".mensaje").removeClass("ocultar");
+	});
+});	
+</script>
+
+</head>
+
+<body>
+
+<div class="centrado">
+
+<video autoplay width="1024" height="576" poster="cover.png" preload controls id="video" class="video">
+	<source src="que-es-un-biotecnologico.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+	<source src="que-es-un-biotecnologico.ogv" type='video/ogg; codecs="theora, vorbis"' />
+	<source src="que-es-un-biotecnologico.webm" type='video/webm; codecs="vp8, vorbis"' />
+</video>
+   
+<div class="ocultar mensaje">
+	<a href="#" target="_blank">PARA MÁS INFORMACIÓN <strong>CLIC AQUÍ</strong></a>
+</div>   
+   
+</div>
+
+</body>
+</html>
