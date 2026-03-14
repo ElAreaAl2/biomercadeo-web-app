@@ -1,13 +1,16 @@
-﻿import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
 import { ArrowUpRight, MonitorPlay, Layers, Layout, BookOpen, Globe, Presentation, MessageSquare, MapPin, Phone, Smartphone, X, CheckCircle2, ChevronRight, Sparkles, ArrowDown, Send, Loader2, PhoneCall, Bot, HeartPulse, BarChart3, Database, ClipboardCheck, Megaphone, Users, Gift, Truck, ShieldCheck, BrainCircuit, Mail as MailIcon, Target, Eye, Search } from 'lucide-react';
 import { Link } from 'react-router';
 
 // Array de servicios expandido con detalles profundos
+// CAMBIO 8: Eliminado "Marketing Digital" (era id "05"). Quedan 7 ejes.
+// CAMBIO 7: Títulos en Title Case, "BiCall" → "Contact Center", "BIOGEO INSIGHTS" → "BioGeo Insights"
+// CAMBIO 6: Degradados de títulos consistentes
 const SERVICES = [
   {
     id: "01",
-    title: "Desarrollos Gráficos y Publicitarios",
+    title: "Desarrollos Gráficos",
     description: "Construimos conceptos, diagramamos y creamos piezas gráficas de alto impacto.",
     icon: <Layers className="w-6 h-6" />,
     image: "/images/futuristic-business-office-space.jpg",
@@ -16,9 +19,9 @@ const SERVICES = [
       subtitle: "Construimos conceptos, diagramamos y creamos piezas como:",
       type: "grid",
       items: [
-        "Ayuda ventas", "Volantes y tarjetones", "Pendones", "Stands (Cajas de luz)", 
+        "Ayuda ventas", "Volantes y tarjetones", "Pendones", "Stands (Cajas de luz)",
         "Etiquetas y Packaging", "Folletos, trípticos, dípticos y brochure",
-        "Piezas digitales - Social media", "Presentaciones - Slide kits", 
+        "Piezas digitales - Social media", "Presentaciones - Slide kits",
         "Invitaciones", "Rotafolios - Calendarios", "Toma fotográfica de producto"
       ],
       footer: "¡Y otros desarrollos a su medida!"
@@ -44,7 +47,7 @@ const SERVICES = [
   },
   {
     id: "03",
-    title: "e-Learning",
+    title: "E-Learning",
     description: "Entendemos las necesidades formativas y capacitamos a bajo costo.",
     icon: <Layout className="w-6 h-6" />,
     image: "/images/woman-with-vr-glasses-futuristic-city.jpg",
@@ -59,7 +62,7 @@ const SERVICES = [
       ],
       subtitle2: "Usamos herramientas como:",
       items2: [
-        "Chat", "Video Interactivo", "Diapositivas", "Infografías", 
+        "Chat", "Video Interactivo", "Diapositivas", "Infografías",
         "Experiencias Gamificadas", "Podcast"
       ],
       footer: "Apoyamos el manejo y configuración de los cursos garantizando su correcto funcionamiento."
@@ -83,27 +86,6 @@ const SERVICES = [
   },
   {
     id: "05",
-    title: "Marketing Digital",
-    description: "Tenemos la estrategia para posicionar y promocionar su marca.",
-    icon: <Globe className="w-6 h-6" />,
-    image: "/images/3d-character-emerging-from-smartphone.jpg",
-    list: ["Estrategia 360", "Social ads", "SEO / SEM"],
-    detailed: {
-      subtitle: "Tenemos la estrategia para posicionar y promocionar su marca",
-      type: "numbered",
-      items: [
-        "Análisis de mercado y público objetivo",
-        "Objetivos y métrica de rendimiento",
-        "Selección de canales y tácticas",
-        "Creación de contenido y mensajes",
-        "Planificación y ejecución de campañas",
-        "Seguimiento y análisis de resultado",
-        "Optimización continua"
-      ]
-    }
-  },
-  {
-    id: "06",
     title: "Programas Multi-impacto 360°",
     description: "Estrategias integrales diseñadas para maximizar la visibilidad a bajos costos.",
     icon: <Presentation className="w-6 h-6" />,
@@ -122,26 +104,32 @@ const SERVICES = [
     }
   },
   {
-    id: "07",
-    title: "BiCall",
+    id: "06",
+    // CAMBIO 7: "BiCall" → "Contact Center"
+    title: "Contact Center",
     description: "Contact Center especializado en salud y relacionamiento corporativo efectivo de última generación.",
     icon: <PhoneCall className="w-6 h-6" />,
-    image: "/images/arte-digital-equipo-trabajo.jpg",
+    image: "/images/call-center-bio.png",
     list: ["Atención al paciente", "Fidelización", "Servicio integral"],
     detailed: {
       subtitle: "Solución de Call Center para las necesidades de comunicación y relacionamiento.",
       type: "pills",
       items: [
-        "Inbound (Recepción de llamadas)", "Outbound (Emisión de llamadas)", 
-        "Agendamiento de citas", "Campañas de prevención/adherencia",
-        "Seguimiento a pacientes/médicos", "Actualización de bases de datos",
-        "Encuestas de satisfacción", "Atención omnicanal (WhatsApp/Web)"
+        "Inbound (Recepción de llamadas)",
+        "Outbound (Emisión de llamadas)",
+        "Agendamiento de citas",
+        "Campañas de prevención/adherencia",
+        "Seguimiento a pacientes/médicos",
+        "Actualización de bases de datos",
+        "Encuestas de satisfacción",
+        "Atención omnicanal (WhatsApp/Web)"
       ]
     }
   },
   {
-    id: "08",
-    title: "BIOGEO INSIGHTS",
+    id: "07",
+    // CAMBIO 7: "BIOGEO INSIGHTS" → "BioGeo Insights"
+    title: "BioGeo Insights",
     description: "Sistema inteligente de georreferenciación para optimizar la ubicación de puntos de atención y el análisis territorial de pacientes en el sector salud.",
     icon: <MapPin className="w-6 h-6" />,
     image: "/images/technology-hologram-indoors.jpg",
@@ -150,7 +138,7 @@ const SERVICES = [
       subtitle: "Descubra dónde ubicar sus sedes, dónde surtir y cómo llegar a su cliente ideal con precisión geográfica e inteligencia de datos.",
       type: "pills",
       items: [
-        "Sugerencia de puntos de atención", "Análisis de perfiles cercanos", 
+        "Sugerencia de puntos de atención", "Análisis de perfiles cercanos",
         "Identificación de zonas de surtido", "Potencial del cliente objetivo",
         "Geomarketing en salud", "Optimización de cobertura territorial"
       ]
@@ -166,13 +154,15 @@ export function HomeV2() {
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  // CAMBIO 2: Estado para colapsar Visión y Misión por defecto
+  const [showVisionMision, setShowVisionMision] = useState(false);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
 
     const term = searchQuery.toLowerCase();
-    
+
     // Un-highlight previous
     document.querySelectorAll('.search-highlight').forEach(el => {
       el.classList.remove('search-highlight', 'bg-orange-500/40', 'transition-colors', 'duration-500', 'rounded', 'px-1');
@@ -180,19 +170,19 @@ export function HomeV2() {
 
     // Encontrar todos los elementos que podrian contener texto
     const elements = Array.from(document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, li, a, strong, b, button'));
-    
+
     for (const el of elements) {
       // Necesitamos asegurar que es el elemento más interno o tiene texto directo sustancial
       const textNodes = Array.from(el.childNodes).filter(node => node.nodeType === Node.TEXT_NODE && (node.nodeValue?.trim()?.length || 0) > 0);
-      
+
       const elementContainsText = textNodes.some(node => node.nodeValue?.toLowerCase().includes(term));
-      
+
       if (elementContainsText) {
         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
+
         // Agregar clases para resaltar visualmente
         el.classList.add('search-highlight', 'bg-orange-500/40', 'transition-colors', 'duration-500', 'rounded', 'px-1');
-        
+
         // Cierra el panel de busqueda si está abierto
         setIsSearchOpen(false);
 
@@ -273,10 +263,10 @@ export function HomeV2() {
           <a href="#services" className="hover:text-orange-500 transition-colors">¿Qué hacemos?</a>
           <a href="#contact" className="hover:text-orange-500 transition-colors">Contacto</a>
         </div>
-        
+
         <div className="flex gap-2 sm:gap-3 lg:gap-4 items-center z-10 scale-90 sm:scale-100 origin-right transition-all">
-          
-          {/* Barra de búsqueda integrada y dinámica */}
+
+          {/* CAMBIO 4: Barra de búsqueda - visible, con border, value y onChange correctamente conectados */}
           <div className="flex items-center">
             {isSearchOpen ? (
               <form onSubmit={handleSearch} className="flex items-center ml-2">
@@ -286,22 +276,22 @@ export function HomeV2() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   autoFocus
-                  className="bg-black/60 text-white text-sm px-3 py-1.5 rounded-l-md outline-none border border-white/20 w-[130px] sm:w-[150px] lg:w-[200px] placeholder:text-gray-400 focus:border-orange-500/50 transition-all"
+                  className="bg-white/10 text-white text-sm px-3 py-1.5 rounded-l-md outline-none border border-white/40 w-[130px] sm:w-[150px] lg:w-[200px] placeholder:text-gray-300 focus:border-orange-500 transition-all"
                 />
                 <button type="submit" className="bg-orange-600 hover:bg-orange-500 text-white px-2.5 py-1.5 border border-orange-600 transition-colors flex items-center justify-center">
                   <Search size={16} />
                 </button>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={() => setIsSearchOpen(false)}
-                  className="bg-white/10 hover:bg-white/20 text-white px-2 py-1.5 rounded-r-md border border-l-0 border-white/20 transition-colors flex items-center justify-center"
+                  className="bg-white/10 hover:bg-white/20 text-white px-2 py-1.5 rounded-r-md border border-l-0 border-white/40 transition-colors flex items-center justify-center"
                   title="Cerrar"
                 >
                   <X size={16} />
                 </button>
               </form>
             ) : (
-              <button 
+              <button
                 onClick={() => setIsSearchOpen(true)}
                 className="text-white hover:text-orange-500 transition-colors p-1"
                 title="Buscar"
@@ -330,198 +320,238 @@ export function HomeV2() {
       </nav>
 
       {/* QUIÉNES SOMOS */}
-      <section id="about" className="pt-20 pb-16 bg-[#1a1a1a] relative border-t border-white/20 z-20 overflow-hidden">
+      {/* CAMBIO 2: Sección compacta - Visión y Misión colapsadas por defecto */}
+      <section id="about" className="pt-20 pb-12 bg-[#1a1a1a] relative border-t border-white/20 z-20 overflow-hidden">
         {/* TEXTURA GRID MODERNA MUCHO MÁS CLARA */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-60" />
-        
-        {/* LUCES DE NEON "AURORA" INTENSAS PARA ACLARAR EL FONDO */}
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }} 
+
+        {/* LUCES DE NEON "AURORA" */}
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] pointer-events-none mix-blend-screen" 
+          className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] pointer-events-none mix-blend-screen"
         />
-        <motion.div 
-          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }} 
+        <motion.div
+          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] pointer-events-none mix-blend-screen" 
+          className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] pointer-events-none mix-blend-screen"
         />
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }} 
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-          className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] pointer-events-none mix-blend-screen" 
+          className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] pointer-events-none mix-blend-screen"
         />
-        
+
         {/* Gradiente radial blanco masivo desde el centro para iluminar toda el área */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_100%)] pointer-events-none" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-12 text-center relative z-10">
-          
+
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+
+          {/* Logo centrado, ancho completo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex flex-row items-center justify-center gap-4 sm:gap-6 mb-12"
+            className="flex flex-row items-center justify-center gap-4 sm:gap-6 mb-2"
           >
-            <img src="/images/logo-biomercadeo.png" alt="Biomercadeo" className="h-20 w-20 sm:h-28 sm:w-28 lg:h-36 lg:w-36 object-contain" />
-            <span className="text-white font-black text-4xl sm:text-5xl lg:text-7xl tracking-tighter uppercase drop-shadow-lg">Biomercadeo</span>
+            <img src="/images/logo-biomercadeo.png" alt="Biomercadeo" className="h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 object-contain" />
+            <span className="text-white font-black text-4xl sm:text-5xl lg:text-6xl tracking-tighter uppercase drop-shadow-lg">Biomercadeo</span>
           </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="mb-20 max-w-5xl mx-auto relative px-4"
-          >
-            {/* Elemento decorativo visual */}
-            <div className="flex justify-center mb-8">
-              <div className="h-px w-24 bg-gradient-to-r from-transparent via-orange-500 to-transparent"></div>
-            </div>
 
-            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-neutral-200 leading-[1.4] sm:leading-[1.5] text-center font-light mb-8">
-              Expertos en <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300">comunicaciones en salud</span> y soluciones corporativas.
-            </h3>
-            
-            <p className="text-lg md:text-xl text-neutral-400 leading-relaxed text-center font-light mb-10 max-w-3xl mx-auto">
-              Somos una empresa de mercadeo enfocada en transformar la visión de su marca ofreciendo soluciones integrales de:
-            </p>
+          {/* Dos columnas en desktop, apilado en tablet/móvil */}
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-10 lg:mb-0">
 
-            {/* Grilla creativa de servicios core */}
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-14">
-              <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
-                <Layers className="w-5 h-5 text-orange-500" /> 
-                <span className="font-medium">Diseño y Publicidad</span>
+            {/* COLUMNA IZQUIERDA: Expertos */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative px-4"
+            >
+              <div className="flex justify-center mb-6">
+                <div className="h-px w-24 bg-gradient-to-r from-transparent via-orange-500 to-transparent"></div>
               </div>
-              <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
-                <MonitorPlay className="w-5 h-5 text-sky-500" /> 
-                <span className="font-medium">Tecnología</span>
-              </div>
-              <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
-                <Presentation className="w-5 h-5 text-emerald-500" /> 
-                <span className="font-medium">Estrategias de alto nivel</span>
-              </div>
-              <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
-                <PhoneCall className="w-5 h-5 text-purple-500" /> 
-                <span className="font-medium">Contact Center</span>
-              </div>
-            </div>
 
-            {/* Parrafo de experiencia con styling tipo cita/Quote de impacto */}
-            <div className="text-center relative max-w-4xl mx-auto">
-              <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-64 h-32 bg-orange-500/10 rounded-full blur-[60px] pointer-events-none"></div>
-              <div className="relative z-10 border-l-2 border-orange-500/50 pl-6 py-2 md:pl-8 text-left inline-block">
-                <p className="text-neutral-300 text-base md:text-xl leading-relaxed font-light">
-                  Contamos con un <strong className="text-white font-medium">amplio portafolio de servicios</strong>, respaldado por una <strong className="text-white font-medium">sólida experiencia</strong> en el acompañamiento de importantes compañías a nivel <strong className="text-white font-medium">nacional e internacional</strong>.
-                </p>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-neutral-200 leading-[1.4] sm:leading-[1.5] text-center font-light font-sans mb-6">
+                Expertos en <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">comunicaciones en salud</span> y soluciones corporativas.
+              </h3>
+
+              <p className="text-lg md:text-xl text-neutral-300 leading-relaxed text-center lg:text-left font-light font-sans mb-8">
+                Somos una empresa de mercadeo enfocada en transformar la visión de su marca ofreciendo soluciones integrales de:
+              </p>
+
+              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10">
+                <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                  <Layers className="w-5 h-5 text-orange-500" />
+                  <span className="font-medium">Diseño y Publicidad</span>
+                </div>
+                <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                  <MonitorPlay className="w-5 h-5 text-sky-500" />
+                  <span className="font-medium">Tecnología</span>
+                </div>
+                <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                  <Presentation className="w-5 h-5 text-emerald-500" />
+                  <span className="font-medium">Estrategias de alto nivel</span>
+                </div>
+                <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                  <PhoneCall className="w-5 h-5 text-purple-500" />
+                  <span className="font-medium">Contact Center</span>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        </div>
 
-        {/* STATS & ABOUT */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center mb-20 relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight">
-              Diseño y comunicación <br />
-              <span className="text-orange-500 underline decoration-wavy decoration-orange-500/50 underline-offset-8">hecha a su medida.</span>
-            </h3>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-2 gap-6"
-          >
-            <StatsCard number="17+" label="Años de Experiencia" delay={0.1} />
-            <StatsCard number="+12" label="Países de experiencia" delay={0.2} />
-            <StatsCard number="360°" label="Estrategias Integrales" delay={0.3} />
-            <StatsCard number="Top" label="Partners en Salud & Farma" delay={0.4} />
-          </motion.div>
-        </div>
+              <div className="relative">
+                <div className="absolute left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 top-1/2 -translate-y-1/2 w-64 h-32 bg-orange-500/10 rounded-full blur-[60px] pointer-events-none"></div>
+                <div className="relative z-10 border-l-2 border-orange-500/50 pl-6 py-2 md:pl-8 text-left inline-block">
+                  <p className="text-neutral-300 text-base md:text-xl leading-relaxed font-light font-sans">
+                    Contamos con un <strong className="text-white font-medium">amplio portafolio de servicios</strong>, respaldado por una <strong className="text-white font-medium">sólida experiencia</strong> en el acompañamiento de importantes compañías a nivel <strong className="text-white font-medium">nacional e internacional</strong>.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
 
-        {/* MISION & VISION */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 mt-12 relative z-10">
-          <div className="flex flex-col items-center">
-            {/* Controles interactivos (Tabs) */}
-            <div className="bg-[#111] border border-white/10 rounded-full p-1.5 flex shadow-2xl mb-8 relative">
-              <button 
-                onClick={() => setActiveTab('mision')}
-                className={`relative z-10 flex items-center gap-2 px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'mision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
+            {/* COLUMNA DERECHA: Diseño y comunicación + Stats */}
+            <div>
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-8"
               >
-                <Target className="w-5 h-5" />
-                Misión
-              </button>
-              <button 
-                onClick={() => setActiveTab('vision')}
-                className={`relative z-10 flex items-center gap-2 px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'vision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
+                <div className="flex justify-center mb-6">
+                  <div className="h-px w-24 bg-gradient-to-r from-transparent via-orange-500 to-transparent"></div>
+                </div>
+                <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight font-sans">
+                  Diseño y comunicación <br />
+                  <span className="text-orange-500 underline decoration-wavy decoration-orange-500/50 underline-offset-8">hecha a su medida.</span>
+                </h3>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="grid grid-cols-2 gap-6"
               >
-                <Eye className="w-5 h-5" />
-                Visión
-              </button>
-              {/* Pill indicador de fondo con animacion */}
-              <div 
-                className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-gradient-to-r from-orange-500 to-amber-500 rounded-full transition-all duration-500 ease-out shadow-[0_0_20px_rgba(249,115,22,0.3)] ${activeTab === 'mision' ? 'left-1.5' : 'left-[calc(50%+4.5px)]'}`} 
-              />
+                <StatsCard number="17+" label="Años de Experiencia" delay={0.1} />
+                <StatsCard number="+12" label="Países de experiencia" delay={0.2} />
+                <StatsCard number="360°" label="Estrategias Integrales" delay={0.3} />
+                <StatsCard number="Top" label="Partners en Salud & Farma" delay={0.4} />
+              </motion.div>
             </div>
 
-            {/* Contenedor del texto (Glassmorphism) */}
-            <div className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 rounded-3xl p-8 md:p-12 lg:p-16 min-h-[300px] w-full flex items-center justify-center relative overflow-hidden shadow-2xl">
-              {/* Blur decorativo de fondo en la tarjeta */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-[80px]" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/5 rounded-full blur-[80px]" />
-              
-              <AnimatePresence mode="wait">
-                {activeTab === 'mision' && (
-                  <motion.div
-                    key="mision"
-                    initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-                    animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                    exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-                    transition={{ duration: 0.4 }}
-                    className="text-center w-full"
-                  >
-                    <p className="text-neutral-300 text-xl md:text-2xl leading-relaxed font-light">
-                      Biomercadeo es una empresa Colombiana que apoya principalmente a <strong className="font-bold text-white">empresas del área de la salud</strong> a <strong className="font-bold text-white">desarrollar y aplicar estrategias de comunicación novedosas</strong> con sus colaboradores internos, médicos, farmacias, pacientes y socios estratégicos para <strong className="font-bold text-white">alcanzar sus objetivos comerciales y de ventas</strong>.
-                    </p>
-                  </motion.div>
-                )}
-                {activeTab === 'vision' && (
-                  <motion.div
-                    key="vision"
-                    initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-                    animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                    exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-                    transition={{ duration: 0.4 }}
-                    className="text-center w-full"
-                  >
-                    <p className="text-neutral-300 text-xl md:text-2xl leading-relaxed font-light">
-                      Biomercadeo quiere ser reconocido como el <strong className="font-bold text-white">más importante aliado estratégico en Colombia</strong> para la <strong className="font-bold text-white">Industria de la salud en comunicación</strong> con su unidad de diseño y Contact Center. Deseamos <strong className="font-bold text-white">expandir nuestros servicios a otras empresas</strong> en los próximos años.
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
           </div>
+        </div>
+
+        {/* CAMBIO 2: VISIÓN Y MISIÓN COLAPSABLES */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+          {/* Botón toggle para mostrar/ocultar Visión y Misión */}
+          <div className="flex justify-center mb-4">
+            <button
+              onClick={() => setShowVisionMision(prev => !prev)}
+              className="flex items-center gap-2 px-6 py-3 rounded-full border border-orange-500/40 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 font-bold text-sm uppercase tracking-widest transition-all duration-300"
+            >
+              <Eye className="w-4 h-4" />
+              {showVisionMision ? 'Ocultar Visión y Misión' : 'Ver Visión y Misión'}
+              <motion.span
+                animate={{ rotate: showVisionMision ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+                className="inline-block"
+              >
+                ▼
+              </motion.span>
+            </button>
+          </div>
+
+          <AnimatePresence>
+            {showVisionMision && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                className="overflow-hidden"
+              >
+                <div className="flex flex-col items-center pb-4">
+                  {/* Controles interactivos (Tabs) */}
+                  <div className="bg-[#111] border border-white/10 rounded-full p-1.5 flex shadow-2xl mb-6 relative">
+                    <button
+                      onClick={() => setActiveTab('mision')}
+                      className={`relative z-10 flex items-center gap-2 px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'mision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
+                    >
+                      <Target className="w-5 h-5" />
+                      Misión
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('vision')}
+                      className={`relative z-10 flex items-center gap-2 px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'vision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
+                    >
+                      <Eye className="w-5 h-5" />
+                      Visión
+                    </button>
+                    {/* Pill indicador de fondo con animacion */}
+                    <div
+                      className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-gradient-to-r from-orange-500 to-amber-500 rounded-full transition-all duration-500 ease-out shadow-[0_0_20px_rgba(249,115,22,0.3)] ${activeTab === 'mision' ? 'left-1.5' : 'left-[calc(50%+4.5px)]'}`}
+                    />
+                  </div>
+
+                  {/* Contenedor del texto (Glassmorphism) */}
+                  <div className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 rounded-3xl p-8 md:p-10 w-full flex items-center justify-center relative overflow-hidden shadow-2xl">
+                    {/* Blur decorativo de fondo en la tarjeta */}
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-[80px]" />
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/5 rounded-full blur-[80px]" />
+
+                    <AnimatePresence mode="wait">
+                      {activeTab === 'mision' && (
+                        <motion.div
+                          key="mision"
+                          initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                          exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                          transition={{ duration: 0.4 }}
+                          className="text-center w-full"
+                        >
+                          {/* CAMBIO 3: text-white en lugar de text-neutral-300 para mejor legibilidad */}
+                          <p className="text-white text-xl md:text-2xl leading-relaxed font-light font-sans">
+                            Biomercadeo es una empresa Colombiana que apoya principalmente a <strong className="font-bold text-orange-400">empresas del área de la salud</strong> a <strong className="font-bold text-orange-400">desarrollar y aplicar estrategias de comunicación novedosas</strong> con sus colaboradores internos, médicos, farmacias, pacientes y socios estratégicos para <strong className="font-bold text-orange-400">alcanzar sus objetivos comerciales y de ventas</strong>.
+                          </p>
+                        </motion.div>
+                      )}
+                      {activeTab === 'vision' && (
+                        <motion.div
+                          key="vision"
+                          initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                          exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                          transition={{ duration: 0.4 }}
+                          className="text-center w-full"
+                        >
+                          <p className="text-white text-xl md:text-2xl leading-relaxed font-light font-sans">
+                            Biomercadeo quiere ser reconocido como el <strong className="font-bold text-orange-400">más importante aliado estratégico en Colombia</strong> para la <strong className="font-bold text-orange-400">Industria de la salud en comunicación</strong> con su unidad de diseño y Contact Center. Deseamos <strong className="font-bold text-orange-400">expandir nuestros servicios a otras empresas</strong> en los próximos años.
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
       {/* EQUIPO DE TRABAJO */}
       <section className="relative py-16 md:py-24 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 border-t border-white/5 bg-[#050505]">
+        {/* CAMBIO 1: Reducida la opacidad del overlay sobre la imagen de fondo para verla más */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/90 via-[#050505] to-[#0a0a0a]/90 z-10" />
-          <img 
-            src="https://images.unsplash.com/photo-1758468274726-1197049bbfa9?q=80&w=2000&auto=format&fit=crop" 
-            alt="Futuristic Background" 
-            className="w-full h-full object-cover opacity-[0.15]"
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/20 via-transparent to-[#0a0a0a]/20 z-10" />
+          <img
+            src="https://images.unsplash.com/photo-1758468274726-1197049bbfa9?q=80&w=2000&auto=format&fit=crop"
+            alt="Futuristic Background"
+            className="w-full h-full object-cover"
           />
         </div>
 
@@ -533,9 +563,10 @@ export function HomeV2() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center text-center"
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[1.2] mb-2 uppercase">
+            {/* CAMBIO 6: Degradado estándar from-orange-400 to-orange-600 */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[1.2] mb-2 uppercase font-sans">
               Queremos ser parte de su <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300 text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-1 block">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-1 block">
                 Equipo de Trabajo
               </span>
             </h1>
@@ -547,31 +578,35 @@ export function HomeV2() {
       <section id="services" className="pt-20 pb-20 relative bg-[#1a1a1a] border-t border-white/20 z-20 overflow-hidden">
         {/* TEXTURA GRID MODERNA MUCHO MÁS CLARA */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-60" />
-        
-        {/* LUCES DE NEON "AURORA" INTENSAS PARA ACLARAR EL FONDO */}
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }} 
+
+        {/* LUCES DE NEON "AURORA" */}
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] pointer-events-none mix-blend-screen" 
+          className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] pointer-events-none mix-blend-screen"
         />
-        <motion.div 
-          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }} 
+        <motion.div
+          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] pointer-events-none mix-blend-screen" 
+          className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] pointer-events-none mix-blend-screen"
         />
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }} 
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-          className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] pointer-events-none mix-blend-screen" 
+          className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] pointer-events-none mix-blend-screen"
         />
-        
+
         {/* Gradiente radial blanco masivo desde el centro para iluminar toda el área */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_100%)] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
           <div className="mb-12 md:mb-20 text-center">
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-tighter"><span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300">8 Ejes</span> de Innovación</h3>
-            <p className="text-neutral-500 mt-4 text-lg">Haz click en cualquier servicio para conocer el detalle</p>
+            {/* CAMBIO 6: Degradado estándar from-orange-400 to-orange-600 */}
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-tighter font-sans">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">7 Ejes</span> de Innovación
+            </h3>
+            {/* CAMBIO 3: text-white/90 en lugar de text-neutral-500 */}
+            <p className="text-white/90 mt-4 text-lg font-sans">Haz click en cualquier servicio para conocer el detalle</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -585,9 +620,10 @@ export function HomeV2() {
       {/* CLIENTS MARQUEE */}
       <section className="border-t border-white/5 py-16 bg-[#0a0a0a] z-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mb-16 text-center">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl text-white font-black uppercase tracking-tighter">Importantes compañías confían en nosotros</h3>
+          {/* CAMBIO 6: Degradado estándar en título */}
+          <h3 className="text-2xl sm:text-3xl md:text-4xl text-white font-black uppercase tracking-tighter font-sans">Importantes compañías confían en nosotros</h3>
         </div>
-        
+
         <div className="relative flex overflow-x-hidden group bg-white/5 py-8 border-y border-white/10">
           <div className="animate-[scroll_40s_linear_infinite] whitespace-nowrap flex items-center space-x-16 px-8">
             {["Fresenius Kabi", "AstraZeneca", "Pfizer", "Abbott", "Janssen", "Takeda", "Bayer", "Merck", "Novartis", "Sanofi", "Medtronic"].map((client, i) => (
@@ -604,33 +640,33 @@ export function HomeV2() {
 
       {/* NEW CONTACT SECTION WITH FORM */}
       <section id="contact" className="py-24 bg-[#1a1a1a] relative border-t border-white/20 z-20 overflow-hidden">
-        {/* TEXTURA GRID MODERNA MUCHO MÁS CLARA */}
+        {/* TEXTURA GRID MODERNA */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-60" />
-        
-        {/* LUCES DE NEON "AURORA" INTENSAS PARA ACLARAR EL FONDO */}
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }} 
+
+        {/* LUCES DE NEON "AURORA" */}
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] pointer-events-none mix-blend-screen" 
+          className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] pointer-events-none mix-blend-screen"
         />
-        <motion.div 
-          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }} 
+        <motion.div
+          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] pointer-events-none mix-blend-screen" 
+          className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] pointer-events-none mix-blend-screen"
         />
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }} 
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-          className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] pointer-events-none mix-blend-screen" 
+          className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] pointer-events-none mix-blend-screen"
         />
-        
-        {/* Gradiente radial blanco masivo desde el centro para iluminar toda el área */}
+
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_100%)] pointer-events-none" />
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter mb-4">Iniciar <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300">Proyecto</span></h2>
-            <p className="text-neutral-400 text-lg">Cuéntenos sobre su iniciativa y le responderemos a la brevedad.</p>
+            {/* CAMBIO 6: Degradado estándar */}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter mb-4 font-sans">Iniciar <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Proyecto</span></h2>
+            <p className="text-neutral-300 text-lg font-sans">Cuéntenos sobre su iniciativa y le responderemos a la brevedad.</p>
           </div>
 
           <div className="bg-[#0a0a0a] border border-white/5 rounded-[2rem] p-8 md:p-12 shadow-2xl">
@@ -712,23 +748,23 @@ export function HomeV2() {
 
       {/* Footer / Contact */}
       <footer className="py-12 md:py-16 px-4 sm:px-8 bg-[#0d0d0d] text-white relative overflow-hidden border-t border-white/5">
-        {/* Glow sutil en el fondo del footer */}
         <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-orange-600/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none" />
-        
+
         <div className="relative z-10 flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-10 md:gap-0">
           <div className="text-center md:text-left space-y-2">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black leading-none mb-2 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300">
+            {/* CAMBIO 6: Degradado estándar */}
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black leading-none mb-2 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
               LET'S WORK.
             </h2>
-            <p className="text-xl md:text-2xl font-bold text-neutral-300">
+            <p className="text-xl md:text-2xl font-bold text-neutral-300 font-sans">
               ¿Tiene un proyecto en mente?
             </p>
-            <p className="text-xl md:text-2xl font-bold text-neutral-300">
+            <p className="text-xl md:text-2xl font-bold text-neutral-300 font-sans">
               Creemos un futuro juntos.
             </p>
           </div>
-          
-            <div className="flex flex-col items-center md:items-start text-lg md:text-xl lg:text-2xl font-bold gap-4 mt-4 md:mt-0 text-neutral-300">
+
+          <div className="flex flex-col items-center md:items-start text-lg md:text-xl lg:text-2xl font-bold gap-4 mt-4 md:mt-0 text-neutral-300">
             <div className="flex items-center gap-3 hover:text-orange-400 transition-colors cursor-default">
               <MapPin className="w-6 h-6 md:w-8 md:h-8 text-orange-500 shrink-0" />
               <span>Carrera 55A #166-21, Bogotá Colombia</span>
@@ -759,52 +795,57 @@ export function HomeV2() {
       {/* MODAL DE SERVICIOS */}
       <AnimatePresence>
         {selectedService && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
           >
             {/* Backdrop */}
-            <motion.div 
-              className="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer" 
-              onClick={() => setSelectedService(null)} 
+            <motion.div
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer"
+              onClick={() => setSelectedService(null)}
             />
-            
+
             {/* Modal Content */}
-            <motion.div 
+            {/* CAMBIO 1: bg-neutral-900 → bg-gray-700 para el modal (más claro) */}
+            <motion.div
               initial={{ y: 100, opacity: 0, scale: 0.95 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: 50, opacity: 0, scale: 0.95 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="relative w-full max-w-5xl max-h-[90vh] bg-neutral-900 border border-white/10 rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl"
+              className="relative w-full max-w-5xl max-h-[90vh] bg-gray-700 border border-white/10 rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl"
             >
               {/* Image Side (Hidden on mobile for more space) */}
+              {/* CAMBIO 1: Reducir overlay oscuro sobre la imagen del modal */}
               <div className="hidden md:block w-2/5 relative">
                 <img src={selectedService.image} alt={selectedService.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-neutral-900" />
+                {/* CAMBIO 1: from-black/10 to-gray-700 para que la imagen sea visible */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-gray-700/80" />
                 <div className="absolute bottom-8 left-8 text-white max-w-xs">
-                  <div className="text-orange-500 w-16 h-16 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center mb-6">
+                  <div className="text-orange-500 w-16 h-16 rounded-full bg-black/30 backdrop-blur-md flex items-center justify-center mb-6">
                     {selectedService.icon}
                   </div>
-                  <h2 className="text-5xl font-black leading-none mb-2">{selectedService.id}</h2>
+                  {/* CAMBIO 5: Eliminado el número {selectedService.id} del render */}
                 </div>
               </div>
 
               {/* Content Side */}
-              <div className="w-full md:w-3/5 p-8 md:p-12 overflow-y-auto">
-                <button 
+              {/* CAMBIO 1: bg del content side más claro */}
+              <div className="w-full md:w-3/5 p-8 md:p-12 overflow-y-auto bg-gray-800">
+                <button
                   onClick={() => setSelectedService(null)}
-                  className="absolute top-6 right-6 p-2 bg-white/5 hover:bg-orange-600 rounded-full transition-colors text-neutral-400 hover:text-white"
+                  className="absolute top-6 right-6 p-2 bg-white/10 hover:bg-orange-600 rounded-full transition-colors text-neutral-200 hover:text-white"
                 >
                   <X className="w-6 h-6" />
                 </button>
 
-                <h3 className="text-3xl md:text-5xl font-black mb-4 pr-12 text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-500">
+                {/* CAMBIO 3: text gradient más legible en fondo menos oscuro */}
+                <h3 className="text-3xl md:text-5xl font-black mb-4 pr-12 text-white font-sans">
                   {selectedService.title}
                 </h3>
-                
-                <p className="text-xl text-orange-500 font-medium mb-8 leading-relaxed">
+
+                <p className="text-xl text-orange-400 font-medium mb-8 leading-relaxed font-sans">
                   {selectedService.detailed.subtitle}
                 </p>
 
@@ -814,12 +855,12 @@ export function HomeV2() {
                     {selectedService.detailed.type === "pills" && (
                       <div className="flex flex-wrap gap-3">
                         {selectedService.detailed.items.map((item: string, idx: number) => (
-                          <div 
-                            key={idx} 
-                            className="flex items-center gap-2 bg-gradient-to-r from-orange-500/10 to-transparent border border-orange-500/20 px-5 py-3 rounded-full hover:bg-orange-500/20 hover:border-orange-500/50 transition-all cursor-default"
+                          <div
+                            key={idx}
+                            className="flex items-center gap-2 bg-gradient-to-r from-orange-500/20 to-transparent border border-orange-500/30 px-5 py-3 rounded-full hover:bg-orange-500/30 hover:border-orange-500/60 transition-all cursor-default"
                           >
                             <Sparkles className="w-4 h-4 text-orange-400" />
-                            <span className="text-neutral-200 font-medium text-sm md:text-base whitespace-nowrap">{item}</span>
+                            <span className="text-white font-medium text-sm md:text-base whitespace-nowrap">{item}</span>
                           </div>
                         ))}
                       </div>
@@ -829,17 +870,17 @@ export function HomeV2() {
                     {selectedService.detailed.type === "masonry-cards" && (
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {selectedService.detailed.items.map((item: string, idx: number) => (
-                          <div 
-                            key={idx} 
-                            className={`flex flex-col bg-white/5 p-6 rounded-2xl border border-white/10 hover:border-orange-500/30 transition-all ${idx % 3 === 0 ? 'sm:col-span-2' : ''}`}
+                          <div
+                            key={idx}
+                            className={`flex flex-col bg-white/10 p-6 rounded-2xl border border-white/20 hover:border-orange-500/50 transition-all ${idx % 3 === 0 ? 'sm:col-span-2' : ''}`}
                           >
                             <div className="flex items-center justify-between mb-4">
-                              <span className="text-4xl font-black text-white/5">{String(idx + 1).padStart(2, '0')}</span>
-                              <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center">
+                              <span className="text-4xl font-black text-white/10">{String(idx + 1).padStart(2, '0')}</span>
+                              <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
                                 <ArrowUpRight className="w-5 h-5 text-orange-500" />
                               </div>
                             </div>
-                            <span className="text-neutral-200 font-bold text-lg">{item}</span>
+                            <span className="text-white font-bold text-lg">{item}</span>
                           </div>
                         ))}
                       </div>
@@ -849,9 +890,9 @@ export function HomeV2() {
                     {selectedService.detailed.type === "grid" && (
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {selectedService.detailed.items.map((item: string, idx: number) => (
-                          <div key={idx} className="flex items-start gap-3 bg-white/5 p-4 rounded-xl border border-white/5 hover:border-orange-500/30 transition-colors">
+                          <div key={idx} className="flex items-start gap-3 bg-white/10 p-4 rounded-xl border border-white/10 hover:border-orange-500/40 transition-colors">
                             <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
-                            <span className="text-neutral-300 font-medium">{item}</span>
+                            <span className="text-white font-medium">{item}</span>
                           </div>
                         ))}
                       </div>
@@ -862,15 +903,15 @@ export function HomeV2() {
                     <div className="flex flex-col relative w-full pt-4">
                       {/* Línea vertical continua de fondo */}
                       <div className="absolute left-6 top-8 bottom-8 w-0.5 bg-gradient-to-b from-orange-500 via-orange-500/50 to-transparent md:left-8"></div>
-                      
+
                       {selectedService.detailed.items.map((item: string, idx: number) => (
                         <div key={idx} className="group relative pl-16 md:pl-20 mb-8 last:mb-0">
                           {/* Nodo del Timeline */}
-                          <div className="absolute left-[1.1rem] md:left-[1.6rem] top-1 w-10 h-10 rounded-full bg-neutral-900 border-2 border-orange-500 flex items-center justify-center text-orange-500 font-black text-lg group-hover:bg-orange-500 group-hover:text-black hover:scale-110 transition-all shadow-[0_0_15px_rgba(234,88,12,0.4)] z-10">
+                          <div className="absolute left-[1.1rem] md:left-[1.6rem] top-1 w-10 h-10 rounded-full bg-gray-700 border-2 border-orange-500 flex items-center justify-center text-orange-500 font-black text-lg group-hover:bg-orange-500 group-hover:text-black hover:scale-110 transition-all shadow-[0_0_15px_rgba(234,88,12,0.4)] z-10">
                             {idx + 1}
                           </div>
                           {/* Tarjeta de Contenido */}
-                          <div className="bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-orange-500/30 transition-colors flex items-center">
+                          <div className="bg-white/10 border border-white/10 rounded-2xl p-5 hover:border-orange-500/40 transition-colors flex items-center">
                             <h4 className="text-xl font-bold text-white tracking-tight group-hover:text-orange-400 transition-colors">{item}</h4>
                           </div>
                         </div>
@@ -883,17 +924,17 @@ export function HomeV2() {
                     <div className="flex flex-col relative w-full pt-4">
                       {/* Línea vertical continua de fondo */}
                       <div className="absolute left-6 top-8 bottom-8 w-0.5 bg-gradient-to-b from-orange-500 via-orange-500/50 to-transparent md:left-8"></div>
-                      
+
                       {selectedService.detailed.items.map((step: any, idx: number) => (
                         <div key={idx} className="group relative pl-16 md:pl-20 mb-10 last:mb-0">
                           {/* Nodo del Timeline */}
-                          <div className="absolute left-[1.1rem] md:left-[1.6rem] top-1 w-10 h-10 rounded-full bg-neutral-900 border-2 border-orange-500 flex items-center justify-center text-orange-500 font-black text-lg group-hover:bg-orange-500 group-hover:text-black hover:scale-110 transition-all shadow-[0_0_15px_rgba(234,88,12,0.4)] z-10">
+                          <div className="absolute left-[1.1rem] md:left-[1.6rem] top-1 w-10 h-10 rounded-full bg-gray-700 border-2 border-orange-500 flex items-center justify-center text-orange-500 font-black text-lg group-hover:bg-orange-500 group-hover:text-black hover:scale-110 transition-all shadow-[0_0_15px_rgba(234,88,12,0.4)] z-10">
                             {idx + 1}
                           </div>
                           {/* Tarjeta de Contenido */}
-                          <div className="bg-white/5 border border-white/5 rounded-2xl p-6 hover:border-orange-500/30 transition-colors">
-                            <h4 className="text-2xl font-black text-white mb-2 tracking-tight group-hover:text-orange-400 transition-colors">{step.title}</h4>
-                            <p className="text-neutral-400 text-lg leading-relaxed">{step.desc}</p>
+                          <div className="bg-white/10 border border-white/10 rounded-2xl p-6 hover:border-orange-500/40 transition-colors">
+                            <h4 className="text-2xl font-black text-white mb-2 tracking-tight group-hover:text-orange-400 transition-colors font-sans">{step.title}</h4>
+                            <p className="text-neutral-200 text-lg leading-relaxed font-sans">{step.desc}</p>
                           </div>
                         </div>
                       ))}
@@ -907,16 +948,16 @@ export function HomeV2() {
                         {selectedService.detailed.items.map((item: string, idx: number) => (
                           <div key={idx} className="flex items-center gap-3">
                             <Sparkles className="w-5 h-5 text-orange-500 shrink-0" />
-                            <span className="text-neutral-300 text-lg">{item}</span>
+                            <span className="text-white text-lg font-sans">{item}</span>
                           </div>
                         ))}
                       </div>
-                      
-                      <div className="bg-orange-500/10 border border-orange-500/20 rounded-2xl p-6">
-                        <h4 className="text-orange-500 font-bold mb-4">{selectedService.detailed.subtitle2}</h4>
+
+                      <div className="bg-orange-500/20 border border-orange-500/30 rounded-2xl p-6">
+                        <h4 className="text-orange-400 font-bold mb-4 font-sans">{selectedService.detailed.subtitle2}</h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedService.detailed.items2.map((item: string, idx: number) => (
-                            <span key={idx} className="bg-black/50 border border-white/10 px-4 py-2 rounded-full text-sm font-medium">
+                            <span key={idx} className="bg-white/10 border border-white/20 px-4 py-2 rounded-full text-sm font-medium text-white font-sans">
                               {item}
                             </span>
                           ))}
@@ -924,11 +965,36 @@ export function HomeV2() {
                       </div>
                     </div>
                   )}
+
+                  {/* CAMBIO 9: TIPO: CONTACT-CENTER-GALLERY (Galería con imagen + texto) */}
+                  {selectedService.detailed.type === "contact-center-gallery" && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {selectedService.detailed.items.map((item: { label: string; image: string }, idx: number) => (
+                        <div
+                          key={idx}
+                          className="relative rounded-2xl overflow-hidden border border-white/20 hover:border-orange-500/50 transition-all group/card h-36"
+                        >
+                          {/* CAMBIO 1: Imagen sin filtros oscuros pesados */}
+                          <img
+                            src={item.image}
+                            alt={item.label}
+                            className="w-full h-full object-cover"
+                          />
+                          {/* Overlay suave solo en la parte inferior para que se lea el texto */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                          <div className="absolute bottom-0 left-0 right-0 p-3 flex items-center gap-2">
+                            <Sparkles className="w-4 h-4 text-orange-400 shrink-0" />
+                            <span className="text-white font-semibold text-sm leading-tight font-sans">{item.label}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Footer del servicio (Si existe) */}
                 {selectedService.detailed.footer && (
-                  <div className="mt-8 p-4 bg-orange-600 text-black font-bold text-center rounded-xl uppercase tracking-widest text-sm">
+                  <div className="mt-8 p-4 bg-orange-500/15 border border-orange-500/30 text-orange-300 font-semibold text-center rounded-xl uppercase tracking-widest text-sm">
                     {selectedService.detailed.footer}
                   </div>
                 )}
@@ -947,7 +1013,7 @@ const ArrowsRight = () => <ArrowUpRight className="w-6 h-6 ml-2 group-hover:rota
 
 function StatsCard({ number, label, delay }: { number: string, label: string, delay: number }) {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -955,14 +1021,15 @@ function StatsCard({ number, label, delay }: { number: string, label: string, de
       className="p-6 sm:p-8 bg-white/5 border border-white/10 rounded-3xl flex flex-col items-center justify-center text-center backdrop-blur-sm hover:bg-white/10 hover:border-orange-500/50 transition-all cursor-pointer"
     >
       <span className="text-5xl lg:text-6xl font-black text-orange-500 mb-3">{number}</span>
-      <span className="text-sm font-bold uppercase tracking-widest text-neutral-300">{label}</span>
+      {/* CAMBIO 3: text-white en lugar de text-neutral-300 */}
+      <span className="text-sm font-bold uppercase tracking-widest text-white font-sans">{label}</span>
     </motion.div>
   );
 }
 
 function ServiceCard({ srv, index, onClick }: { srv: any, index: number, onClick: () => void }) {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -971,20 +1038,22 @@ function ServiceCard({ srv, index, onClick }: { srv: any, index: number, onClick
       className="group relative h-[450px] rounded-3xl overflow-hidden cursor-pointer border border-white/5 hover:border-orange-500/50 transition-colors"
     >
       {/* Background Image & Overlay */}
+      {/* CAMBIO 1: Reducir el overlay oscuro sobre las fotos de las tarjetas */}
       <div className="absolute inset-0">
-        <img 
-          src={srv.image} 
-          alt={srv.title} 
-          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
+        <img
+          src={srv.image}
+          alt={srv.title}
+          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/20 opacity-90 transition-opacity group-hover:opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent transition-opacity group-hover:opacity-90" />
       </div>
-      
+
       {/* Content */}
       <div className="absolute inset-0 p-8 flex flex-col justify-between">
         {/* Superior: Título de la Tarjeta */}
         <div className="flex justify-between items-start">
-          <h3 className="text-2xl font-bold leading-tight drop-shadow-md pr-4 text-white">
+          {/* CAMBIO 5: Eliminado el número (srv.id) del render */}
+          <h3 className="text-2xl font-bold leading-tight drop-shadow-md pr-4 text-white font-sans">
             {srv.title}
           </h3>
           <div className="w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-md border border-white/20 shrink-0 bg-white/10">
@@ -998,12 +1067,13 @@ function ServiceCard({ srv, index, onClick }: { srv: any, index: number, onClick
           <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
             <div className="overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
               <div className="pb-6">
-                <p className="text-neutral-400 text-sm leading-relaxed mb-4">
+                {/* CAMBIO 3: text-white en lugar de text-neutral-400 */}
+                <p className="text-white/90 text-sm leading-relaxed mb-4 font-sans">
                   {srv.description}
                 </p>
                 <ul className="flex flex-wrap gap-2">
                   {srv.list.map((item: string, i: number) => (
-                    <li key={i} className="text-xs px-3 py-1.5 rounded-full border bg-black/50 text-neutral-300 border-white/10">
+                    <li key={i} className="text-xs px-3 py-1.5 rounded-full border bg-black/50 text-white border-white/20 font-sans">
                       {item}
                     </li>
                   ))}
@@ -1011,7 +1081,7 @@ function ServiceCard({ srv, index, onClick }: { srv: any, index: number, onClick
               </div>
             </div>
           </div>
-          
+
           <div className="text-orange-500 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/10 shadow-[0_0_15px_rgba(234,88,12,0.2)] shrink-0 self-start">
             {srv.icon}
           </div>
