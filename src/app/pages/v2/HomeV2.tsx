@@ -1,7 +1,42 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
-import { ArrowUpRight, MonitorPlay, Layers, Layout, BookOpen, Globe, Presentation, MessageSquare, MapPin, Phone, Smartphone, X, CheckCircle2, ChevronRight, Sparkles, ArrowDown, Send, Loader2, PhoneCall, Bot, HeartPulse, BarChart3, Database, ClipboardCheck, Megaphone, Users, Gift, Truck, ShieldCheck, BrainCircuit, Mail as MailIcon, Target, Eye, Search } from 'lucide-react';
+import { ArrowUpRight, MonitorPlay, Layers, Layout, BookOpen, Globe, Presentation, MessageSquare, MapPin, Phone, Smartphone, X, CheckCircle2, ChevronRight, ChevronUp, ChevronDown, Sparkles, ArrowDown, Send, Loader2, PhoneCall, Bot, HeartPulse, BarChart3, Database, ClipboardCheck, Megaphone, Users, Gift, Truck, ShieldCheck, BrainCircuit, Mail as MailIcon, Target, Eye, Search, BookMarked, Image, Languages, FileEdit, Theater, PenTool, ScanSearch, MessageCircle, Radio, Rocket, Activity, Subtitles, Video, FileText, Globe2, Mic, View, Film, GraduationCap, Gamepad2, Stethoscope, Pill, Briefcase, Navigation, UserSearch, MapPinned, TrendingUp, Radar, LocateFixed } from 'lucide-react';
 import { Link } from 'react-router';
+
+// Mapa de iconos para renderizado dinámico en cards
+const iconMap: Record<string, React.ReactNode> = {
+  BookMarked: <BookMarked className="w-6 h-6" />,
+  Image: <Image className="w-6 h-6" />,
+  Languages: <Languages className="w-6 h-6" />,
+  FileEdit: <FileEdit className="w-6 h-6" />,
+  Theater: <Theater className="w-6 h-6" />,
+  PenTool: <PenTool className="w-6 h-6" />,
+  ScanSearch: <ScanSearch className="w-5 h-5" />,
+  MessageCircle: <MessageCircle className="w-5 h-5" />,
+  Radio: <Radio className="w-5 h-5" />,
+  Rocket: <Rocket className="w-5 h-5" />,
+  Activity: <Activity className="w-5 h-5" />,
+  Subtitles: <Subtitles className="w-5 h-5" />,
+  Video: <Video className="w-5 h-5" />,
+  FileText: <FileText className="w-5 h-5" />,
+  Globe2: <Globe2 className="w-5 h-5" />,
+  Mic: <Mic className="w-5 h-5" />,
+  View: <View className="w-5 h-5" />,
+  Film: <Film className="w-5 h-5" />,
+  GraduationCap: <GraduationCap className="w-5 h-5" />,
+  Gamepad2: <Gamepad2 className="w-5 h-5" />,
+  Stethoscope: <Stethoscope className="w-5 h-5" />,
+  Pill: <Pill className="w-5 h-5" />,
+  Briefcase: <Briefcase className="w-5 h-5" />,
+  Navigation: <Navigation className="w-5 h-5" />,
+  UserSearch: <UserSearch className="w-5 h-5" />,
+  MapPinned: <MapPinned className="w-5 h-5" />,
+  TrendingUp: <TrendingUp className="w-5 h-5" />,
+  Radar: <Radar className="w-5 h-5" />,
+  LocateFixed: <LocateFixed className="w-5 h-5" />,
+  MonitorPlay: <MonitorPlay className="w-5 h-5" />,
+  Target: <Target className="w-5 h-5" />,
+};
 
 // Array de servicios expandido con detalles profundos
 // CAMBIO 8: Eliminado "Marketing Digital" (era id "05"). Quedan 7 ejes.
@@ -36,12 +71,20 @@ const SERVICES = [
     list: ["Videos 2D y 3D", "Realidad Aumentada", "Apps"],
     detailed: {
       subtitle: "Renovamos la comunicación para el público objetivo.",
-      type: "pills",
+      type: "bento-grid",
       items: [
-        "Subtitulación de videos", "Videos 2D y 3D Motion Graphics", "PDF Interactivo",
-        "Páginas web", "Podcast y Locuciones", "Realidad Aumentada",
-        "Loops y miniclips", "Capacitaciones virtuales", "Juegos",
-        "Casos clínicos", "Cápsulas informativas", "Ayuda ventas"
+        { label: "Videos 2D y 3D Motion Graphics", icon: "Video" },
+        { label: "Realidad Aumentada", icon: "View" },
+        { label: "Páginas web", icon: "Globe2" },
+        { label: "Subtitulación de videos", icon: "Subtitles" },
+        { label: "PDF Interactivo", icon: "FileText" },
+        { label: "Podcast y Locuciones", icon: "Mic" },
+        { label: "Loops y miniclips", icon: "Film" },
+        { label: "Capacitaciones virtuales", icon: "GraduationCap" },
+        { label: "Juegos", icon: "Gamepad2" },
+        { label: "Casos clínicos", icon: "Stethoscope" },
+        { label: "Cápsulas informativas", icon: "Pill" },
+        { label: "Ayuda ventas", icon: "Briefcase" }
       ]
     }
   },
@@ -79,8 +122,12 @@ const SERVICES = [
       subtitle: "Realizamos materiales científicos y especializados en diferentes formatos.",
       type: "masonry-cards",
       items: [
-        "Búsquedas bibliográficas", "Infografías", "Traducciones",
-        "Editorialización de estudios", "Sagas culturales", "Adaptaciones editoriales"
+        { label: "Búsquedas bibliográficas", icon: "BookMarked" },
+        { label: "Infografías", icon: "Image" },
+        { label: "Traducciones", icon: "Languages" },
+        { label: "Editorialización de estudios", icon: "FileEdit" },
+        { label: "Sagas culturales", icon: "Theater" },
+        { label: "Adaptaciones editoriales", icon: "PenTool" }
       ]
     }
   },
@@ -95,11 +142,11 @@ const SERVICES = [
       subtitle: "Creamos estrategias integrales diseñadas para maximizar la visibilidad y el impacto de su marca o productos a bajos costos",
       type: "steps",
       items: [
-        { title: "Análisis de Audiencia", desc: "Identificamos el público objetivo y sus necesidades o preferencias." },
-        { title: "Mensajes Clave", desc: "Creamos mensajes atractivos para la audiencia en cada plataforma." },
-        { title: "Canales de Comunicación", desc: "Redes sociales, Medios tradicionales, Marketing digital, Eventos, etc." },
-        { title: "Ejecución de la Campaña", desc: "Puesta en acción en los canales elegidos y asegurar un enfoque unificado." },
-        { title: "Monitoreo y Evaluación", desc: "Del rendimiento de la campaña con métricas y KPIs, analizando la efectividad de cada canal." }
+        { title: "Análisis de Audiencia", desc: "Identificamos el público objetivo y sus necesidades o preferencias.", icon: "ScanSearch" },
+        { title: "Mensajes Clave", desc: "Creamos mensajes atractivos para la audiencia en cada plataforma.", icon: "MessageCircle" },
+        { title: "Canales de Comunicación", desc: "Redes sociales, Medios tradicionales, Marketing digital, Eventos, etc.", icon: "Radio" },
+        { title: "Ejecución de la Campaña", desc: "Puesta en acción en los canales elegidos y asegurar un enfoque unificado.", icon: "Rocket" },
+        { title: "Monitoreo y Evaluación", desc: "Del rendimiento de la campaña con métricas y KPIs, analizando la efectividad de cada canal.", icon: "Activity" }
       ]
     }
   },
@@ -136,11 +183,14 @@ const SERVICES = [
     list: ["Ubicación estratégica", "Perfiles de clientes", "Análisis territorial"],
     detailed: {
       subtitle: "Descubra dónde ubicar sus sedes, dónde surtir y cómo llegar a su cliente ideal con precisión geográfica e inteligencia de datos.",
-      type: "pills",
+      type: "geo-features",
       items: [
-        "Sugerencia de puntos de atención", "Análisis de perfiles cercanos",
-        "Identificación de zonas de surtido", "Potencial del cliente objetivo",
-        "Geomarketing en salud", "Optimización de cobertura territorial"
+        { label: "Sugerencia de puntos de atención", desc: "Identificamos las ubicaciones óptimas para maximizar su alcance.", icon: "MapPinned" },
+        { label: "Análisis de perfiles cercanos", desc: "Perfilamos la población y clientes potenciales en cada zona.", icon: "UserSearch" },
+        { label: "Identificación de zonas de surtido", desc: "Detectamos las áreas con mayor demanda de sus productos.", icon: "Navigation" },
+        { label: "Potencial del cliente objetivo", desc: "Evaluamos el potencial de conversión por segmento y territorio.", icon: "TrendingUp" },
+        { label: "Geomarketing en salud", desc: "Estrategias de marketing basadas en inteligencia geográfica.", icon: "Radar" },
+        { label: "Optimización de cobertura territorial", desc: "Maximice su presencia con la menor inversión posible.", icon: "LocateFixed" }
       ]
     }
   }
@@ -154,45 +204,89 @@ export function HomeV2() {
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchResults, setSearchResults] = useState<Element[]>([]);
+  const [currentResultIdx, setCurrentResultIdx] = useState(-1);
+  const [searchNoResults, setSearchNoResults] = useState(false);
   // CAMBIO 2: Estado para colapsar Visión y Misión por defecto
   const [showVisionMision, setShowVisionMision] = useState(false);
+
+  const clearHighlights = () => {
+    document.querySelectorAll('.search-highlight').forEach(el => {
+      el.classList.remove('search-highlight', 'bg-orange-500/40', 'transition-colors', 'duration-500', 'rounded', 'px-1');
+    });
+    document.querySelectorAll('.search-current').forEach(el => {
+      el.classList.remove('search-current', 'bg-orange-500/70', 'ring-2', 'ring-orange-400');
+    });
+  };
+
+  const goToResult = (results: Element[], idx: number) => {
+    // Quitar highlight activo del anterior
+    document.querySelectorAll('.search-current').forEach(el => {
+      el.classList.remove('search-current', 'bg-orange-500/70', 'ring-2', 'ring-orange-400');
+      el.classList.add('bg-orange-500/40');
+    });
+    // Activar el nuevo
+    const el = results[idx];
+    if (el) {
+      el.classList.add('search-current', 'bg-orange-500/70', 'ring-2', 'ring-orange-400');
+      el.classList.remove('bg-orange-500/40');
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setCurrentResultIdx(idx);
+    }
+  };
+
+  const handleSearchNext = () => {
+    if (searchResults.length === 0) return;
+    const nextIdx = (currentResultIdx + 1) % searchResults.length;
+    goToResult(searchResults, nextIdx);
+  };
+
+  const handleSearchPrev = () => {
+    if (searchResults.length === 0) return;
+    const prevIdx = (currentResultIdx - 1 + searchResults.length) % searchResults.length;
+    goToResult(searchResults, prevIdx);
+  };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
 
     const term = searchQuery.toLowerCase();
+    clearHighlights();
 
-    // Un-highlight previous
-    document.querySelectorAll('.search-highlight').forEach(el => {
-      el.classList.remove('search-highlight', 'bg-orange-500/40', 'transition-colors', 'duration-500', 'rounded', 'px-1');
-    });
-
-    // Encontrar todos los elementos que podrian contener texto
     const elements = Array.from(document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, li, a, strong, b, button'));
+    const matches: Element[] = [];
 
     for (const el of elements) {
-      // Necesitamos asegurar que es el elemento más interno o tiene texto directo sustancial
       const textNodes = Array.from(el.childNodes).filter(node => node.nodeType === Node.TEXT_NODE && (node.nodeValue?.trim()?.length || 0) > 0);
-
       const elementContainsText = textNodes.some(node => node.nodeValue?.toLowerCase().includes(term));
 
       if (elementContainsText) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        // Agregar clases para resaltar visualmente
         el.classList.add('search-highlight', 'bg-orange-500/40', 'transition-colors', 'duration-500', 'rounded', 'px-1');
-
-        // Cierra el panel de busqueda si está abierto
-        setIsSearchOpen(false);
-
-        // Quitar el resaltado despues de un tiempo
-        setTimeout(() => {
-          el.classList.remove('search-highlight', 'bg-orange-500/40', 'transition-colors', 'duration-500', 'rounded', 'px-1');
-        }, 3000);
-        break;
+        matches.push(el);
       }
     }
+
+    setSearchResults(matches);
+    setSearchNoResults(matches.length === 0);
+
+    if (matches.length > 0) {
+      setCurrentResultIdx(0);
+      goToResult(matches, 0);
+    } else {
+      setCurrentResultIdx(-1);
+      // Quitar el indicador de "sin resultados" después de 2s
+      setTimeout(() => setSearchNoResults(false), 2000);
+    }
+  };
+
+  const handleCloseSearch = () => {
+    clearHighlights();
+    setIsSearchOpen(false);
+    setSearchQuery('');
+    setSearchResults([]);
+    setCurrentResultIdx(-1);
+    setSearchNoResults(false);
   };
 
   // Bloquear el scroll de la pagina cuando el modal está abierto
@@ -266,40 +360,60 @@ export function HomeV2() {
 
         <div className="flex gap-2 sm:gap-3 lg:gap-4 items-center z-10 scale-90 sm:scale-100 origin-right transition-all">
 
-          {/* CAMBIO 4: Barra de búsqueda - visible, con border, value y onChange correctamente conectados */}
-          <div className="flex items-center">
-            {isSearchOpen ? (
-              <form onSubmit={handleSearch} className="flex items-center ml-2">
-                <input
-                  type="text"
-                  placeholder="Buscar..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  autoFocus
-                  className="bg-white/10 text-white text-sm px-3 py-1.5 rounded-l-md outline-none border border-white/40 w-[130px] sm:w-[150px] lg:w-[200px] placeholder:text-gray-300 focus:border-orange-500 transition-all"
-                />
-                <button type="submit" className="bg-orange-600 hover:bg-orange-500 text-white px-2.5 py-1.5 border border-orange-600 transition-colors flex items-center justify-center">
-                  <Search size={16} />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setIsSearchOpen(false)}
-                  className="bg-white/10 hover:bg-white/20 text-white px-2 py-1.5 rounded-r-md border border-l-0 border-white/40 transition-colors flex items-center justify-center"
-                  title="Cerrar"
-                >
-                  <X size={16} />
+          {/* Búsqueda: botón cuando cerrada, inline en md+ cuando abierta */}
+          {!isSearchOpen ? (
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="text-white hover:text-orange-500 transition-colors p-1.5 hover:bg-white/10 rounded-lg"
+              title="Buscar"
+            >
+              <Search size={20} />
+            </button>
+          ) : (
+            /* Barra inline — solo visible en tablet/desktop */
+            <div className="hidden md:flex items-center">
+              <form onSubmit={handleSearch} className="flex items-center">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Buscar en la página..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    autoFocus
+                    className={`bg-white/10 backdrop-blur-sm text-white text-sm pl-3 pr-16 py-2 rounded-l-xl outline-none border md:w-[200px] lg:w-[250px] placeholder:text-gray-400 transition-all ${searchNoResults ? 'border-red-500/70 bg-red-500/10' : 'border-white/20 focus:border-orange-500'}`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Escape') handleCloseSearch();
+                      if (e.key === 'Enter' && e.shiftKey) { e.preventDefault(); handleSearchPrev(); }
+                    }}
+                  />
+                  {searchResults.length > 0 && (
+                    <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-orange-400 font-mono font-bold tabular-nums">
+                      {currentResultIdx + 1}/{searchResults.length}
+                    </span>
+                  )}
+                  {searchNoResults && (
+                    <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-red-400 font-medium">
+                      Sin resultados
+                    </span>
+                  )}
+                </div>
+                <button type="submit" className="bg-orange-600 hover:bg-orange-500 text-white px-2.5 py-2 border-y border-orange-600 transition-colors flex items-center justify-center shrink-0" title="Buscar">
+                  <Search size={15} />
                 </button>
               </form>
-            ) : (
-              <button
-                onClick={() => setIsSearchOpen(true)}
-                className="text-white hover:text-orange-500 transition-colors p-1"
-                title="Buscar"
-              >
-                <Search size={22} />
+              <div className="flex items-center border-y border-white/20 shrink-0">
+                <button type="button" onClick={handleSearchPrev} disabled={searchResults.length === 0} className="text-white hover:text-orange-400 px-1.5 py-2 transition-colors disabled:opacity-30 disabled:cursor-not-allowed" title="Anterior">
+                  <ChevronUp size={15} />
+                </button>
+                <button type="button" onClick={handleSearchNext} disabled={searchResults.length === 0} className="text-white hover:text-orange-400 px-1.5 py-2 transition-colors disabled:opacity-30 disabled:cursor-not-allowed" title="Siguiente">
+                  <ChevronDown size={15} />
+                </button>
+              </div>
+              <button type="button" onClick={handleCloseSearch} className="bg-white/10 hover:bg-white/20 text-white px-2.5 py-2 rounded-r-xl border border-l-0 border-white/20 transition-colors flex items-center justify-center shrink-0" title="Cerrar (Esc)">
+                <X size={15} />
               </button>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Redes sociales (Ocultar dinámicamente en tablet/móvil si la búsqueda está activa) */}
           <div className={`items-center gap-2 sm:gap-3 ${isSearchOpen ? 'hidden lg:flex' : 'flex'}`}>
@@ -318,6 +432,52 @@ export function HomeV2() {
           </div>
         </div>
       </nav>
+
+      {/* Overlay de búsqueda — solo móvil (< md), fuera del nav */}
+      {isSearchOpen && (
+        <div className="fixed top-0 left-0 right-0 z-50 flex md:hidden items-center bg-[#050505] border-b border-white/10 px-3 sm:px-4 py-2.5">
+          <form onSubmit={handleSearch} className="flex items-center flex-1 min-w-0">
+            <div className="relative flex-1 min-w-0">
+              <input
+                type="text"
+                placeholder="Buscar en la página..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus
+                className={`bg-white/10 text-white text-sm pl-3 pr-16 py-2 rounded-l-xl outline-none border w-full placeholder:text-gray-400 transition-all ${searchNoResults ? 'border-red-500/70 bg-red-500/10' : 'border-white/20 focus:border-orange-500'}`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') handleCloseSearch();
+                  if (e.key === 'Enter' && e.shiftKey) { e.preventDefault(); handleSearchPrev(); }
+                }}
+              />
+              {searchResults.length > 0 && (
+                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-orange-400 font-mono font-bold tabular-nums">
+                  {currentResultIdx + 1}/{searchResults.length}
+                </span>
+              )}
+              {searchNoResults && (
+                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-red-400 font-medium">
+                  Sin resultados
+                </span>
+              )}
+            </div>
+            <button type="submit" className="bg-orange-600 hover:bg-orange-500 text-white px-2.5 py-2 border-y border-orange-600 transition-colors flex items-center justify-center shrink-0" title="Buscar">
+              <Search size={15} />
+            </button>
+          </form>
+          <div className="flex items-center border-y border-white/20 shrink-0">
+            <button type="button" onClick={handleSearchPrev} disabled={searchResults.length === 0} className="text-white hover:text-orange-400 px-1.5 py-2 transition-colors disabled:opacity-30 disabled:cursor-not-allowed" title="Anterior">
+              <ChevronUp size={15} />
+            </button>
+            <button type="button" onClick={handleSearchNext} disabled={searchResults.length === 0} className="text-white hover:text-orange-400 px-1.5 py-2 transition-colors disabled:opacity-30 disabled:cursor-not-allowed" title="Siguiente">
+              <ChevronDown size={15} />
+            </button>
+          </div>
+          <button type="button" onClick={handleCloseSearch} className="bg-white/10 hover:bg-white/20 text-white px-2.5 py-2 rounded-r-xl border border-l-0 border-white/20 transition-colors flex items-center justify-center shrink-0" title="Cerrar (Esc)">
+            <X size={15} />
+          </button>
+        </div>
+      )}
 
       {/* QUIÉNES SOMOS */}
       {/* CAMBIO 2: Sección compacta - Visión y Misión colapsadas por defecto */}
@@ -866,23 +1026,82 @@ export function HomeV2() {
                       </div>
                     )}
 
-                    {/* TIPO: MASONRY CARDS (Tarjetas asimétricas) */}
-                    {selectedService.detailed.type === "masonry-cards" && (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {selectedService.detailed.items.map((item: string, idx: number) => (
-                          <div
-                            key={idx}
-                            className={`flex flex-col bg-white/10 p-6 rounded-2xl border border-white/20 hover:border-orange-500/50 transition-all ${idx % 3 === 0 ? 'sm:col-span-2' : ''}`}
-                          >
-                            <div className="flex items-center justify-between mb-4">
-                              <span className="text-4xl font-black text-white/10">{String(idx + 1).padStart(2, '0')}</span>
-                              <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                                <ArrowUpRight className="w-5 h-5 text-orange-500" />
+                    {/* TIPO: BENTO GRID (Desarrollos Interactivos - grid uniforme llamativo) */}
+                    {selectedService.detailed.type === "bento-grid" && (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        {selectedService.detailed.items.map((item: any, idx: number) => {
+                          const icon = item.icon ? iconMap[item.icon] : null;
+                          return (
+                            <div
+                              key={idx}
+                              className="group/bento relative overflow-hidden rounded-2xl border bg-white/[0.06] border-white/10 hover:border-orange-500/50 hover:bg-white/[0.12] hover:shadow-[0_0_20px_rgba(234,88,12,0.15)] transition-all duration-300 cursor-default"
+                            >
+                              <div className="relative z-10 flex flex-col justify-between h-full p-4">
+                                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500/30 to-orange-700/10 flex items-center justify-center text-orange-400 group-hover/bento:scale-110 group-hover/bento:text-orange-300 transition-all duration-300 mb-3">
+                                  {icon || <MonitorPlay className="w-5 h-5" />}
+                                </div>
+                                <span className="text-white font-semibold leading-tight text-sm">
+                                  {item.label}
+                                </span>
                               </div>
                             </div>
-                            <span className="text-white font-bold text-lg">{item}</span>
-                          </div>
-                        ))}
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {/* TIPO: GEO FEATURES (BioGeo Insights - cards con icono hexagonal y descripción) */}
+                    {selectedService.detailed.type === "geo-features" && (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {selectedService.detailed.items.map((item: any, idx: number) => {
+                          const icon = item.icon ? iconMap[item.icon] : null;
+                          return (
+                            <div
+                              key={idx}
+                              className="group/geo relative bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 rounded-2xl p-5 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all duration-300 overflow-hidden"
+                            >
+                              {/* Efecto de pulso sutil en hover */}
+                              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-cyan-500/0 rounded-full blur-2xl group-hover/geo:bg-cyan-500/15 transition-all duration-500" />
+                              <div className="relative z-10 flex items-start gap-4">
+                                {/* Icono hexagonal */}
+                                <div className="shrink-0 w-12 h-12 relative">
+                                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/30 to-blue-600/20 border border-cyan-500/30 group-hover/geo:from-cyan-500/50 group-hover/geo:to-blue-500/30 group-hover/geo:border-cyan-400/50 transition-all duration-300" style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }} />
+                                  <div className="absolute inset-0 flex items-center justify-center text-cyan-400 group-hover/geo:text-cyan-300 group-hover/geo:scale-110 transition-all duration-300">
+                                    {icon || <MapPin className="w-5 h-5" />}
+                                  </div>
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <h5 className="text-white font-bold text-base mb-1 group-hover/geo:text-cyan-300 transition-colors">{item.label}</h5>
+                                  <p className="text-neutral-400 text-sm leading-relaxed group-hover/geo:text-neutral-300 transition-colors">{item.desc}</p>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {/* TIPO: MASONRY CARDS (Tarjetas con iconos temáticos) */}
+                    {selectedService.detailed.type === "masonry-cards" && (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {selectedService.detailed.items.map((item: any, idx: number) => {
+                          const label = typeof item === 'string' ? item : item.label;
+                          const icon = typeof item === 'object' && item.icon ? iconMap[item.icon] : null;
+                          return (
+                            <div
+                              key={idx}
+                              className={`group/card flex flex-col bg-white/10 p-6 rounded-2xl border border-white/20 hover:border-orange-500/50 hover:bg-white/[0.14] transition-all ${idx % 3 === 0 ? 'sm:col-span-2' : ''}`}
+                            >
+                              <div className="flex items-center justify-between mb-4">
+                                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500/30 to-orange-600/10 border border-orange-500/20 flex items-center justify-center text-orange-400 group-hover/card:from-orange-500/50 group-hover/card:to-orange-600/20 group-hover/card:scale-110 transition-all">
+                                  {icon || <ArrowUpRight className="w-6 h-6" />}
+                                </div>
+                                <ArrowUpRight className="w-5 h-5 text-white/20 group-hover/card:text-orange-500 transition-colors" />
+                              </div>
+                              <span className="text-white font-bold text-lg">{label}</span>
+                            </div>
+                          );
+                        })}
                       </div>
                     )}
 
@@ -919,25 +1138,28 @@ export function HomeV2() {
                     </div>
                   )}
 
-                  {/* TIPO: STEPS (Títulos y descripciones como Timeline vertical) */}
+                  {/* TIPO: STEPS (Títulos y descripciones como Timeline vertical con iconos) */}
                   {selectedService.detailed.type === "steps" && (
                     <div className="flex flex-col relative w-full pt-4">
                       {/* Línea vertical continua de fondo */}
                       <div className="absolute left-6 top-8 bottom-8 w-0.5 bg-gradient-to-b from-orange-500 via-orange-500/50 to-transparent md:left-8"></div>
 
-                      {selectedService.detailed.items.map((step: any, idx: number) => (
-                        <div key={idx} className="group relative pl-16 md:pl-20 mb-10 last:mb-0">
-                          {/* Nodo del Timeline */}
-                          <div className="absolute left-[1.1rem] md:left-[1.6rem] top-1 w-10 h-10 rounded-full bg-gray-700 border-2 border-orange-500 flex items-center justify-center text-orange-500 font-black text-lg group-hover:bg-orange-500 group-hover:text-black hover:scale-110 transition-all shadow-[0_0_15px_rgba(234,88,12,0.4)] z-10">
-                            {idx + 1}
+                      {selectedService.detailed.items.map((step: any, idx: number) => {
+                        const stepIcon = step.icon ? iconMap[step.icon] : null;
+                        return (
+                          <div key={idx} className="group relative pl-16 md:pl-20 mb-10 last:mb-0">
+                            {/* Nodo del Timeline con icono */}
+                            <div className="absolute left-[1.1rem] md:left-[1.6rem] top-1 w-10 h-10 rounded-full bg-gray-700 border-2 border-orange-500 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-black hover:scale-110 transition-all shadow-[0_0_15px_rgba(234,88,12,0.4)] z-10">
+                              {stepIcon || <Sparkles className="w-5 h-5" />}
+                            </div>
+                            {/* Tarjeta de Contenido */}
+                            <div className="bg-white/10 border border-white/10 rounded-2xl p-6 hover:border-orange-500/40 transition-colors">
+                              <h4 className="text-2xl font-black text-white mb-2 tracking-tight group-hover:text-orange-400 transition-colors font-sans">{step.title}</h4>
+                              <p className="text-neutral-200 text-lg leading-relaxed font-sans">{step.desc}</p>
+                            </div>
                           </div>
-                          {/* Tarjeta de Contenido */}
-                          <div className="bg-white/10 border border-white/10 rounded-2xl p-6 hover:border-orange-500/40 transition-colors">
-                            <h4 className="text-2xl font-black text-white mb-2 tracking-tight group-hover:text-orange-400 transition-colors font-sans">{step.title}</h4>
-                            <p className="text-neutral-200 text-lg leading-relaxed font-sans">{step.desc}</p>
-                          </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   )}
 
