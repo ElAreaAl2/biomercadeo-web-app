@@ -212,7 +212,7 @@ export function HomeV2() {
 
   const clearHighlights = () => {
     document.querySelectorAll('.search-highlight').forEach(el => {
-      el.classList.remove('search-highlight', 'bg-orange-500/40', 'transition-colors', 'duration-500', 'rounded', 'px-1');
+      el.classList.remove('search-highlight', 'bg-orange-500/40', 'transition-colors', 'duration-500', 'rounded');
     });
     document.querySelectorAll('.search-current').forEach(el => {
       el.classList.remove('search-current', 'bg-orange-500/70', 'ring-2', 'ring-orange-400');
@@ -262,7 +262,7 @@ export function HomeV2() {
       const elementContainsText = textNodes.some(node => node.nodeValue?.toLowerCase().includes(term));
 
       if (elementContainsText) {
-        el.classList.add('search-highlight', 'bg-orange-500/40', 'transition-colors', 'duration-500', 'rounded', 'px-1');
+        el.classList.add('search-highlight', 'bg-orange-500/40', 'transition-colors', 'duration-500', 'rounded');
         matches.push(el);
       }
     }
@@ -339,7 +339,7 @@ export function HomeV2() {
   });
 
   return (
-    <div ref={containerRef} className="bg-[#050505] text-white selection:bg-orange-500 selection:text-black font-sans overflow-hidden">
+    <div ref={containerRef} className="bg-[#050505] text-white selection:bg-orange-500 selection:text-black font-sans overflow-x-hidden">
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-orange-600 origin-left z-50 pointer-events-none"
@@ -481,7 +481,7 @@ export function HomeV2() {
 
       {/* QUIÉNES SOMOS */}
       {/* CAMBIO 2: Sección compacta - Visión y Misión colapsadas por defecto */}
-      <section id="about" className="pt-20 pb-12 bg-[#1a1a1a] relative border-t border-white/20 z-20 overflow-hidden">
+      <section id="about" className="pt-20 pb-12 bg-[#1a1a1a] relative border-t border-white/20 z-20 overflow-x-hidden">
         {/* TEXTURA GRID MODERNA MUCHO MÁS CLARA */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-60" />
 
@@ -507,11 +507,10 @@ export function HomeV2() {
 
         <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
 
-          {/* Logo centrado, ancho completo */}
+          {/* Logo centrado, ancho completo — animación solo al montar, no depende de viewport */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             className="flex flex-row items-center justify-center gap-4 sm:gap-6 mb-2"
           >
