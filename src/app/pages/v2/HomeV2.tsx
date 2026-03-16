@@ -339,7 +339,7 @@ export function HomeV2() {
   });
 
   return (
-    <div ref={containerRef} className="bg-[#050505] text-white selection:bg-orange-500 selection:text-black font-sans overflow-x-hidden">
+    <div ref={containerRef} className="bg-[#050505] text-white selection:bg-orange-500 selection:text-black font-sans">
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-orange-600 origin-left z-50 pointer-events-none"
@@ -481,29 +481,32 @@ export function HomeV2() {
 
       {/* QUIÉNES SOMOS */}
       {/* CAMBIO 2: Sección compacta - Visión y Misión colapsadas por defecto */}
-      <section id="about" className="pt-20 pb-12 bg-[#1a1a1a] relative border-t border-white/20 z-20 overflow-x-hidden">
-        {/* TEXTURA GRID MODERNA MUCHO MÁS CLARA */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-60" />
+      <section id="about" className="pt-20 pb-12 bg-[#1a1a1a] relative border-t border-white/20 z-20">
+        {/* Contenedor de efectos decorativos con overflow controlado */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* TEXTURA GRID MODERNA MUCHO MÁS CLARA */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] opacity-60" />
 
-        {/* LUCES DE NEON "AURORA" */}
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] pointer-events-none mix-blend-screen"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] pointer-events-none mix-blend-screen"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-          className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] pointer-events-none mix-blend-screen"
-        />
+          {/* LUCES DE NEON "AURORA" */}
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] mix-blend-screen"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] mix-blend-screen"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+            className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] mix-blend-screen"
+          />
 
-        {/* Gradiente radial blanco masivo desde el centro para iluminar toda el área */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_100%)] pointer-events-none" />
+          {/* Gradiente radial blanco masivo desde el centro para iluminar toda el área */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_100%)]" />
+        </div>
 
         <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
 
@@ -734,29 +737,26 @@ export function HomeV2() {
       </section>
 
       {/* INTERACTIVE SERVICES ACCORDION/GRID */}
-      <section id="services" className="pt-20 pb-20 relative bg-[#1a1a1a] border-t border-white/20 z-20 overflow-hidden">
-        {/* TEXTURA GRID MODERNA MUCHO MÁS CLARA */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-60" />
-
-        {/* LUCES DE NEON "AURORA" */}
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] pointer-events-none mix-blend-screen"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] pointer-events-none mix-blend-screen"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-          className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] pointer-events-none mix-blend-screen"
-        />
-
-        {/* Gradiente radial blanco masivo desde el centro para iluminar toda el área */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_100%)] pointer-events-none" />
+      <section id="services" className="pt-20 pb-20 relative bg-[#1a1a1a] border-t border-white/20 z-20">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] opacity-60" />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] mix-blend-screen"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] mix-blend-screen"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+            className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] mix-blend-screen"
+          />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_100%)]" />
+        </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
           <div className="mb-12 md:mb-20 text-center">
@@ -798,28 +798,26 @@ export function HomeV2() {
       </section>
 
       {/* NEW CONTACT SECTION WITH FORM */}
-      <section id="contact" className="py-24 bg-[#1a1a1a] relative border-t border-white/20 z-20 overflow-hidden">
-        {/* TEXTURA GRID MODERNA */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-60" />
-
-        {/* LUCES DE NEON "AURORA" */}
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] pointer-events-none mix-blend-screen"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] pointer-events-none mix-blend-screen"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-          className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] pointer-events-none mix-blend-screen"
-        />
-
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_100%)] pointer-events-none" />
+      <section id="contact" className="py-24 bg-[#1a1a1a] relative border-t border-white/20 z-20">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] opacity-60" />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-32 left-0 w-[800px] h-[800px] rounded-full bg-orange-500/40 blur-[180px] mix-blend-screen"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.7, 0.5] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute top-1/4 -right-10 w-[600px] h-[600px] rounded-full bg-amber-400/40 blur-[180px] mix-blend-screen"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+            className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] mix-blend-screen"
+          />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_100%)]" />
+        </div>
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
           <div className="text-center mb-12">
@@ -906,8 +904,10 @@ export function HomeV2() {
       </section>
 
       {/* Footer / Contact */}
-      <footer className="py-12 md:py-16 px-4 sm:px-8 bg-[#0d0d0d] text-white relative overflow-hidden border-t border-white/5">
-        <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-orange-600/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none" />
+      <footer className="py-12 md:py-16 px-4 sm:px-8 bg-[#0d0d0d] text-white relative border-t border-white/5">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-orange-600/5 rounded-full blur-[100px] -translate-y-1/2" />
+        </div>
 
         <div className="relative z-10 flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-10 md:gap-0">
           <div className="text-center md:text-left space-y-2">
