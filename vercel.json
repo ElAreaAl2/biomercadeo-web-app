@@ -1,6 +1,5 @@
 {
   "rewrites": [
-    { "source": "/archivos/(.*)", "destination": "https://old.biomercadeo.com/archivos/$1" },
     { "source": "/abbott/(.*)", "destination": "https://old.biomercadeo.com/abbott/$1" },
     { "source": "/desarrollos/(.*)", "destination": "https://old.biomercadeo.com/desarrollos/$1" },
     { "source": "/formula-abbott/(.*)", "destination": "https://old.biomercadeo.com/formula-abbott/$1" },
