@@ -347,10 +347,9 @@ export function HomeV2() {
       />
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-40 px-4 sm:px-6 md:px-8 py-3 md:py-4 flex justify-between items-center bg-[#050505]/95 backdrop-blur-md border-b border-white/5">
-        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-base sm:text-lg lg:text-2xl font-black tracking-tighter uppercase flex items-center gap-1.5 md:gap-2 cursor-pointer z-10 w-max truncate">
-          <img src="/images/logo-biomercadeo.png" alt="Biomercadeo" className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8 object-contain shrink-0" />
-          <span className="truncate">Biomercadeo</span>
+      <nav className="fixed top-0 w-full z-40 px-4 sm:px-6 md:px-8 py-3 md:py-4 flex justify-between items-center bg-[#1c1c1c]/95 backdrop-blur-md border-b border-white/10">
+        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="cursor-pointer z-10 shrink-0">
+          <img src="/images/biomercadeologodef.png" alt="Biomercadeo" className="h-12 sm:h-14 lg:h-16 w-auto object-contain" style={{ filter: 'invert(1) hue-rotate(180deg) saturate(1.8)' }} />
         </a>
         <div className="hidden lg:flex gap-6 lg:gap-8 text-sm xl:text-base font-bold uppercase tracking-widest items-center absolute left-1/2 -translate-x-1/2 min-w-max">
           <a href="#about" className="hover:text-orange-500 transition-colors">¿Quiénes somos?</a>
@@ -479,15 +478,11 @@ export function HomeV2() {
         </div>
       )}
 
-      {/* QUIÉNES SOMOS */}
-      {/* CAMBIO 2: Sección compacta - Visión y Misión colapsadas por defecto */}
-      <section id="about" className="pt-20 pb-12 bg-[#1a1a1a] relative border-t border-white/20 z-20">
-        {/* Contenedor de efectos decorativos con overflow controlado */}
+      {/* QUIÉNES SOMOS — Opción B: Bento grid */}
+      <section id="about" className="pt-20 md:pt-28 pb-20 md:pb-28 bg-[#1a1a1a] relative border-t border-white/20 z-20">
+        {/* Fondo decorativo */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* TEXTURA GRID MODERNA MUCHO MÁS CLARA */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:40px_40px] opacity-60" />
-
-          {/* LUCES DE NEON "AURORA" */}
           <motion.div
             animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -503,205 +498,194 @@ export function HomeV2() {
             transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
             className="absolute -bottom-32 left-1/4 w-[900px] h-[600px] rounded-full bg-orange-600/30 blur-[180px] mix-blend-screen"
           />
-
-          {/* Gradiente radial blanco masivo desde el centro para iluminar toda el área */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_100%)]" />
         </div>
 
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
 
-          {/* Logo centrado, ancho completo — animación solo al montar, no depende de viewport */}
+          {/* Logo + Tagline — ancho completo */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-row items-center justify-center gap-4 sm:gap-6 mb-2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-14 md:mb-16"
           >
-            <img src="/images/logo-biomercadeo.png" alt="Biomercadeo" className="h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 object-contain" />
-            <span className="text-white font-black text-4xl sm:text-5xl lg:text-6xl tracking-tighter uppercase drop-shadow-lg">Biomercadeo</span>
+            <div className="flex items-center justify-center mb-8">
+              <img src="/images/biomercadeologodef.png" alt="Biomercadeo" className="h-24 sm:h-32 lg:h-40 w-auto object-contain" style={{ filter: 'invert(1) hue-rotate(180deg) saturate(1.8)' }} />
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-neutral-200 leading-[1.3] max-w-4xl mx-auto">
+              Expertos en{' '}
+              <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
+                comunicaciones en salud
+              </span>{' '}
+              y soluciones corporativas.
+            </h2>
           </motion.div>
 
-          {/* Dos columnas en desktop, apilado en tablet/móvil */}
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-10 lg:mb-0">
-
-            {/* COLUMNA IZQUIERDA: Expertos */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative px-4"
-            >
-              <div className="flex justify-center mb-6">
-                <div className="h-px w-24 bg-gradient-to-r from-transparent via-orange-500 to-transparent"></div>
-              </div>
-
-              <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-neutral-200 leading-[1.4] sm:leading-[1.5] text-center font-light font-sans mb-6">
-                Expertos en <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">comunicaciones en salud</span> y soluciones corporativas.
-              </h3>
-
-              <p className="text-lg md:text-xl text-neutral-300 leading-relaxed text-center lg:text-left font-light font-sans mb-8">
-                Somos una empresa de mercadeo enfocada en transformar la visión de su marca ofreciendo soluciones integrales de:
-              </p>
-
-              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10">
-                <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
-                  <Layers className="w-5 h-5 text-orange-500" />
-                  <span className="font-medium">Diseño y Publicidad</span>
-                </div>
-                <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
-                  <MonitorPlay className="w-5 h-5 text-sky-500" />
-                  <span className="font-medium">Tecnología</span>
-                </div>
-                <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
-                  <Presentation className="w-5 h-5 text-emerald-500" />
-                  <span className="font-medium">Estrategias de alto nivel</span>
-                </div>
-                <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/5 bg-[#111]/80 hover:bg-[#1a1a1a] transition-colors text-neutral-200 text-sm md:text-base shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
-                  <PhoneCall className="w-5 h-5 text-purple-500" />
-                  <span className="font-medium">Contact Center</span>
-                </div>
-              </div>
-
-              <div className="relative">
-                <div className="absolute left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 top-1/2 -translate-y-1/2 w-64 h-32 bg-orange-500/10 rounded-full blur-[60px] pointer-events-none"></div>
-                <div className="relative z-10 border-l-2 border-orange-500/50 pl-6 py-2 md:pl-8 text-left inline-block">
-                  <p className="text-neutral-300 text-base md:text-xl leading-relaxed font-light font-sans">
-                    Contamos con un <strong className="text-white font-medium">amplio portafolio de servicios</strong>, respaldado por una <strong className="text-white font-medium">sólida experiencia</strong> en el acompañamiento de importantes compañías a nivel <strong className="text-white font-medium">nacional e internacional</strong>.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* COLUMNA DERECHA: Diseño y comunicación + Stats */}
-            <div>
+          {/* Bento grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+            {[
+              {
+                icon: <Layers className="w-8 h-8" />,
+                color: "text-orange-400",
+                bg: "bg-orange-500/10",
+                border: "border-orange-500/20 hover:border-orange-500/50",
+                label: "Diseño y Publicidad",
+                desc: "Piezas gráficas, packaging, redes sociales y presentaciones de alto impacto.",
+                stat: "17+", statLabel: "años",
+              },
+              {
+                icon: <MonitorPlay className="w-8 h-8" />,
+                color: "text-sky-400",
+                bg: "bg-sky-500/10",
+                border: "border-sky-500/20 hover:border-sky-500/50",
+                label: "Tecnología",
+                desc: "Videos 2D/3D, realidad aumentada, apps, e-learning y soluciones digitales.",
+                stat: "+12", statLabel: "países",
+              },
+              {
+                icon: <Presentation className="w-8 h-8" />,
+                color: "text-emerald-400",
+                bg: "bg-emerald-500/10",
+                border: "border-emerald-500/20 hover:border-emerald-500/50",
+                label: "Estrategias 360°",
+                desc: "Campañas multi-impacto, geomarketing y programas integrales de comunicación.",
+                stat: "360°", statLabel: "enfoque",
+              },
+              {
+                icon: <PhoneCall className="w-8 h-8" />,
+                color: "text-purple-400",
+                bg: "bg-purple-500/10",
+                border: "border-purple-500/20 hover:border-purple-500/50",
+                label: "Contact Center",
+                desc: "Atención omnicanal especializada en salud, fidelización y seguimiento a pacientes.",
+                stat: "Top", statLabel: "partner",
+              },
+            ].map((card, i) => (
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                key={card.label}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-8"
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className={`relative rounded-2xl border ${card.border} bg-[#2a2a2a]/80 backdrop-blur-md p-7 flex flex-col gap-5 transition-all duration-300 group overflow-hidden`}
               >
-                <div className="flex justify-center mb-6">
-                  <div className="h-px w-24 bg-gradient-to-r from-transparent via-orange-500 to-transparent"></div>
+                <div className={`absolute inset-0 ${card.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`} />
+                <div className="relative z-10 flex flex-col gap-5 h-full">
+                  <div className={`${card.bg} w-14 h-14 rounded-xl flex items-center justify-center ${card.color}`}>
+                    {card.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className={`text-lg font-bold mb-2 ${card.color}`}>{card.label}</h3>
+                    <p className="text-neutral-400 text-sm leading-relaxed">{card.desc}</p>
+                  </div>
+                  <div className="flex items-baseline gap-1.5 pt-4 border-t border-white/5">
+                    <span className={`text-3xl font-black ${card.color}`}>{card.stat}</span>
+                    <span className="text-xs text-neutral-500 uppercase tracking-widest font-semibold">{card.statLabel}</span>
+                  </div>
                 </div>
-                <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight font-sans">
-                  Diseño y comunicación <br />
-                  <span className="text-orange-500 underline decoration-wavy decoration-orange-500/50 underline-offset-8">hecha a su medida.</span>
-                </h3>
               </motion.div>
+            ))}
+          </div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="grid grid-cols-2 gap-6"
+          {/* Fila inferior: frase de experiencia + Visión/Misión */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="rounded-2xl border border-white/10 bg-[#2a2a2a]/60 backdrop-blur-md p-8 md:p-10 mt-0"
+          >
+            <p className="text-lg md:text-xl lg:text-2xl text-neutral-300 leading-relaxed font-light text-center max-w-3xl mx-auto mb-8">
+              Contamos con un <strong className="text-white font-semibold">amplio portafolio de servicios</strong>, respaldado por una <strong className="text-white font-semibold">sólida experiencia</strong> en el acompañamiento de importantes compañías a nivel <strong className="text-white font-semibold">nacional e internacional</strong>.
+            </p>
+
+            <div className="flex justify-center">
+              <button
+                onClick={() => setShowVisionMision(prev => !prev)}
+                className="flex items-center gap-2 px-6 py-3 rounded-full border border-orange-500/40 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 font-bold text-sm uppercase tracking-widest transition-all duration-300"
               >
-                <StatsCard number="17+" label="Años de Experiencia" delay={0.1} />
-                <StatsCard number="+12" label="Países de experiencia" delay={0.2} />
-                <StatsCard number="360°" label="Estrategias Integrales" delay={0.3} />
-                <StatsCard number="Top" label="Partners en Salud & Farma" delay={0.4} />
-              </motion.div>
+                <Eye className="w-4 h-4" />
+                {showVisionMision ? 'Ocultar Visión y Misión' : 'Ver Visión y Misión'}
+                <motion.span
+                  animate={{ rotate: showVisionMision ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="inline-block"
+                >
+                  ▼
+                </motion.span>
+              </button>
             </div>
 
-          </div>
-        </div>
-
-        {/* CAMBIO 2: VISIÓN Y MISIÓN COLAPSABLES */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
-          {/* Botón toggle para mostrar/ocultar Visión y Misión */}
-          <div className="flex justify-center mb-4">
-            <button
-              onClick={() => setShowVisionMision(prev => !prev)}
-              className="flex items-center gap-2 px-6 py-3 rounded-full border border-orange-500/40 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 font-bold text-sm uppercase tracking-widest transition-all duration-300"
-            >
-              <Eye className="w-4 h-4" />
-              {showVisionMision ? 'Ocultar Visión y Misión' : 'Ver Visión y Misión'}
-              <motion.span
-                animate={{ rotate: showVisionMision ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-                className="inline-block"
-              >
-                ▼
-              </motion.span>
-            </button>
-          </div>
-
-          <AnimatePresence>
-            {showVisionMision && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
-                className="overflow-hidden"
-              >
-                <div className="flex flex-col items-center pb-4">
-                  {/* Controles interactivos (Tabs) */}
-                  <div className="bg-[#111] border border-white/10 rounded-full p-1.5 flex shadow-2xl mb-6 relative">
-                    <button
-                      onClick={() => setActiveTab('mision')}
-                      className={`relative z-10 flex items-center gap-2 px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'mision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
-                    >
-                      <Target className="w-5 h-5" />
-                      Misión
-                    </button>
-                    <button
-                      onClick={() => setActiveTab('vision')}
-                      className={`relative z-10 flex items-center gap-2 px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'vision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
-                    >
-                      <Eye className="w-5 h-5" />
-                      Visión
-                    </button>
-                    {/* Pill indicador de fondo con animacion */}
-                    <div
-                      className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-gradient-to-r from-orange-500 to-amber-500 rounded-full transition-all duration-500 ease-out shadow-[0_0_20px_rgba(249,115,22,0.3)] ${activeTab === 'mision' ? 'left-1.5' : 'left-[calc(50%+4.5px)]'}`}
-                    />
+            <AnimatePresence>
+              {showVisionMision && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                  className="overflow-hidden mt-8"
+                >
+                  <div className="flex flex-col items-center">
+                    <div className="bg-[#2a2a2a] border border-white/10 rounded-full p-1.5 flex shadow-2xl mb-6 relative">
+                      <button
+                        onClick={() => setActiveTab('mision')}
+                        className={`relative z-10 flex items-center gap-2 px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'mision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
+                      >
+                        <Target className="w-5 h-5" />
+                        Misión
+                      </button>
+                      <button
+                        onClick={() => setActiveTab('vision')}
+                        className={`relative z-10 flex items-center gap-2 px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'vision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
+                      >
+                        <Eye className="w-5 h-5" />
+                        Visión
+                      </button>
+                      <div
+                        className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-gradient-to-r from-orange-500 to-amber-500 rounded-full transition-all duration-500 ease-out shadow-[0_0_20px_rgba(249,115,22,0.3)] ${activeTab === 'mision' ? 'left-1.5' : 'left-[calc(50%+4.5px)]'}`}
+                      />
+                    </div>
+                    <div className="bg-[#2a2a2a]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 w-full flex items-center justify-center relative overflow-hidden shadow-2xl">
+                      <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-[80px]" />
+                      <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/5 rounded-full blur-[80px]" />
+                      <AnimatePresence mode="wait">
+                        {activeTab === 'mision' && (
+                          <motion.div
+                            key="mision"
+                            initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                            exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                            transition={{ duration: 0.4 }}
+                            className="text-center w-full"
+                          >
+                            <p className="text-white text-xl md:text-2xl leading-relaxed font-light">
+                              Biomercadeo es una empresa Colombiana que apoya principalmente a <strong className="font-bold text-orange-400">empresas del área de la salud</strong> a <strong className="font-bold text-orange-400">desarrollar y aplicar estrategias de comunicación novedosas</strong> con sus colaboradores internos, médicos, farmacias, pacientes y socios estratégicos para <strong className="font-bold text-orange-400">alcanzar sus objetivos comerciales y de ventas</strong>.
+                            </p>
+                          </motion.div>
+                        )}
+                        {activeTab === 'vision' && (
+                          <motion.div
+                            key="vision"
+                            initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                            exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                            transition={{ duration: 0.4 }}
+                            className="text-center w-full"
+                          >
+                            <p className="text-white text-xl md:text-2xl leading-relaxed font-light">
+                              Biomercadeo quiere ser reconocido como el <strong className="font-bold text-orange-400">más importante aliado estratégico en Colombia</strong> para la <strong className="font-bold text-orange-400">Industria de la salud en comunicación</strong> con su unidad de diseño y Contact Center. Deseamos <strong className="font-bold text-orange-400">expandir nuestros servicios a otras empresas</strong> en los próximos años.
+                            </p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
 
-                  {/* Contenedor del texto (Glassmorphism) */}
-                  <div className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 rounded-3xl p-8 md:p-10 w-full flex items-center justify-center relative overflow-hidden shadow-2xl">
-                    {/* Blur decorativo de fondo en la tarjeta */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-[80px]" />
-                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/5 rounded-full blur-[80px]" />
-
-                    <AnimatePresence mode="wait">
-                      {activeTab === 'mision' && (
-                        <motion.div
-                          key="mision"
-                          initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-                          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                          exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-                          transition={{ duration: 0.4 }}
-                          className="text-center w-full"
-                        >
-                          {/* CAMBIO 3: text-white en lugar de text-neutral-300 para mejor legibilidad */}
-                          <p className="text-white text-xl md:text-2xl leading-relaxed font-light font-sans">
-                            Biomercadeo es una empresa Colombiana que apoya principalmente a <strong className="font-bold text-orange-400">empresas del área de la salud</strong> a <strong className="font-bold text-orange-400">desarrollar y aplicar estrategias de comunicación novedosas</strong> con sus colaboradores internos, médicos, farmacias, pacientes y socios estratégicos para <strong className="font-bold text-orange-400">alcanzar sus objetivos comerciales y de ventas</strong>.
-                          </p>
-                        </motion.div>
-                      )}
-                      {activeTab === 'vision' && (
-                        <motion.div
-                          key="vision"
-                          initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-                          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                          exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-                          transition={{ duration: 0.4 }}
-                          className="text-center w-full"
-                        >
-                          <p className="text-white text-xl md:text-2xl leading-relaxed font-light font-sans">
-                            Biomercadeo quiere ser reconocido como el <strong className="font-bold text-orange-400">más importante aliado estratégico en Colombia</strong> para la <strong className="font-bold text-orange-400">Industria de la salud en comunicación</strong> con su unidad de diseño y Contact Center. Deseamos <strong className="font-bold text-orange-400">expandir nuestros servicios a otras empresas</strong> en los próximos años.
-                          </p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
       </section>
 
@@ -826,7 +810,7 @@ export function HomeV2() {
             <p className="text-neutral-300 text-lg font-sans">Cuéntenos sobre su iniciativa y le responderemos a la brevedad.</p>
           </div>
 
-          <div className="bg-[#0a0a0a] border border-white/5 rounded-[2rem] p-8 md:p-12 shadow-2xl">
+          <div className="bg-[#2a2a2a] border border-white/10 rounded-[2rem] p-8 md:p-12 shadow-2xl">
             {formStatus === 'sent' ? (
               <div className="flex flex-col items-center justify-center py-12 text-center h-full">
                 <div className="w-20 h-20 rounded-full bg-orange-500/20 flex items-center justify-center mb-6">
@@ -904,7 +888,7 @@ export function HomeV2() {
       </section>
 
       {/* Footer / Contact */}
-      <footer className="py-12 md:py-16 px-4 sm:px-8 bg-[#0d0d0d] text-white relative border-t border-white/5">
+      <footer className="py-12 md:py-16 px-4 sm:px-8 bg-[#1c1c1c] text-white relative border-t border-white/10">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-orange-600/5 rounded-full blur-[100px] -translate-y-1/2" />
         </div>
