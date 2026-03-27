@@ -627,17 +627,17 @@ export function HomeV2() {
                   className="overflow-hidden mt-8"
                 >
                   <div className="flex flex-col items-center">
-                    <div className="bg-[#2a2a2a] border border-white/10 rounded-full p-1.5 flex shadow-2xl mb-6 relative">
+                    <div className="bg-[#2a2a2a] border border-white/10 rounded-full p-1.5 flex shadow-2xl mb-6 relative w-full max-w-xs sm:max-w-none sm:w-auto">
                       <button
                         onClick={() => setActiveTab('mision')}
-                        className={`relative z-10 flex items-center gap-2 px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'mision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
+                        className={`relative z-10 flex items-center justify-center gap-2 flex-1 sm:flex-none px-5 sm:px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'mision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
                       >
                         <Target className="w-5 h-5" />
                         Misión
                       </button>
                       <button
                         onClick={() => setActiveTab('vision')}
-                        className={`relative z-10 flex items-center gap-2 px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'vision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
+                        className={`relative z-10 flex items-center justify-center gap-2 flex-1 sm:flex-none px-5 sm:px-8 py-3 rounded-full text-sm sm:text-base font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'vision' ? 'text-white' : 'text-neutral-500 hover:text-neutral-300'}`}
                       >
                         <Eye className="w-5 h-5" />
                         Visión
