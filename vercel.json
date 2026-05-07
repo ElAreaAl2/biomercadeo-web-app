@@ -1,6 +1,8 @@
 {
+  "redirects": [
+    { "source": "/archivos/:path*", "destination": "https://archivos.biomercadeo.com/:path*", "permanent": true }
+  ],
   "rewrites": [
-    { "source": "/archivos/:path*", "destination": "https://archivos.biomercadeo.com/:path*" },
     { "source": "/abbott/(.*)", "destination": "https://old.biomercadeo.com/abbott/$1" },
     { "source": "/desarrollos/(.*)", "destination": "https://old.biomercadeo.com/desarrollos/$1" },
     { "source": "/formula-abbott/(.*)", "destination": "https://old.biomercadeo.com/formula-abbott/$1" },
