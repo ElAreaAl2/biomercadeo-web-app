@@ -1,8 +1,6 @@
 {
-  "redirects": [
-    { "source": "/archivos/Amgen/IPP/IPP-BKEMV", "destination": "/archivos/Amgen/IPP/IPP-BKEMV.pdf", "permanent": true }
-  ],
   "rewrites": [
+    { "source": "/archivos/:path*", "destination": "https://archivos.biomercadeo.com/:path*" },
     { "source": "/abbott/(.*)", "destination": "https://old.biomercadeo.com/abbott/$1" },
     { "source": "/desarrollos/(.*)", "destination": "https://old.biomercadeo.com/desarrollos/$1" },
     { "source": "/formula-abbott/(.*)", "destination": "https://old.biomercadeo.com/formula-abbott/$1" },
